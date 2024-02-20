@@ -16,17 +16,18 @@ public:
 	void		add();
 	void		search() const;
 
-	void		displayContact( int index ) const;
-	std::string fixTextForDisplay( std::string text ) const;
-	std::string	getUserInput( std::string prompt ) const;
-	int			verifyPhoneNumber( std::string phoneNumer ) const;
-	int			maxContactsReached( void ) const;
 
 private:
 
-	Contact contact[8];
-	int	contactIndex;
-	int	contactCount;
+	void		_displayContact( int index ) const;
+	std::string _fixTextForDisplay( std::string text ) const;
+	std::string	_getUserInput( std::string prompt ) const;
+	int			_verifyPhoneNumber( std::string phoneNumer ) const;
+	int			_maxContactsReached( void ) const;
+
+	Contact _contact[8];
+	int	_contactIndex;
+	int	_contactCount;
 
 };
 
