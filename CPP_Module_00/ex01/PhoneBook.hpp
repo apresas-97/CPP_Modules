@@ -1,5 +1,5 @@
 #ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 
 #include "Contact.hpp"
 #include <iostream>
@@ -7,20 +7,20 @@
 
 class PhoneBook
 {
-	
+
 public:
 
 	PhoneBook();
 	~PhoneBook();
 
 	void		add();
-	void		search();
+	void		search() const;
 
-	void		displayContact( int index );
-	std::string fixTextForDisplay( std::string text );
-	std::string	getUserInput( std::string prompt );
-	int			verifyPhoneNumber( std::string phoneNumer );
-	int			maxContactsReached( void );
+	void		displayContact( int index ) const;
+	std::string fixTextForDisplay( std::string text ) const;
+	std::string	getUserInput( std::string prompt ) const;
+	int			verifyPhoneNumber( std::string phoneNumer ) const;
+	int			maxContactsReached( void ) const;
 
 private:
 

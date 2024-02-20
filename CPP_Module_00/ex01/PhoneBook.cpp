@@ -12,7 +12,7 @@ PhoneBook::~PhoneBook()
 	std::cout << "Crappy Awesome Phonebook is shutting down" << std::endl;
 }
 
-std::string	PhoneBook::getUserInput( std::string prompt )
+std::string	PhoneBook::getUserInput( std::string prompt ) const
 {
 	std::string	userInput;
 	while (userInput.empty() && !std::cin.eof())
@@ -56,7 +56,7 @@ void PhoneBook::add()
 	return ;
 }
 
-void	PhoneBook::search()
+void	PhoneBook::search() const
 {
 	std::string input;
 
@@ -75,7 +75,7 @@ void	PhoneBook::search()
 	return ;
 }
 
-void	PhoneBook::displayContact(int index)
+void	PhoneBook::displayContact(int index) const
 {
 	std::cout << "     index" << "|" << "first name" << "|" << " last name" << "|" << "  nickname" << std::endl;
 	
@@ -91,7 +91,7 @@ void	PhoneBook::displayContact(int index)
 	<< lastName << "|" << nickname << std::endl;
 }
 
-std::string PhoneBook::fixTextForDisplay( std::string text )
+std::string PhoneBook::fixTextForDisplay( std::string text ) const
 {
 	if (text.size() > 10)
 	{
@@ -103,7 +103,7 @@ std::string PhoneBook::fixTextForDisplay( std::string text )
 	return (text);
 }
 
-int	PhoneBook::verifyPhoneNumber( std::string phoneNumber )
+int	PhoneBook::verifyPhoneNumber( std::string phoneNumber ) const
 {
 	if (phoneNumber.length() == 0)
 		return (0);
@@ -115,7 +115,7 @@ int	PhoneBook::verifyPhoneNumber( std::string phoneNumber )
 	return (1);
 }
 
-int	PhoneBook::maxContactsReached( void )
+int	PhoneBook::maxContactsReached( void ) const
 {
 	std::cout << "Maximum amount of contacts reached, your oldest contact will be overwritten." << std::endl;
 	std::string userInput;

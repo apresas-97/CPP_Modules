@@ -17,11 +17,11 @@ public:
 	void setPhoneNumber(std::string str);
 	void setDarkestSecret(std::string str);
 
-	std::string getFirstName();
-	std::string getLastName();
-	std::string getNickname();
-	std::string getPhoneNumber();
-	std::string getDarkestSecret();
+	std::string getFirstName() const;
+	std::string getLastName() const;
+	std::string getNickname() const;
+	std::string getPhoneNumber() const;
+	std::string getDarkestSecret() const;
 
 private:
 
