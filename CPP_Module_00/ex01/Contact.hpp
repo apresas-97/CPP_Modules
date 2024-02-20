@@ -11,7 +11,6 @@ public:
 	Contact();
 	~Contact();
 
-
 	std::string getFirstName() const;
 	std::string getLastName() const;
 	std::string getNickname() const;

@@ -16,7 +16,6 @@ public:
 	void		add();
 	void		search() const;
 
-
 private:
 
 	void		_displayContact( int index ) const;
