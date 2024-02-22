@@ -6,18 +6,16 @@ int main(int argc, char **argv)
 	{
 		if (argc == 1)
 		{
-			std::cerr << "You must introduce a level for Harl to say something" << std::endl;
-			std::cerr << "Levels:\n\tdebug\n\tinfo\n\twarning\n\terror" << std::endl;
+			std::cerr << "You must introduce an anger level:" << std::endl;
+			std::cerr << "Levels:\n\tDEBUG\n\tINFO\n\tWARNING\n\tERROR" << std::endl;
 		}
 		if (argc > 2)
 			std::cerr << "Only one argument at a time!" << std::endl;
-		return 0;
+		return 1;
 	}
 
 	Harl		harl;
-	std::string	level = argv[1];
-
-	harl.complain(level);
+	harl.complain(argv[1]);
 
 	return 0;
 }
