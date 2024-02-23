@@ -14,7 +14,6 @@ private:
 public:
 	
 	Fixed( void );
-	Fixed( int value );
 	Fixed( Fixed const & src );
 	~Fixed( void );
 
