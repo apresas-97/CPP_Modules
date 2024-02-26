@@ -1,11 +1,11 @@
-NAME = harlFilter
+NAME = bspTriangle
 
 # Files
 SRC_DIR = .
 OBJ_DIR = obj
 DEPS_DIR = deps
 
-SRC = main.cpp Harl.cpp
+SRC = main.cpp bsp.cpp Fixed.cpp Point.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
 
