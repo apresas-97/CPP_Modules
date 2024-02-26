@@ -77,28 +77,28 @@ bool	Fixed::operator!=( Fixed const & rhs )
 Fixed	Fixed::operator+( Fixed const & rhs )
 {
 	Fixed result;
-	result.setRawBits( this->getRawBits() + rhs.getRawBits() );
+	result._value = this->_value + rhs._value;
 	return result;
 }
 
 Fixed	Fixed::operator-( Fixed const & rhs )
 {
 	Fixed result;
-	result.setRawBits( this->getRawBits() - rhs.getRawBits() );
+	result._value = this->_value - rhs._value;
 	return result;
 }
 
 Fixed	Fixed::operator*( Fixed const & rhs )
 {
 	Fixed result;
-	result._value = (this->_value * rhs._value) >> Fixed::_fbits;
+	result._value = ((long)this->_value * (long)rhs._value) >> Fixed::_fbits;
 	return result;
 }
 
 Fixed	Fixed::operator/( Fixed const & rhs )
 {
 	Fixed result;
-	result._value = (this->_value << Fixed::_fbits) / rhs._value;
+	result._value = ((long)this->_value << Fixed::_fbits) / (long)rhs._value;
 	return result;
 }
 
