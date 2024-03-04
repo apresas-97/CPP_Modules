@@ -29,13 +29,13 @@ void Harl::complain( std::string level )
 	{
 		case 0:
 			(this->*functionPTR[0]) ();
-			__attribute__ ((fallthrough));// Esto no hace falta en 42, creo
+			// __attribute__ ((fallthrough));// Esto no hace falta en 42, creo
 		case 1:
 			(this->*functionPTR[1]) ();
-			__attribute__ ((fallthrough));// Esto no hace falta en 42, creo
+			// __attribute__ ((fallthrough));// Esto no hace falta en 42, creo
 		case 2:
 			(this->*functionPTR[2]) ();
-			__attribute__ ((fallthrough));// Esto no hace falta en 42, creo
+			// __attribute__ ((fallthrough));// Esto no hace falta en 42, creo
 		case 3:
 			(this->*functionPTR[3]) ();
 			break;

@@ -25,5 +25,6 @@ void	Zombie::announce( void ) const
 
 void	Zombie::setName( std::string name )
 {
+	std::cout << this->_name << " was renamed to " << name << std::endl;
 	this->_name = name;
 }

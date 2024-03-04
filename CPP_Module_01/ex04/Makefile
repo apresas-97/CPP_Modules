@@ -20,8 +20,8 @@ DFLAGS = -MD -MF
 INCLUDE =
 
 # Commands and utils
-RM = rm --recursive --force --verbose
-MKDIR = mkdir --parent --verbose
+RM = rm -rf
+MKDIR = mkdir -p
 AR = ar rcs
 MUTE = &> /dev/null
 MK = Makefile
@@ -35,19 +35,19 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(MK) | $(OBJ_DIR) $(DEPS_DIR)
 	$(CC) $(CFLAGS) $(DFLAGS) $(DEPS_DIR)/$*.d -c $< -o $@
 
 $(OBJ_DIR):
-	@$(MKDIR) $(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR)
 
 $(DEPS_DIR):
-	@$(MKDIR) $(DEPS_DIR)
+	$(MKDIR) $(DEPS_DIR)
 
 clean:
-	@$(RM) $(OBJ)
-	@$(RM) $(OBJ_DIR)
-	@$(RM) $(DEPS)
-	@$(RM) $(DEPS_DIR)
+	$(RM) $(OBJ)
+	$(RM) $(OBJ_DIR)
+	$(RM) $(DEPS)
+	$(RM) $(DEPS_DIR)
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
