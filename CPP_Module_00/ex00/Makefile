@@ -29,14 +29,14 @@ fclean: clean
 re: fclean all
 
 test: all
-	@echo "Test:"
-	@echo -n "$$>"
+	@/bin/echo "Test:"
+	@/bin/echo -n "$$>"
 	./$(NAME) "shhhhh... I think the students are asleep..."
-	@echo -n "$$>"
+	@/bin/echo -n "$$>"
 	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
-	@echo -n "$$>"
+	@/bin/echo -n "$$>"
 	./$(NAME)
-	@echo -n "$$>"
+	@/bin/echo -n "$$>"
 
 .PHONY: all clean fclean re
 -include $(DEPS)
