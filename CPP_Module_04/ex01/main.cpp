@@ -1,12 +1,9 @@
 #include <iostream>
-#include <sstream>
 #include <string>
 
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
