@@ -21,15 +21,11 @@ Dog::~Dog( void )
 
 Dog &	Dog::operator=( Dog const & other )
 {
+	std::cout << "Dog operator = called" << std::endl;
 	if ( this != &other )
 	{
 		this->type = other.type;
-		// if (this->brain)
-			// delete this->brain;
-		// if (other.brain)
-			this->brain = new Brain(*other.brain);
-		// else
-			// this->brain = NULL;
+		this->brain = new Brain(*other.brain);
 	}
 	return *this;
 }
@@ -49,7 +45,7 @@ void	Dog::changeIdea( int index, std::string idea )
 {
 	if (index >= 100 || index < 0)
 		return ;
-	std::cout << "Dog changed his mind from:\n\"" << getIdea(index) << "\"\nTo\n\"" << idea << "\"" << std::endl;
+	std::cout << "Dog changed his mind" << std::endl;
 	this->brain->changeIdea(index, idea);
 }
 
