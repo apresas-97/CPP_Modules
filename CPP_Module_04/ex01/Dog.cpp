@@ -7,7 +7,7 @@ Dog::Dog( void )
 	std::cout << "Dog default constructed" << std::endl;
 }
 
-Dog::Dog( Dog const & src ) : Animal()
+Dog::Dog( Dog const & src ) : Animal(src)
 {
 	*this = src;
 	std::cout << "Dog copy constructed" << std::endl;

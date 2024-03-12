@@ -7,7 +7,7 @@ Cat::Cat( void )
 	std::cout << "Cat default constructed" << std::endl;
 }
 
-Cat::Cat( Cat const & src ) : Animal()
+Cat::Cat( Cat const & src ) : Animal(src)
 {
 	*this = src;
 	std::cout << "Cat copy constructed" << std::endl;
