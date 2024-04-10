@@ -37,7 +37,7 @@ int	main( void )
 	std::cout << CODE "int	animalCount = " << animalCount << ";" << std::endl;
 	if (animalCount > 1000)
 	{
-		std::cerr << BR_RED "\nI'm not risking my program crashing with that large of an animalCount" RESET << std::endl;
+		std::cout << BR_RED "\nI'm not risking my program crashing with that large of an animalCount" RESET << std::endl;
 		return 1;
 	}
 	Animal	*animals[animalCount];

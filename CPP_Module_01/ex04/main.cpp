@@ -6,7 +6,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cerr << "Usage: " << argv[0] << " <filename> <target_line> <replacement_line>" << std::endl;
+		std::cout << "Usage: " << argv[0] << " <filename> <target_line> <replacement_line>" << std::endl;
 		return 1;
 	}
 	
@@ -16,19 +16,19 @@ int	main(int argc, char **argv)
 
 	if (filename.empty() || s1.empty() || s2.empty())
 	{
-		std::cerr << "An argument provided was empty" << std::endl;
+		std::cout << "An argument provided was empty" << std::endl;
 		return 1;
 	}
 
 	std::ifstream	oldFile(filename.c_str());
 	if (!oldFile.good())
 	{
-		std::cerr << "File \"" << filename << "\" does not exists" << std::endl;
+		std::cout << "File \"" << filename << "\" does not exists" << std::endl;
 		return 1;
 	}
 	if (!oldFile.is_open())
 	{
-		std::cerr << "Failed to open \"" << filename << "\"" << std::endl;
+		std::cout << "Failed to open \"" << filename << "\"" << std::endl;
 		return 1;
 	}
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	std::ofstream	newFile(newFilename.c_str());
 	if (!newFile.is_open())
 	{
-		std::cerr << "Failed to create and open \"" << newFilename << "\"" << std::endl;
+		std::cout << "Failed to create and open \"" << newFilename << "\"" << std::endl;
 		oldFile.close();
 		return 1;
 	}
@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 	if (changesMade == false)
 	{
 		std::remove(newFilename.c_str());
-		std::cerr << "File \"" << filename << "\" did not contain any matching line" << std::endl;
+		std::cout << "File \"" << filename << "\" did not contain any matching line" << std::endl;
 	}
 
 	newFile.close();
