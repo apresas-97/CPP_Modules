@@ -46,7 +46,7 @@ void PhoneBook::add()
 	std::string lastNameAux = PhoneBook::_getUserInput("Last name: ");
 	std::string nicknameAux = PhoneBook::_getUserInput("Nickname: ");
 	std::string phoneNumberAux;
-	while (PhoneBook::_verifyPhoneNumber(phoneNumberAux) != 1)
+	while (!std::cin.eof() && PhoneBook::_verifyPhoneNumber(phoneNumberAux) != 1)
 		phoneNumberAux = PhoneBook::_getUserInput("Phone number: ");
 	std::string darkestSecretAux = PhoneBook::_getUserInput("Darkest secret: ");
 
