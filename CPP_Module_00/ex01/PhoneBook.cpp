@@ -15,12 +15,25 @@ PhoneBook::~PhoneBook()
 std::string	PhoneBook::_getUserInput( std::string prompt ) const
 {
 	std::string	userInput;
-	while (userInput.empty() && !std::cin.eof())
+	while (PhoneBook::_isInputEmpty(userInput) && !std::cin.eof())
 	{
 		std::cout << prompt;
 		std::getline(std::cin, userInput);
 	}
 	return (userInput);
+}
+
+//new
+int	PhoneBook::_isInputEmpty( std::string input ) const
+{
+	if (input.empty())
+		return 1;
+	for (size_t i = 0; i < input.length(); i++)
+	{
+		if (!std::isspace(input[i]))
+			return 0;
+	}
+	return 1;
 }
 
 void PhoneBook::add()
@@ -49,9 +62,6 @@ void PhoneBook::add()
 
 	this->_contactIndex++;
 	this->_contactCount++;
-
-	if (this->_contactIndex == 2)
-		std::cout << this->_contact[0].getLastName() << std::endl;
 
 	return ;
 }

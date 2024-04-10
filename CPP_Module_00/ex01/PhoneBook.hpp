@@ -23,6 +23,7 @@ private:
 	std::string	_getUserInput( std::string prompt ) const;
 	int			_verifyPhoneNumber( std::string phoneNumer ) const;
 	int			_maxContactsReached( void ) const;
+	int			_isInputEmpty( std::string input ) const;
 
 	Contact _contact[8];
 	int	_contactIndex;
