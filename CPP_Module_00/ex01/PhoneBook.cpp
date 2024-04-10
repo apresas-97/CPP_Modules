@@ -23,7 +23,6 @@ std::string	PhoneBook::_getUserInput( std::string prompt ) const
 	return (userInput);
 }
 
-//new
 int	PhoneBook::_isInputEmpty( std::string input ) const
 {
 	if (input.empty())
