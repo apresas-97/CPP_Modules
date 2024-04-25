@@ -20,7 +20,7 @@ DFLAGS = -MD -MF
 INCLUDE =
 
 # Commands and utils
-RM = rm -f
+RM = rm -rf
 MKDIR = mkdir -p
 AR = ar rcs
 MUTE = &> /dev/null
