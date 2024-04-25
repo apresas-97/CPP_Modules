@@ -18,7 +18,8 @@ public:
 
 private:
 
-	void		_displayContact( int index ) const;
+	void		_displayPreviewContact( int index ) const;
+	void		_displayFullContact( int index ) const;
 	std::string _fixTextForDisplay( std::string text ) const;
 	std::string	_getUserInput( std::string prompt ) const;
 	int			_verifyPhoneNumber( std::string phoneNumer ) const;

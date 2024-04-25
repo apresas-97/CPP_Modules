@@ -67,27 +67,33 @@ void PhoneBook::add()
 
 void	PhoneBook::search() const
 {
+	if (this->_contactCount == 0)
+	{
+		std::cout << "No contacts have been stored" << std::endl;
+		return ;
+	}
+	std::cout << "     index" << "|" << "first name" << "|" << " last name" << "|" << "  nickname" << std::endl;
+	for (int i = 0; i < this->_contactCount && i < 8; i++)
+		this->_displayPreviewContact(i % 8);
+	std::cout << std::endl;
 	std::string input;
 
 	std::cout << "Introduce the index of the contact you want to search: ";
 	std::getline(std::cin, input);
 	if (std::cin.eof())
 		return ;
-	if (input.size() == 1 \
-		&& (input[0] >= '0' && input[0] <= '7') \
-		&& (input[0] - '0') < this->_contactIndex)
-	{
-		this->_displayContact(input[0] - '0');
-	}
+	if (input.size() == 1
+	&& (input[0] >= '0' && input[0] <= '7')
+	&& (input[0] - '0') < this->_contactIndex)
+		this->_displayFullContact(input[0] - '0');
 	else
 		std::cout << "Invalid index" << std::endl;
+
 	return ;
 }
 
-void	PhoneBook::_displayContact(int index) const
+void	PhoneBook::_displayPreviewContact(int index) const
 {
-	std::cout << "     index" << "|" << "first name" << "|" << " last name" << "|" << "  nickname" << std::endl;
-	
 	std::string firstName = this->_contact[index].getFirstName();
 	std::string lastName = this->_contact[index].getLastName();
 	std::string nickname = this->_contact[index].getNickname();
@@ -95,9 +101,24 @@ void	PhoneBook::_displayContact(int index) const
 	firstName = PhoneBook::_fixTextForDisplay(firstName);
 	lastName = PhoneBook::_fixTextForDisplay(lastName);
 	nickname = PhoneBook::_fixTextForDisplay(nickname);
-
 	std::cout << "         " << index << "|" << firstName << "|" \
 	<< lastName << "|" << nickname << std::endl;
+	return ;
+}
+
+void	PhoneBook::_displayFullContact(int index) const
+{
+	std::string firstName = this->_contact[index].getFirstName();
+	std::string lastName = this->_contact[index].getLastName();
+	std::string nickname = this->_contact[index].getNickname();
+	std::string phoneNumber = this->_contact[index].getPhoneNumber();
+	std::string darkestSecret = this->_contact[index].getDarkestSecret();
+	std::cout << "First Name     : " << firstName << std::endl;
+	std::cout << "Last Name      : " << lastName << std::endl;
+	std::cout << "Nickname       : " << nickname << std::endl;
+	std::cout << "Phone Number   : " << phoneNumber << std::endl;
+	std::cout << "Darkest Secret : " << darkestSecret << std::endl;
+	return ;
 }
 
 std::string PhoneBook::_fixTextForDisplay( std::string text ) const
