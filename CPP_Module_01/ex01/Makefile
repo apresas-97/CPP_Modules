@@ -32,5 +32,8 @@ re: fclean all
 run: all
 	./$(NAME)
 
-.PHONY: all clean fclean re run
+leaks: all
+	leaks --atExit -- ./$(NAME)
+
+.PHONY: all clean fclean re run leaks
 -include $(DEPS)
