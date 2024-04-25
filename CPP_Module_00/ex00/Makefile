@@ -38,5 +38,5 @@ test: all
 	./$(NAME)
 	@/bin/echo -n "$$>"
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 -include $(DEPS)

@@ -1,11 +1,12 @@
 NAME = moar_brainz
 
-SRC = main.cpp Zombie.cpp
+SRC = main.cpp Zombie.cpp zombieHorde.cpp
 OBJ = $(SRC:%.cpp=%.o)
 DEPS = $(OBJ:%.o=%.d)
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
+CFLAGS = -Wall -Wextra -Werror -std=c++98
+DFLAGS = -MMD
 
 RM = rm -rf
 
@@ -17,7 +18,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp $(MAKEFILE)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
@@ -31,5 +32,5 @@ re: fclean all
 run: all
 	./$(NAME)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re run
 -include $(DEPS)
