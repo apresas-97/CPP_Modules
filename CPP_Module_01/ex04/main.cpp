@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 		std::cout << "Usage: " << argv[0] << " <filename> <target_line> <replacement_line>" << std::endl;
 		return 1;
 	}
-	
+
 	std::string	filename = argv[1];
 	std::string	s1 = argv[2];
 	std::string	s2 = argv[3];
@@ -41,24 +41,31 @@ int	main(int argc, char **argv)
 		return 1;
 	}
 
-	bool changesMade = false;
-	std::string line;
-	while (std::getline(oldFile, line))
+	std::string fileString;
+	oldFile.seekg(0, std::ios::end);
+	fileString.resize(oldFile.tellg());
+	oldFile.seekg(0, std::ios::beg);
+	oldFile.read(&fileString[0], fileString.size());
+	oldFile.close();
+
+	bool 	changesMade = false;
+	size_t	pos = fileString.find(s1); 
+	while (pos != std::string::npos)
 	{
-		if (line == s1)
-		{
-			line = s2;
-			changesMade = true;
-		}
-		if (!oldFile.eof())
-			newFile << line << std::endl;
-		else
-			newFile << line;
+		fileString.erase(pos, s1.length());
+		fileString.insert(pos, s2);
+		changesMade = true;
+		pos = fileString.find(s1, pos + s2.length());
 	}
+	if (fileString[fileString.length() - 1] != '\n')
+		newFile << fileString << std::endl;
+	else
+		newFile << fileString;
+
 	if (changesMade == false)
 	{
 		std::remove(newFilename.c_str());
-		std::cout << "File \"" << filename << "\" did not contain any matching line" << std::endl;
+		std::cout << "File \"" << filename << "\" did not contain any matches" << std::endl;
 	}
 
 	newFile.close();
