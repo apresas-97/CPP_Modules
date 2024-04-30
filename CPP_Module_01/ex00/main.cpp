@@ -2,7 +2,6 @@
 
 #define GREEN "\033[32m"
 #define RESET "\033[0m"
-#define BOLD "\033[1m"
 #define ITALIC "\033[3m"
 #define CYAN "\033[36m"
 #define BLUE "\033[34m"
@@ -13,7 +12,7 @@ void	randomChump( std::string name );
 
 int main(void)
 {
-	std::cout << GREEN "\nZombie " BLUE "*zombie" RESET " = " ITALIC CYAN "newZombie(" RESET "\"Victor\"" ITALIC CYAN ")" RESET ";" << std::endl;
+	std::cout << GREEN "Zombie " BLUE "*zombie" RESET " = " ITALIC CYAN "newZombie(" RESET "\"Victor\"" ITALIC CYAN ")" RESET ";" << std::endl;
 	Zombie *zombie = newZombie("Victor");
 	std::cout << BLUE "\nzombie" RESET "->" ITALIC CYAN "announce()" RESET ";" << std::endl;
 	zombie->announce();
