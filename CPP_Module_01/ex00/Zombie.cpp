@@ -3,12 +3,12 @@
 Zombie::Zombie( std::string name )
 {
 	this->name = name;
-	std::cout << this->name << " was created" << std::endl;
+	std::cout << "Zombie " << this->name << " was created" << std::endl;
 }
 
 Zombie::~Zombie( void )
 {
-	std::cout << this->name << " was destroyed" << std::endl;
+	std::cout << "Zombie " << this->name << " was destroyed" << std::endl;
 }
 
 void	Zombie::announce( void ) const
