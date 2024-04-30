@@ -16,5 +16,6 @@ int	main(void)
 	std::cout << "// Deleting the horde:" << std::endl;
 	delete [] (horde);
 
+	std::cout << "// Exiting the program" << std::endl;
 	return (0);
 }
