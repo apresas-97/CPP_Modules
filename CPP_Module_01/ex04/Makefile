@@ -45,14 +45,16 @@ clean:
 	$(RM) $(OBJ_DIR)
 	$(RM) $(DEPS)
 	$(RM) $(DEPS_DIR)
+	$(RM) file
+	$(RM) file.replace
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-run: all
-	./$(NAME)
+file:
+	@printf "Hola que tal como estas?\nYo bien y tu?\nMuy bien gracias por preguntar\nAhora vamos a poner un lorem ipsum:\nLorem ipsum dolor sit amet, consectetur adipiscing elit.\nVenga adios adios\nchao chao adios, noseque hola adios bien lorem Lorem ipsum" > file
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re file
 -include $(DEPS)
