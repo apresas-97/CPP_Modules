@@ -40,7 +40,7 @@ Fixed &	Fixed::operator=( Fixed const & rhs )
 
 int	Fixed::getRawBits( void ) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->_value);
 }
 
@@ -67,7 +67,7 @@ float	Fixed::toFloat( void ) const
 
 int	Fixed::toInt( void ) const
 {
-	return roundf(static_cast<float>(this->_value) / (1 << Fixed::_fbits));
+	return this->_value >> Fixed::_fbits;
 }
 
 std::ostream & operator<<( std::ostream & out, const Fixed & rhs )

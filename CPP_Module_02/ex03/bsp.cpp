@@ -11,9 +11,9 @@ bool	bsp( Point const a, Point const b, Point const c, Point const point )
 	Fixed	ab = partition(a, b, point);
 	Fixed	bc = partition(b, c, point);
 	Fixed	ca = partition(c, a, point);
-	std::cout << "ab = " << ab << std::endl;
-	std::cout << "bc = " << bc << std::endl;
-	std::cout << "ca = " << ca << std::endl;
+	// std::cout << "ab = " << ab << std::endl;
+	// std::cout << "bc = " << bc << std::endl;
+	// std::cout << "ca = " << ca << std::endl;
 
 	if ((ab < 0 && bc < 0 && ca < 0) || (ab > 0 && bc > 0 && ca > 0))
 		return true;
