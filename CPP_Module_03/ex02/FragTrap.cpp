@@ -1,6 +1,6 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap( void ) : ClapTrap( "Default", 100, 100, 30)
+FragTrap::FragTrap( void ) : ClapTrap( "Default", 100, 100, 30 )
 {
 	std::cout << "FragTrap " << this->_name << " was constructed" << std::endl;
 }
