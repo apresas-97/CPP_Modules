@@ -89,3 +89,8 @@ void	ClapTrap::displayEnergyPoints( void ) const
 {
 	std::cout << "ClapTrap " << this->_name << "'s energy points: " << this->_energyPoints << std::endl;
 }
+
+void	ClapTrap::displayStats( void ) const
+{
+	std::cout << "Name: " << this->_name << " | HP: " << this->_hitPoints << " | EP: " << this->_energyPoints << " | AT: " << this->_attackDamage << std::endl;
+}
