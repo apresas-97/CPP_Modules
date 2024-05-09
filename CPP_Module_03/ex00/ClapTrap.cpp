@@ -16,7 +16,7 @@ ClapTrap::ClapTrap( std::string name ) : _name( name ), _attackDamage( 0 )
 
 ClapTrap::ClapTrap( ClapTrap const & src ) : _name(src._name), _attackDamage(src._attackDamage)
 {
-	*this = src; // ?
+	*this = src;
 	std::cout << "ClapTrap " << _name << " was copy constructed" << std::endl;
 }
 
@@ -27,6 +27,7 @@ ClapTrap::~ClapTrap( void )
 
 ClapTrap &	ClapTrap::operator=( ClapTrap const & other )
 {
+	// std::cout << "ClapTrap assignment operator called" << std::endl;
 	if ( this != &other )
 	{
 		this->_hitPoints = other._hitPoints;
