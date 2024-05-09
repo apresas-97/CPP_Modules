@@ -159,7 +159,7 @@ float	Fixed::toFloat( void ) const
 
 int	Fixed::toInt( void ) const
 {
-	return roundf(static_cast<float>(this->_value) / (1 << Fixed::_fbits));
+	return this->_value >> Fixed::_fbits;
 }
 
 // Non member functions
