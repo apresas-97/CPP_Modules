@@ -10,13 +10,13 @@ DiamondTrap::DiamondTrap( void ) : ClapTrap()
 DiamondTrap::DiamondTrap( std::string name ) : ClapTrap( name + "_clap_name" )
 {
 	this->_name = name;
-	this->_hitPoints = FlagTrap::_hitPoints;
+	this->_hitPoints = FragTrap::_hitPoints;
 	this->_energyPoints = ScavTrap::_energyPoints;
-	this->_attackDamage = FlagTrap::_attackDamage;
+	this->_attackDamage = FragTrap::_attackDamage;
 	std::cout << "DiamondTrap " << this->_name << " was constructed" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( DiamondTrap const & src ) : ClapTrap( src ), ScavTrap( src ), FlagTrap( src )
+DiamondTrap::DiamondTrap( DiamondTrap const & src ) : ClapTrap( src ), ScavTrap( src ), FragTrap( src )
 {
 	*this = src;
 	std::cout << "DiamondTrap " << this->_name << " was copy constructed" << std::endl;

@@ -5,7 +5,7 @@ SRC_DIR = .
 OBJ_DIR = obj
 DEPS_DIR = deps
 
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FlagTrap.cpp DiamondTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
 

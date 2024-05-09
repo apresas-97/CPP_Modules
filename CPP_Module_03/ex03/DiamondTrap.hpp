@@ -2,9 +2,9 @@
 # define DIAMONDTRAP_HPP
 
 #include "ScavTrap.hpp"
-#include "FlagTrap.hpp"
+#include "FragTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FlagTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 
 private:
