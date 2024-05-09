@@ -1,11 +1,11 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap( void ) : ClapTrap()
+ScavTrap::ScavTrap( void ) : ClapTrap( "Default", 100, 50, 20 )
 {
 	std::cout << "ScavTrap " << this->_name << " was constructed" << std::endl;
 }
 
-ScavTrap::ScavTrap( std::string name ) : ClapTrap( name )
+ScavTrap::ScavTrap( std::string name ) : ClapTrap( name, 100, 50, 20 )
 {
 	std::cout << "ScavTrap " << this->_name << " was constructed" << std::endl;
 }
