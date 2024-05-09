@@ -1,18 +1,12 @@
 #include "FlagTrap.hpp"
 
-FlagTrap::FlagTrap( void ) : ClapTrap()
+FlagTrap::FlagTrap( void ) : ClapTrap( "Default", 100, 100, 30)
 {
-	this->_hitPoints = 100;
-	this->_energyPoints = 100;
-	this->_attackDamage = 30;
 	std::cout << "FlagTrap " << this->_name << " was constructed" << std::endl;
 }
 
-FlagTrap::FlagTrap( std::string name ) : ClapTrap( name )
+FlagTrap::FlagTrap( std::string name ) : ClapTrap( name, 100, 100, 30 )
 {
-	this->_hitPoints = 100;
-	this->_energyPoints = 100;
-	this->_attackDamage = 30;
 	std::cout << "FlagTrap " << this->_name << " was constructed" << std::endl;
 }
 
