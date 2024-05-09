@@ -1,12 +1,13 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
-#include "FlagTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main( void )
 {
-	std::cout << "Creating FlagTrap:\n" << std::endl;
+	std::cout << "Creating FragTrap:\n" << std::endl;
 
-	FlagTrap a("FLAG");
+	FragTrap a("FRAG");
+	a.displayStats();
 	a.attack("Monster");
 	a.takeDamage(25);
 	a.beRepaired(25);
@@ -15,33 +16,32 @@ int	main( void )
 	// if (false) // Comment this if you want to test the copy constructor
 	{
 		std::cout << "\n--------" << std::endl;
-		std::cout << "Testing FlagTrap Copy constructor:\n" << std::endl;
+		std::cout << "Testing FragTrap Copy constructor:\n" << std::endl;
 
-		FlagTrap b(a);
-		b.attack("Monster");
-		b.beRepaired(25);
+		FragTrap b(a);
+		b.displayStats();
 	}
 
 	std::cout << "\n--------" << std::endl;
-	std::cout << "Checking FlagTrap behavior when out of hit points:\n" << std::endl;
+	std::cout << "Checking FragTrap behavior when out of hit points:\n" << std::endl;
 
 	a.takeDamage(100);
 	a.beRepaired(100);
 	a.highFiveGuys();
 
-	if (false) // Comment this if you want to test the other classes
+	// if (false) // Comment this if you want to test the other classes
 	{
 		std::cout << "\n--------" << std::endl;
 		std::cout << "Creating ClapTrap:\n" << std::endl;
 
 		ClapTrap clap("CLAP");
-		clap.attack("Monster");
+		clap.displayStats();
 
 		std::cout << "\n--------" << std::endl;
 		std::cout << "Creating ScavTrap:\n" << std::endl;
 
 		ScavTrap scav("SCAV");
-		scav.attack("Monster");
+		scav.displayStats();
 	}
 
 	std::cout << "\n--------" << std::endl;
