@@ -3,35 +3,42 @@
 
 int	main( void )
 {
-	std::cout << "Creating ScavTrap:" << std::endl;
+	std::cout << "Creating ScavTrap:\n" << std::endl;
 
-	ScavTrap a("Cachibache");
+	ScavTrap a("SCAV");
+	a.displayStats();
 	a.attack("Monster");
 	a.takeDamage(25);
 	a.beRepaired(25);
 	a.guardGate();
+	a.displayStats();
 
-	std::cout << "--------" << std::endl;
-	std::cout << "Testing ScavTrap Copy constructor:" << std::endl;
+	// if (false) // Comment this if you want to test the copy constructor
+	{
+		std::cout << "\n--------" << std::endl;
+		std::cout << "Testing ScavTrap Copy constructor:\n" << std::endl;
 
-	ScavTrap c(a);
-	c.attack("Monster");
-	c.beRepaired(25);
+		ScavTrap b(a);
+		b.displayStats();
+	}
 
-	std::cout << "--------" << std::endl;
-	std::cout << "Checing ScavTrap behavior when out of hit points:" << std::endl;
+	std::cout << "\n--------" << std::endl;
+	std::cout << "Checking ScavTrap behavior when out of hit points:\n" << std::endl;
 
 	a.takeDamage(100);
 	a.beRepaired(100);
 	a.guardGate();
+	a.displayStats();
 
-	std::cout << "--------" << std::endl;
-	std::cout << "Creating ClapTrap:" << std::endl;
+	// if (false) // Comment this if you want to test the ClapTrap class
+	{
+		std::cout << "\n--------" << std::endl;
+		std::cout << "Creating ClapTrap:\n" << std::endl;
+		
+		ClapTrap clap("CLAP");
+		clap.displayStats();
+	}
 
-	ClapTrap b("Bachibache");
-	b.attack("Monster");
-	b.takeDamage(10);
-
-	std::cout << "--------" << std::endl;
+	std::cout << "\n--------" << std::endl;
 	return 0;
 }
