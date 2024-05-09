@@ -30,6 +30,7 @@ public:
 	void	beRepaired( unsigned int amount );
 	void	displayHitPoints( void ) const;
 	void	displayEnergyPoints( void ) const;
+	void	displayStats( void ) const;
 
 };
 
