@@ -77,10 +77,10 @@ void	ClapTrap::beRepaired( unsigned int amount )
 
 void	ClapTrap::displayHitPoints( void ) const
 {
-	std::cout << "Claptrap " << this->_name << "'s hit points: " << this->_hitPoints << std::endl;
+	std::cout << "ClapTrap " << this->_name << "'s hit points: " << this->_hitPoints << std::endl;
 }
 
 void	ClapTrap::displayEnergyPoints( void ) const
 {
-	std::cout << "Claptrap " << this->_name << "'s energy points: " << this->_energyPoints << std::endl;
+	std::cout << "ClapTrap " << this->_name << "'s energy points: " << this->_energyPoints << std::endl;
 }
