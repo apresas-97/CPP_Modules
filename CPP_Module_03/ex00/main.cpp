@@ -9,20 +9,18 @@ int	main( void )
 
 	std::cout << "-----" << std::endl;
 
-	b.displayEnergyPoints();
-	b.displayHitPoints();
+	b.displayStats();
 	b.attack("Aparatus");
 	b.attack("Aparatus");
 	b.attack("Aparatus");
-	b.displayEnergyPoints();
+	b.displayStats();
 
 	std::cout << "-----" << std::endl;
 
 	b.takeDamage(9);
-	b.displayHitPoints();
+	b.displayStats();
 	b.beRepaired(9);
-	b.displayHitPoints();
-	b.displayEnergyPoints();
+	b.displayStats();
 
 	std::cout << "-----" << std::endl;
 
@@ -32,15 +30,19 @@ int	main( void )
 	b.attack("Aparatus");
 	b.attack("Aparatus");
 	b.attack("Aparatus");
-	b.displayEnergyPoints();
+	b.displayStats();
 	b.attack("Aparatus");
 	b.beRepaired(10);
 	b.takeDamage(5);
+	b.displayStats();
 
 	std::cout << "-----" << std::endl;
 
+	a.displayStats();
 	a.takeDamage(9);
+	a.displayStats();
 	a.takeDamage(1);
+	a.displayStats();
 	a.attack("Somebody");
 	a.beRepaired(5);
 	a.takeDamage(5);
