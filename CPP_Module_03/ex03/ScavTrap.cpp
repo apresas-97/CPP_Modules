@@ -1,11 +1,15 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap( void ) : ClapTrap( "Default", 100, 50, 20 )
+unsigned int const ScavTrap::_hp = 100;
+unsigned int const ScavTrap::_ep = 50;
+unsigned int const ScavTrap::_ad = 20;
+
+ScavTrap::ScavTrap( void ) : ClapTrap( "Default", ScavTrap::_hp, ScavTrap::_ep, ScavTrap::_ad )
 {
 	std::cout << "ScavTrap " << this->_name << " was constructed" << std::endl;
 }
 
-ScavTrap::ScavTrap( std::string name ) : ClapTrap( name, 100, 50, 20 )
+ScavTrap::ScavTrap( std::string name ) : ClapTrap( name, ScavTrap::_hp, ScavTrap::_ep, ScavTrap::_ad )
 {
 	std::cout << "ScavTrap " << this->_name << " was constructed" << std::endl;
 }

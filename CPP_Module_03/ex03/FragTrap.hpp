@@ -6,8 +6,10 @@
 class FragTrap : public virtual ClapTrap
 {
 
-private:
-
+protected:
+	static unsigned int const _hp;
+	static unsigned int const _ep;
+	static unsigned int const _ad;
 
 public:
 

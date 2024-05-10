@@ -1,11 +1,15 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap( void ) : ClapTrap( "Default", 100, 100, 30 )
+unsigned int const FragTrap::_hp = 100;
+unsigned int const FragTrap::_ep = 100;
+unsigned int const FragTrap::_ad = 30;
+
+FragTrap::FragTrap( void ) : ClapTrap( "Default", FragTrap::_hp, FragTrap::_ep, FragTrap::_ad )
 {
 	std::cout << "FragTrap " << this->_name << " was constructed" << std::endl;
 }
 
-FragTrap::FragTrap( std::string name ) : ClapTrap( name, 100, 100, 30 )
+FragTrap::FragTrap( std::string name ) : ClapTrap( name, FragTrap::_hp, FragTrap::_ep, FragTrap::_ad )
 {
 	std::cout << "FragTrap " << this->_name << " was constructed" << std::endl;
 }

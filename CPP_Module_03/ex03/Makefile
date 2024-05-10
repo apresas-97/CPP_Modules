@@ -15,7 +15,7 @@ HDRS =
 
 # Compiler + flags
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
+CFLAGS = -Wall -Wextra -Werror -Wshadow -Wno-shadow -std=c++98
 DFLAGS = -MD -MF
 INCLUDE =
 

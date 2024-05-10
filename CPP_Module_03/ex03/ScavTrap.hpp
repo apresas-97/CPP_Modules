@@ -6,6 +6,11 @@
 class ScavTrap : public virtual ClapTrap
 {
 
+protected:
+	static unsigned int const _hp;
+	static unsigned int const _ep;
+	static unsigned int const _ad;
+
 public:
 
 	ScavTrap( void );
