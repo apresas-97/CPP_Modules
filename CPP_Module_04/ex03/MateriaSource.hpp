@@ -18,7 +18,6 @@ public:
 	~MateriaSource( void );
 	MateriaSource & operator=( MateriaSource const & other );
 
-	void		printMaterias( void ) const;
 	void		learnMateria( AMateria* );
 	AMateria*	createMateria( std::string const & type );
 

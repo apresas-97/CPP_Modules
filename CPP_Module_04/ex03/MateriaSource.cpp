@@ -33,18 +33,6 @@ MateriaSource &	MateriaSource::operator=( MateriaSource const & other )
 	return *this;
 }
 
-void	MateriaSource::printMaterias( void ) const
-{
-	for (int i = 0; i < 4; i++)
-	{
-		std::cout << "On slot [" << i << "]: ";
-		if (this->_learnedMaterias[i])
-			std::cout << "Type = " << this->_learnedMaterias[i]->getType() << std::endl;
-		else
-			std::cout << "No materia" << std::endl;
-	}
-}
-
 void	MateriaSource::learnMateria( AMateria *materia )
 {
 	if (!materia)
