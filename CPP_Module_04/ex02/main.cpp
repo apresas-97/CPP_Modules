@@ -39,9 +39,9 @@ int	main( void )
 	std::cout << CODE "int dogCount = " << dogCount << RESET << std::endl;
 	int	catCount = 2;
 	std::cout << CODE "int dogCount = " << catCount << RESET << std::endl;
-	std::cout << CODE "Dog *dogs[ dogCount ]" RESET << std::endl;
+	std::cout << CODE "Dog *dogs[ dogCount ];" RESET << std::endl;
 	Dog	*dogs[dogCount];
-	std::cout << CODE "Cat *cats[ catCount ]" RESET << std::endl;
+	std::cout << CODE "Cat *cats[ catCount ];" RESET << std::endl;
 	Cat	*cats[catCount];
 	std::cout << std::endl;
 
