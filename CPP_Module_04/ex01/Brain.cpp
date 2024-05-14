@@ -9,8 +9,8 @@ Brain::Brain( void )
 
 Brain::Brain( Brain const & src )
 {
-	std::cout << "Brain copy constructed" << std::endl;
 	*this = src;
+	std::cout << "Brain copy constructed" << std::endl;
 }
 
 Brain::~Brain( void )
