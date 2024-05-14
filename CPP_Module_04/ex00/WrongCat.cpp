@@ -2,7 +2,7 @@
 
 WrongCat::WrongCat( void )
 {
-	this->type = "Cat";
+	this->type = "WrongCat";
 	std::cout << "WrongCat default constructed" << std::endl;
 }
 
