@@ -25,11 +25,12 @@ public:
 	Character & operator=( Character const & other );
 	~Character( void );
 
+	AMateria*					getDroppedMaterias( void );
+
 	virtual std::string const &	getName( void ) const;
 	virtual void				equip( AMateria* m );
 	virtual void				unequip( int idx );
 	virtual void				use( int idx, ICharacter & target );
-	virtual AMateria*			getDroppedMaterias( void );
 
 };
 

@@ -146,7 +146,7 @@ int	main( void )
 	cloud->unequip(1);
 	std::cout << RESET COMMENT "// We get a warning, we must pick the pointer of the previously unequipped Materia,\n// otherwise it might be lost and unable to be deleted" << std::endl;
 	std::cout << CODE AMATERIA_F "AMateria* " CODE "droppedMateria = cloud->getDroppedMaterias();" << std::endl;
-	AMateria* droppedMateria = cloud->getDroppedMaterias();
+	AMateria* droppedMateria = static_cast<Character*>(cloud)->getDroppedMaterias();
 	std::cout << std::endl;
 	std::cout << RESET COMMENT "// Now we can unequip safely" << std::endl;
 	std::cout << CODE "cloud->unequip( 1 );" OUTPUT_F << std::endl;
@@ -190,7 +190,7 @@ int	main( void )
 	std::cout << CODE "leon.unequip( 0 );" OUTPUT_F << std::endl;
 	leon.unequip(0);
 	std::cout << CODE AMATERIA_F "AMateria*" CODE " leonDroppedMateria = leon.getDroppedMaterias();" OUTPUT_F << std::endl;
-	AMateria*	leonDroppedMateria = leon.getDroppedMaterias();
+	AMateria* leonDroppedMateria = static_cast<Character*>(&leon)->getDroppedMaterias();
 	std::cout << CODE KEYWORD_F "delete " CODE "leonDroppedMateria;" OUTPUT_F << std::endl; 
 	delete leonDroppedMateria;
 	std::cout << std::endl;
