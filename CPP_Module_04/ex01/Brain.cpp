@@ -21,7 +21,7 @@ Brain::~Brain( void )
 
 Brain &	Brain::operator=( Brain const & other )
 {
-	std::cout << "Brain operator = called" << std::endl;
+	// std::cout << "Brain operator = called" << std::endl;
 	if ( this != &other )
 	{
 		this->_index = other._index;

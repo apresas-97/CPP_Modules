@@ -25,24 +25,12 @@ MateriaSource &	MateriaSource::operator=( MateriaSource const & other )
 	std::cout << "MateriaSource assignment operator called" << std::endl;
 	if ( this != &other )
 	{
-		// for (int i = 0; i < 4; i++)
-		// 	this->_learnedMaterias[i] = NULL;
-		// for (int i = 0; i < 4; i++)
-		// 	this->_learnedMaterias[i] = other._learnedMaterias[i]->clone();
+		// Why empty?
+		// A MateriaSource doesn't know where it got its Materia from, it can't delete them
+		// therefore it can't overwrite them with new ones
+		// therefore, MateriaSource should not be able to be copied
 	}
 	return *this;
-}
-
-void	MateriaSource::printMaterias( void ) const
-{
-	for (int i = 0; i < 4; i++)
-	{
-		std::cout << "On slot [" << i << "]: ";
-		if (this->_learnedMaterias[i])
-			std::cout << "Type = " << this->_learnedMaterias[i]->getType() << std::endl;
-		else
-			std::cout << "No materia" << std::endl;
-	}
 }
 
 void	MateriaSource::learnMateria( AMateria *materia )

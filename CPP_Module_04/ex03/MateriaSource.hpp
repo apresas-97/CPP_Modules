@@ -18,9 +18,8 @@ public:
 	~MateriaSource( void );
 	MateriaSource & operator=( MateriaSource const & other );
 
-	void		printMaterias( void ) const;
-	void		learnMateria( AMateria* );
-	AMateria*	createMateria( std::string const & type );
+	virtual void		learnMateria( AMateria* );
+	virtual AMateria*	createMateria( std::string const & type );
 
 };
 

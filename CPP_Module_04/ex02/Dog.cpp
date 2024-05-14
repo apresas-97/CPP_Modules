@@ -45,7 +45,7 @@ void	Dog::changeIdea( int index, std::string idea )
 {
 	if (index >= 100 || index < 0)
 		return ;
-	std::cout << "Dog changed his mind" << std::endl;
+	std::cout << "Dog changed his mind from:\n\"" << getIdea(index) << "\"\nTo\n\"" << idea << "\"" << std::endl;
 	this->brain->changeIdea(index, idea);
 }
 

@@ -63,16 +63,6 @@ int	main( void )
 	std::cout << RESET BOLD GREEN "Succesfully created " << animalCount << " animals, " << animalCount / 2 + animalCount % 2 << " Cats and " << animalCount / 2 << " Dogs" RESET << std::endl;
 	std::cout << std::endl;
 
-	std::cout << TITLE ">> Deleting animals array: (directly as Animals) <<" RESET << std::endl;
-	for (int i = 0; i < animalCount; i++)
-	{
-		std::cout << CODE KEYWORD_F "\ndelete " BR_CYAN "animals[ " BOLD YELLOW << i << CODE BR_CYAN " ]" CODE ";" COMMENT " // Delete the allocated object in animals[ " << i << " ]" OUTPUT_F << std::endl;
-		delete animals[i];
-	}
-	std::cout << std::endl;
-	std::cout << RESET BOLD GREEN "Succesfully deallocated and destroyed all animals as Animals" RESET << std::endl;
-	std::cout << std::endl;
-
 	std::cout << TITLE ">> Testing that copies are NOT shallow: <<" RESET << std::endl;
 	std::cout << CODE "Dog d1;" COMMENT" // Construct a Dog \"d1\" with the default constructor" << OUTPUT_F << std::endl;
 	Dog d1;
@@ -116,5 +106,15 @@ int	main( void )
 	std::cout << RESET BOLD GREEN "This shows that d2 and d3 are DEEP copies of d1, not SHALLOW" RESET << std::endl;
 
 	std::cout << std::endl;
+	std::cout << TITLE ">> Deleting animals array: (directly as Animals) <<" RESET << std::endl;
+	for (int i = 0; i < animalCount; i++)
+	{
+		std::cout << CODE KEYWORD_F "\ndelete " BR_CYAN "animals[ " BOLD YELLOW << i << CODE BR_CYAN " ]" CODE ";" COMMENT " // Delete the allocated object in animals[ " << i << " ]" OUTPUT_F << std::endl;
+		delete animals[i];
+	}
+	std::cout << std::endl;
+	std::cout << RESET BOLD GREEN "Succesfully deallocated and destroyed all animals as Animals" RESET << std::endl;
+	std::cout << std::endl;
+
 	return 0;
 }

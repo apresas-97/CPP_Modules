@@ -21,10 +21,11 @@ Cat::~Cat( void )
 
 Cat &	Cat::operator=( Cat const & other )
 {
+	std::cout << "Cat operator = called" << std::endl;
 	if ( this != &other )
 	{
 		this->type = other.type;
-		this->brain = other.brain;
+		this->brain = new Brain(*other.brain);
 	}
 	return *this;
 }
