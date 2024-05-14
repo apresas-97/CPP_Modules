@@ -8,8 +8,8 @@ Dog::Dog( void )
 
 Dog::Dog( Dog const & src ) : Animal()
 {
-	*this = src;
 	std::cout << "Dog copy constructed" << std::endl;
+	*this = src;
 }
 
 Dog::~Dog( void )
