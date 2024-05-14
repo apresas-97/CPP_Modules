@@ -9,6 +9,7 @@ Cat::Cat( void )
 
 Cat::Cat( Cat const & src ) : Animal(src)
 {
+	this->brain = new Brain();
 	*this = src;
 	std::cout << "Cat copy constructed" << std::endl;
 }
@@ -25,7 +26,7 @@ Cat &	Cat::operator=( Cat const & other )
 	if ( this != &other )
 	{
 		this->type = other.type;
-		this->brain = new Brain(*other.brain);
+		*this->brain = *other.brain;
 	}
 	return *this;
 }

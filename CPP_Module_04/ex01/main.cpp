@@ -70,8 +70,10 @@ int	main( void )
 	std::cout << CODE "d1.addIdea(" BOLD BR_MAGENTA "\"I'm hungry\"" CODE "); "  COMMENT "// Store a new idea in d1's brain" << OUTPUT_F << std::endl;
 	d1.addIdea("I'm hungry"); // We add an idea to d1.brain.ideas[0]
 	std::cout << std::endl;
-	std::cout << CODE "Dog d2 = d1; " COMMENT "// Construct a new Dog \"d2\", copy of d1, with operator=" OUTPUT_F << std::endl;
-	Dog d2 = d1;
+	std::cout << CODE "Dog d2; " COMMENT "// Construct a new dog \"d2\"" OUTPUT_F << std::endl;
+	Dog d2;
+	std::cout << CODE "d2 = d1; " COMMENT "// Copy from d1 with the assign operator" OUTPUT_F << std::endl;
+	d2 = d1;
 	std::cout << std::endl;
 	std::cout << CODE "Dog d3(" BR_CYAN "d1" RESET "); " COMMENT "// Construct a new Dog \"d3\", copy of d1, with copy constructor" OUTPUT_F << std::endl;
 	Dog d3(d1);
@@ -101,7 +103,6 @@ int	main( void )
 	std::cout << CODE "d1.brain->ideas[0] = " RESET BR_CYAN "\"" << d1.getIdea(0) << "\"" RESET << std::endl;
 	std::cout << CODE "d2.brain->ideas[0] = " RESET BR_GREEN "\"" << d2.getIdea(0) << "\"" RESET << std::endl;
 	std::cout << CODE "d3.brain->ideas[0] = " RESET BR_RED "\"" << d3.getIdea(0) << "\"" RESET << std::endl;
-	// This shows that d1.brain.ideas[0] and d2.brain.ideas[0] are not the same
 	std::cout << std::endl;
 	std::cout << RESET BOLD GREEN "This shows that d2 and d3 are DEEP copies of d1, not SHALLOW" RESET << std::endl;
 

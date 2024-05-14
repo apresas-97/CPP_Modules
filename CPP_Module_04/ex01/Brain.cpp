@@ -15,7 +15,6 @@ Brain::Brain( Brain const & src )
 
 Brain::~Brain( void )
 {
-	this->_index = 0;
 	std::cout << "Brain destroyed" << std::endl;
 }
 
