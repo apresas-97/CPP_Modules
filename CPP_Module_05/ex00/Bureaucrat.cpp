@@ -1,8 +1,8 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat( void ) : _name( "bureauman" ), _grade( 0 )
+Bureaucrat::Bureaucrat( void ) : _name( "bureauman" ), _grade( 1 )
 {
-	std::cout << "Bureaucrat created with default name and grade 1" << std::endl;
+	std::cout << "Bureaucrat created with default values: " << *this << std::endl;
 }
 
 Bureaucrat::Bureaucrat( std::string name, int grade ) : _name( name )
@@ -15,9 +15,10 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) : _name( name )
 	std::cout << "Bureaucrat constructed: " << *this << std::endl;
 }
 
-Bureaucrat::Bureaucrat( Bureaucrat const & src )
+Bureaucrat::Bureaucrat( Bureaucrat const & src ) : _name( src.getName() )
 {
 	*this = src;
+	std::cout << "Bureaucrat copy constructed: " << *this << std::endl;
 }
 
 Bureaucrat::~Bureaucrat( void )
@@ -28,7 +29,9 @@ Bureaucrat::~Bureaucrat( void )
 Bureaucrat &	Bureaucrat::operator=( Bureaucrat const & other )
 {
 	if ( this != &other )
+	{
 		this->_grade = other.getGrade();
+	}
 	return *this;
 }
 
@@ -44,16 +47,18 @@ int	Bureaucrat::getGrade( void ) const
 
 void	Bureaucrat::incrementGrade( void )
 {
-	this->_grade--;
-	if (this->_grade < 1)
+	std::cout << "Incrementing grade" << std::endl;
+	if (this->_grade - 1 < 1)
 		throw Bureaucrat::GradeTooHighException();
+	this->_grade--;
 }
 
 void	Bureaucrat::decrementGrade( void )
 {
-	this->_grade++;
-	if (this->_grade > 150)
+	std::cout << "Decrementing grade" << std::endl;
+	if (this->_grade + 1 > 150)
 		throw Bureaucrat::GradeTooLowException();
+	this->_grade++;
 }
 
 std::ostream & operator<<( std::ostream & out, const Bureaucrat & rhs )

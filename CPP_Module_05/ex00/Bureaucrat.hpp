@@ -12,8 +12,8 @@ public:
 
 	Bureaucrat( void );
 	Bureaucrat( std::string name, int grade );
-	~Bureaucrat();
 	Bureaucrat( Bureaucrat const & other );
+	~Bureaucrat();
 	Bureaucrat & operator=( Bureaucrat const & other );
 
 	class GradeTooHighException : public std::exception
@@ -21,7 +21,7 @@ public:
 		public:
 			virtual const char* what() const throw()
 			{
-				return ("Grade has a value < 1");
+				return ("Grade cannot have a value higher than 1");
 			}
 	};
 	class GradeTooLowException : public std::exception
@@ -29,7 +29,7 @@ public:
 		public:
 			virtual const char* what() const throw()
 			{
-				return ("Grade has a value > 150");
+				return ("Grade cannot have a value lower than 150");
 			}
 	};
 
@@ -42,7 +42,6 @@ private:
 
 	const std::string	_name;
 	int					_grade;
-
 
 };
 
