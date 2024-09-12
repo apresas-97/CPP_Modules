@@ -1,4 +1,4 @@
-NAME = bureaucrat
+NAME = bureaucracy
 
 # Files
 SRC_DIR = .
