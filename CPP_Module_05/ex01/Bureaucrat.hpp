@@ -5,6 +5,10 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "Form.hpp"
+
+class Form;
+
 class Bureaucrat
 {
 
@@ -37,7 +41,7 @@ public:
 	int			getGrade( void ) const;
 	void		incrementGrade( void );
 	void		decrementGrade( void );
-	void		signForm( std::string formName, bool formSigned ); // ?
+	void		signForm( Form & formToSign ); // Hablarlo con Patri
 
 private:
 

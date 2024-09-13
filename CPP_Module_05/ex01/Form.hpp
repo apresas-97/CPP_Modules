@@ -7,6 +7,8 @@
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 public:
@@ -33,13 +35,21 @@ public:
 				return ("Grade too low");
 			}
 	};
+	class FormAlreadySignedException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return ("Form is already signed");
+			}
+	};
 
 	std::string	getName( void ) const;
 	bool		getSigned( void ) const;
 	int			getGradeToSign( void ) const;
 	int			getGradeToExecute( void ) const;
 
-	void		beSigned( Bureaucrat &bureaucrat );
+	void		beSigned( Bureaucrat & bureaucrat );
 
 private:
 	const std::string	_name;
