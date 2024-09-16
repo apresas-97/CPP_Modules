@@ -19,18 +19,12 @@ public:
 	class GradeTooHighException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Grade cannot have a value higher than 1");
-			}
+			virtual const char* what() const throw();
 	};
 	class GradeTooLowException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Grade cannot have a value lower than 150");
-			}
+			virtual const char* what() const throw();
 	};
 
 	std::string	getName( void ) const;
