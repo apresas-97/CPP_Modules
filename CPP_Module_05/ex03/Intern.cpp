@@ -13,6 +13,12 @@ Intern::Intern( void )
 
 Intern::Intern( Intern const &other )
 {
+	this->formNames[0] = "PresidentialPardonForm";
+	this->formNames[1] = "RobotomyRequestForm";
+	this->formNames[2] = "ShrubberyCreationForm";
+	this->formCreators[0] = &createPresidentialPardonForm;
+	this->formCreators[1] = &createRobotomyRequestForm;
+	this->formCreators[2] = &createShrubberyCreationForm;
 	*this = other;
 	std::cout << "Intern copy constructed" << std::endl;
 }
@@ -47,7 +53,7 @@ AForm* Intern::createShrubberyCreationForm( std::string target )
 }
 
 AForm*	Intern::makeForm( std::string formName, std::string targetName )
-{
+{	
 	for (int i = 0; i < 3; i++)
 	{
 		if (this->formNames[i] == formName)
@@ -57,4 +63,10 @@ AForm*	Intern::makeForm( std::string formName, std::string targetName )
 		}
 	}
 	throw Intern::InvalidFormNameException();
+}
+
+// Exceptions
+const char* Intern::InvalidFormNameException::what() const throw()
+{
+	return ("Invalid Form name");
 }

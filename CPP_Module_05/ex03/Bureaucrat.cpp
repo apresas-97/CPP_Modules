@@ -76,7 +76,7 @@ void	Bureaucrat::signForm( AForm & form )
 	std::cout << "<" << *this << ">" << " signed " << "<" << form << ">" << std::endl;
 }
 
-void	Bureaucrat::executeForm( AForm & form )
+void	Bureaucrat::executeForm( AForm const & form )
 {
 	try
 	{
@@ -86,10 +86,22 @@ void	Bureaucrat::executeForm( AForm & form )
 	{
 		std::cout << "<" << *this << ">" << " couldn't execute " << "<" << form << ">" << " because: " << e.what() << std::endl;
 	}
+	std::cout << "<" << *this << ">" << " executed " << "<" << form << ">" << std::endl;
 }
 
 std::ostream & operator<<( std::ostream & out, const Bureaucrat & rhs )
 {
 	out << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
 	return out;
+}
+
+// Exceptions
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
 }

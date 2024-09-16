@@ -23,10 +23,7 @@ public:
 	class InvalidFormNameException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Invalid Form name");
-			}
+			virtual const char* what() const throw();
 	};
 
 private:
