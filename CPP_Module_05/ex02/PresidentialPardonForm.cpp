@@ -1,6 +1,6 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm( void )
+PresidentialPardonForm::PresidentialPardonForm( void ) : AForm("PresidentialPardonForm", "targetless", 25, 5)
 {
 	throw AForm::FormNotProperlyConstructedException();
 }

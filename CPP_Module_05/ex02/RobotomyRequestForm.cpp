@@ -1,6 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm( void )
+RobotomyRequestForm::RobotomyRequestForm( void ) : AForm("RobotomyRequestForm", "targetless", 72, 45)
 {
 	throw AForm::FormNotProperlyConstructedException();
 }

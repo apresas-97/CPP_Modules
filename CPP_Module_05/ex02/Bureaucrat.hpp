@@ -23,25 +23,19 @@ public:
 	class GradeTooHighException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Grade too high");
-			}
+			virtual const char* what() const throw();
 	};
 	class GradeTooLowException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Grade too low");
-			}
+			virtual const char* what() const throw();
 	};
 
 	std::string	getName( void ) const;
 	int			getGrade( void ) const;
 	void		incrementGrade( void );
 	void		decrementGrade( void );
-	void		signForm( AForm & formToSign ); // Hablarlo con Patri
+	void		signForm( AForm & formToSign );
 	void		executeForm( AForm & formToExecute );
 
 private:

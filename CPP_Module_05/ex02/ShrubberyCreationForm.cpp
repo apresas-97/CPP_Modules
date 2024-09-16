@@ -1,11 +1,11 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm( void ) : AForm("ShrubberyCreationForm", "home", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm( void ) : AForm("ShrubberyCreationForm", "targetless", 145, 137)
 {
 	throw AForm::FormNotProperlyConstructedException();
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm( ShrubberyCreationForm const &other ) : AForm("ShrubberyCreationForm", other.getTarget(),145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm( ShrubberyCreationForm const &other ) : AForm("ShrubberyCreationForm", other.getTarget(), 145, 137)
 {
 	throw AForm::FormNotProperlyConstructedException();
 	*this = other;

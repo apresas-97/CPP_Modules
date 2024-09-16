@@ -7,18 +7,12 @@
 int	main( void )
 {
 	std::cout << "Creating forms:" << std::endl;
-	// Creating a ShrubbberyCreationForm
 	ShrubberyCreationForm shrubberyCreationForm("home");
-
-	// Creating a RobotomyRequestForm
 	RobotomyRequestForm robotomyRequestForm("Cyborg");
-
-	// Creating a PresidentialPardonForm
 	PresidentialPardonForm presidentialPardonForm("Misco Jones");
 	std::cout << std::endl;
 
 	std::cout << "Creating bureaucrats:" << std::endl;
-	// Creating some Bureaucreats
 	Bureaucrat Executive("John", 1); // Grade 1 bureaucrat
 	Bureaucrat Manager("Jane", 50); // Grade 50 bureaucrat
 	Bureaucrat Officer("Jack", 100); // Grade 100 bureaucrat
@@ -56,11 +50,9 @@ int	main( void )
 	std::cout << std::endl;
 	Executive.executeForm(presidentialPardonForm);
 	std::cout << std::endl;
-	std::cout << std::endl;
 
 	std::cout << "Attempting to sign an already signed form:" << std::endl;
 	Executive.signForm(shrubberyCreationForm);
-
 	std::cout << std::endl;
 
 	std::cout << "Destroying objects and exiting program..." << std::endl;

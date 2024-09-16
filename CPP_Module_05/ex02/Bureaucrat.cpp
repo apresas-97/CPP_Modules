@@ -93,3 +93,14 @@ std::ostream & operator<<( std::ostream & out, const Bureaucrat & rhs )
 	out << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
 	return out;
 }
+
+// Exceptions
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
+}

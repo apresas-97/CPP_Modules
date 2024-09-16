@@ -23,50 +23,32 @@ public:
 	class GradeTooHighException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Grade too high");
-			}
+			virtual const char* what() const throw();
 	};
 	class GradeTooLowException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Grade too low");
-			}
+			virtual const char* what() const throw();
 	};
 	class FormAlreadySignedException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Form is already signed");
-			}
+			virtual const char* what() const throw();
 	};
 	class FormNotSignedException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Attempted to execute an unsigned form");
-			}
+			virtual const char* what() const throw();
 	};
 	class FormNotProperlyConstructedException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("Form was not properly constructed");
-			}
+			virtual const char* what() const throw();
 	};
 	class FileIssueException : public std::exception
 	{
 		public:
-			virtual const char* what() const throw()
-			{
-				return ("An issue with the file occurred");
-			}
+			virtual const char* what() const throw();
 	};
 
 	std::string			getName( void ) const;
@@ -81,7 +63,7 @@ public:
 protected:
 
 	const std::string	_name;
-	const std::string	_target; // ?
+	const std::string	_target;
 	bool				_signed;
 	const int			_gradeToSign;
 	const int 			_gradeToExecute;
