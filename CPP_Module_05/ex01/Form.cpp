@@ -19,6 +19,7 @@ Form::Form( std::string name, int gradeToSign, int gradeToExecute ) : _name( nam
 Form::Form( Form const &other ) : _name( other.getName() ), _gradeToSign( other.getGradeToSign() ), _gradeToExecute( other.getGradeToExecute() )
 {
 	*this = other;
+	this->_signed = false;
 	std::cout << "Form copy constructed:" << *this << std::endl;
 }
 
@@ -58,7 +59,7 @@ int		Form::getGradeToExecute( void ) const
 
 void	Form::beSigned( Bureaucrat &bureaucrat )
 {
-	if ( this->_signed == true)
+	if ( this->_signed == true )
 		throw Form::FormAlreadySignedException();
 	else if ( bureaucrat.getGrade() > this->getGradeToSign())
 		throw Form::GradeTooLowException();
@@ -66,7 +67,6 @@ void	Form::beSigned( Bureaucrat &bureaucrat )
 		this->_signed = true;
 }
 
-// ?
 std::ostream &	operator<<( std::ostream & out, Form const & rhs )
 {
 	out << "Form " << rhs.getName();
@@ -76,4 +76,20 @@ std::ostream &	operator<<( std::ostream & out, Form const & rhs )
 		out << " (not signed)";
 	out << ", requires grade " << rhs.getGradeToSign() << " to sign and grade " << rhs.getGradeToExecute() << " to execute";
 	return out;
+}
+
+// Exceptions
+const char* Form::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char* Form::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
+}
+
+const char* Form::FormAlreadySignedException::what() const throw()
+{
+	return ("Form is already signed");
 }
