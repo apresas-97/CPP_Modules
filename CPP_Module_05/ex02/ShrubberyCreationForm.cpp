@@ -33,6 +33,8 @@ void ShrubberyCreationForm::execute( Bureaucrat const & executor ) const
 		std::ofstream file;
 		std::string filename = this->getTarget() + "_shrubbery";
 		file.open(filename.c_str());
+		if (file.fail())
+			throw AForm::FileIssueException();
 		file << "\\  /    \\/  \\   \\/   /  " << std::endl;
 		file << " \\/  \\  /    \\  /   /   " << std::endl;
 		file << "  \\   \\/      \\/  \\/    " << std::endl;

@@ -51,13 +51,21 @@ public:
 			{
 				return ("Attempted to execute an unsigned form");
 			}
-	}; // Maybe? For execute
+	};
 	class FormNotProperlyConstructedException : public std::exception
 	{
 		public:
 			virtual const char* what() const throw()
 			{
 				return ("Form was not properly constructed");
+			}
+	};
+	class FileIssueException : public std::exception
+	{
+		public:
+			virtual const char* what() const throw()
+			{
+				return ("An issue with the file occurred");
 			}
 	};
 
