@@ -14,7 +14,6 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm &operator=( PresidentialPardonForm const &other );
 
 		void			execute( Bureaucrat const & executor ) const;
-		virtual	AForm*	clone( std::string target ) const;
 
 	private:
 

@@ -33,11 +33,6 @@ void	PresidentialPardonForm::execute( Bureaucrat const & executor ) const
 	}
 }
 
-AForm*	PresidentialPardonForm::clone( std::string target ) const
-{
-	return new PresidentialPardonForm("PresidentialPardonForm", target, 25, 5);
-}
-
 PresidentialPardonForm &PresidentialPardonForm::operator=( PresidentialPardonForm const &other )
 {
 	if ( this != &other )

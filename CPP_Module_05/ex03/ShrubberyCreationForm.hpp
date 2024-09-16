@@ -15,7 +15,6 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm &operator=( ShrubberyCreationForm const &other );
 
 		void			execute( Bureaucrat const & executor ) const;
-		virtual	AForm*	clone( std::string target ) const;
 
 	private:
 		

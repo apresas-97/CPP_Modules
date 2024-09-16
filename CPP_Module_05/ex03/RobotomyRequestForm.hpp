@@ -16,7 +16,6 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm &operator=( RobotomyRequestForm const &other );
 
 		void			execute( Bureaucrat const & executor ) const;
-		virtual	AForm*	clone( std::string target ) const;
 
 	private:
 

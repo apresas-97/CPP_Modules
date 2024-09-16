@@ -30,7 +30,12 @@ public:
 	};
 
 private:
+	AForm* (*formCreators[3])( std::string target );
 	std::string	formNames[3];
+
+	static AForm* createPresidentialPardonForm( std::string target );
+	static AForm* createRobotomyRequestForm( std::string target );
+	static AForm* createShrubberyCreationForm( std::string target );
 
 };
 
