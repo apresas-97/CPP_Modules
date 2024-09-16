@@ -58,7 +58,7 @@ public:
 	int					getGradeToExecute( void ) const;
 
 	void				beSigned( Bureaucrat & bureaucrat );
-	virtual void		execute( Bureaucrat const & executor ) const;
+	virtual void		execute( Bureaucrat const & executor ) const = 0;
 
 protected:
 
