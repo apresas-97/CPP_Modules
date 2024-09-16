@@ -56,6 +56,5 @@ AForm*	Intern::makeForm( std::string formName, std::string targetName )
 			return formCreators[i](targetName);
 		}
 	}
-
 	throw Intern::InvalidFormNameException();
 }
