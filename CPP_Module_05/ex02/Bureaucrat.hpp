@@ -36,7 +36,7 @@ public:
 	void		incrementGrade( void );
 	void		decrementGrade( void );
 	void		signForm( AForm & formToSign );
-	void		executeForm( AForm & formToExecute );
+	void		executeForm( AForm const & formToExecute );
 
 private:
 
