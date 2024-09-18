@@ -94,3 +94,34 @@ std::ostream &	operator<<( std::ostream & out, AForm const & rhs )
 	out << ", requires grade " << rhs.getGradeToSign() << " to sign and grade " << rhs.getGradeToExecute() << " to execute";
 	return out;
 }
+
+// Exceptions
+const char* AForm::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char* AForm::GradeTooLowException::what() const throw()
+{
+	return ("Grade too low");
+}
+
+const char* AForm::FormAlreadySignedException::what() const throw()
+{
+	return ("Form is already signed");
+}
+
+const char* AForm::FormNotSignedException::what() const throw()
+{
+	return ("Form is not signed");
+}
+
+const char* AForm::FormNotProperlyConstructedException::what() const throw()
+{
+	return ("Form was not properly constructed");
+}	
+
+const char* AForm::FileIssueException::what() const throw()
+{
+	return ("An issue with the file occurred");
+}
