@@ -84,6 +84,10 @@ bool	string_is_float(std::string str )
 	}
 	if (str[i] == '.')
 		i++;
+	if ((str[0] == '+' || str[0] == '-') && i == 2)
+		return false;
+	if (i == 1)
+		return false;
 	if (i == str.size())
 		return false;
 	for (;i < str.size(); i++)
@@ -91,6 +95,8 @@ bool	string_is_float(std::string str )
 		if (std::isdigit(str[i]) == false)
 			break;
 	}
+	if (i >= 1 && std::isdigit(str[i - 1]) == false)
+		return false;
 	if (str[i] != 'f')
 		return false;
 	if (str[i] == 'f')
@@ -117,6 +123,10 @@ bool	string_is_double( std::string str )
 	}
 	if (str[i] == '.')
 		i++;
+	if ((str[0] == '+' || str[0] == '-') && i == 2)
+		return false;
+	if (i == 1)
+		return false;
 	if (i == str.size())
 		return false;
 	for (;i < str.size(); i++)
