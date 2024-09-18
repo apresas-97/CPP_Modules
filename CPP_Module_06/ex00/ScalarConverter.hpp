@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
+#include <sstream>
+#include <iomanip>
+#include <cstdlib>
 
 class ScalarConverter
 {
@@ -16,6 +20,16 @@ private:
 
 public:
 
+	class WrongInput : public std::exception
+	{
+		public:
+			virtual const char* what() const throw();
+	};
+	class EmptyInput : public std::exception
+	{
+		public:
+			virtual const char* what() const throw();
+	};
 	static void convert( std::string input );
 
 };
