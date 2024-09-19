@@ -1,0 +1,328 @@
+>> Testing the convert function <<
+CHARS:
+>Input: a
+CHAR
+char: 'a'
+int: 97
+---------------------------------------------
+>Input: 1
+CHAR
+char: '1'
+int: 49
+---------------------------------------------
+>Input:  
+CHAR
+char: ' '
+int: 32
+---------------------------------------------
+>Input: !
+CHAR
+char: '!'
+int: 33
+---------------------------------------------
+>Input: 0
+CHAR
+char: '0'
+int: 48
+---------------------------------------------
+>Input: 9
+CHAR
+char: '9'
+int: 57
+---------------------------------------------
+>Input: z
+CHAR
+char: 'z'
+int: 122
+---------------------------------------------
+>Input: A
+CHAR
+char: 'A'
+int: 65
+---------------------------------------------
+>Input: Z
+CHAR
+char: 'Z'
+int: 90
+---------------------------------------------
+>Input: ~
+CHAR
+char: '~'
+int: 126
+---------------------------------------------
+>Input: .
+CHAR
+char: '.'
+int: 46
+---------------------------------------------
+>Input: ]
+CHAR
+char: ']'
+int: 93
+---------------------------------------------
+INTS:
+>Input: 00
+INT
+char: Non displayable
+int: 0
+float: 0.0f
+double: 0.0
+
+---------------------------------------------
+>Input: -00000000000000000000000000000000000000000000000001
+INT
+char: impossible
+int: -1
+float: -1.0f
+double: -1.0
+
+---------------------------------------------
+>Input: 42
+INT
+char: '*'
+int: 42
+float: 42.0f
+double: 42.0
+
+---------------------------------------------
+>Input: 255
+INT
+char: Non displayable
+int: 255
+float: 255.0f
+double: 255.0
+
+---------------------------------------------
+>Input: 256
+INT
+char: impossible
+int: 256
+float: 256.0f
+double: 256.0
+
+---------------------------------------------
+>Input: 2147483647
+INT
+char: impossible
+int: 2147483647
+float: 2147483648.0f
+double: 2147483647.0
+
+---------------------------------------------
+>Input: -2147483648
+INT
+char: impossible
+int: -2147483648
+float: -2147483648.0f
+double: -2147483648.0
+
+---------------------------------------------
+>Input: 2147483648
+Wrong input
+---------------------------------------------
+>Input: -2147483649
+Wrong input
+---------------------------------------------
+FLOATS:
+>Input: 0.0f
+FLOAT
+char: Non displayable
+int: 0
+float: 0f
+double: 0
+
+---------------------------------------------
+>Input: 0.042f
+FLOAT
+char: Non displayable
+int: 0
+float: 0.042f
+double: 0.042
+
+---------------------------------------------
+>Input: 42.42f
+FLOAT
+char: '*'
+int: 42
+float: 42.42f
+double: 42.42
+
+---------------------------------------------
+>Input: 518451.093f
+FLOAT
+char: impossible
+int: 518451
+float: 518451f
+double: 518451
+
+---------------------------------------------
+>Input: -0.0f
+FLOAT
+char: Non displayable
+int: 0
+float: -0f
+double: -0
+
+---------------------------------------------
+>Input: -00000000000.123f
+FLOAT
+char: Non displayable
+int: 0
+float: -0.123f
+double: -0.123
+
+---------------------------------------------
+>Input: 2147483647.0f
+FLOAT
+char: impossible
+int: impossible
+float: 2.14748e+09f
+double: 2.14748e+09
+
+---------------------------------------------
+>Input: -2147483648.0f
+FLOAT
+char: impossible
+int: -2147483648
+float: -2.14748e+09f
+double: -2.14748e+09
+
+---------------------------------------------
+>Input: 99999999999999999.0f
+FLOAT
+char: impossible
+int: impossible
+float: 1e+17f
+double: 1e+17
+
+---------------------------------------------
+>Input: -777777777777777.0f
+FLOAT
+char: impossible
+int: impossible
+float: -7.77778e+14f
+double: -7.77778e+14
+
+---------------------------------------------
+>Input: nanf
+FLOAT
+char: impossible
+int: impossible
+float: nanf
+double: nan
+
+---------------------------------------------
+>Input: -inff
+FLOAT
+char: impossible
+int: impossible
+float: -inff
+double: -inf
+
+---------------------------------------------
+>Input: +inff
+FLOAT
+char: impossible
+int: impossible
+float: inff
+double: inf
+
+---------------------------------------------
+DOUBLES:
+>Input: 0.0
+DOUBLE
+char: Non displayable
+int: 0
+---------------------------------------------
+>Input: 0.042
+DOUBLE
+char: Non displayable
+int: 0
+---------------------------------------------
+>Input: 42.42
+DOUBLE
+char: '*'
+int: 42
+---------------------------------------------
+>Input: 784306.74391
+DOUBLE
+char: impossible
+int: 784306
+---------------------------------------------
+>Input: -000.007
+DOUBLE
+char: Non displayable
+int: 0
+---------------------------------------------
+>Input: +0123.4567
+DOUBLE
+char: '{'
+int: 123
+---------------------------------------------
+>Input: +127.0
+DOUBLE
+char: Non displayable
+int: 127
+---------------------------------------------
+>Input: nan
+DOUBLE
+char: impossible
+int: impossible
+---------------------------------------------
+>Input: -inf
+DOUBLE
+char: impossible
+int: impossible
+---------------------------------------------
+>Input: +inf
+DOUBLE
+char: impossible
+int: impossible
+---------------------------------------------
+Edge cases:
+Weird ass floats and doubles:
+>Input: 0.
+DOUBLE
+char: Non displayable
+int: 0
+---------------------------------------------
+>Input: 0.f
+FLOAT
+char: Non displayable
+int: 0
+float: 0f
+double: 0
+
+---------------------------------------------
+>Input: .0
+DOUBLE
+char: Non displayable
+int: 0
+---------------------------------------------
+>Input: .0f
+FLOAT
+char: Non displayable
+int: 0
+float: 0f
+double: 0
+
+---------------------------------------------
+>Input: .f
+Wrong input
+---------------------------------------------
+>Input: +.
+Wrong input
+---------------------------------------------
+>Input: -.
+Wrong input
+---------------------------------------------
+>Input: +nan
+Wrong input
+---------------------------------------------
+>Input: -nan
+Wrong input
+---------------------------------------------
+>Input: +1f
+Wrong input
+---------------------------------------------
+test = 0

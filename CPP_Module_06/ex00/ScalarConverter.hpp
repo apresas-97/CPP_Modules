@@ -7,6 +7,8 @@
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
+#include <climits>
+#include <cmath>
 
 class ScalarConverter
 {
@@ -30,7 +32,7 @@ public:
 		public:
 			virtual const char* what() const throw();
 	};
-	static void convert( std::string input );
+	static void convert( const std::string & input );
 
 };
 
