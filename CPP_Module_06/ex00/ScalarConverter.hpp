@@ -1,14 +1,12 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
-#include <iostream>
 #include <string>
 #include <exception>
-#include <sstream>
+#include <iostream>
 #include <iomanip>
 #include <cstdlib>
 #include <climits>
-#include <cmath>
 
 class ScalarConverter
 {
@@ -22,6 +20,7 @@ private:
 
 public:
 
+	static void convert( const std::string & input );
 	class WrongInput : public std::exception
 	{
 		public:
@@ -32,7 +31,17 @@ public:
 		public:
 			virtual const char* what() const throw();
 	};
-	static void convert( const std::string & input );
+
+private:
+	
+	static bool	input_is_int( const std::string & input );
+	static bool	input_is_float( const std::string & input );
+	static bool	input_is_double( const std::string & input );
+	static void	display_char( const char c , const long l );
+	static void	display_int( const int i, const long l );
+	static void	display_float( const float f, const int decimals );
+	static void	display_double( const double d, const int decimals );
+	static int	get_meaningful_decimals( const std::string & input );
 
 };
 
