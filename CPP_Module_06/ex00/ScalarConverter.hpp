@@ -37,11 +37,11 @@ private:
 	static bool	input_is_int( const std::string & input );
 	static bool	input_is_float( const std::string & input );
 	static bool	input_is_double( const std::string & input );
+	static int	get_meaningful_decimals( const std::string & input );
 	static void	display_char( const char c , const long l );
 	static void	display_int( const int i, const long l );
 	static void	display_float( const float f, const int decimals );
 	static void	display_double( const double d, const int decimals );
-	static int	get_meaningful_decimals( const std::string & input );
 
 };
 
