@@ -26,11 +26,18 @@ int	main( void )
 		std::cout << "Found: " << value << std::endl;
 		value = easyfind(lst, 50);
 		std::cout << "Found: " << value << std::endl;
-		value = easyfind(vec, 2);
-		std::cout << "Found: " << value << std::endl;
-		value = easyfind(lst, 10);
-		std::cout << "Found: " << value << std::endl;
 		value = easyfind(vec, 6);
+		std::cout << "Found: " << value << std::endl;
+	}
+	catch ( const std::exception & e )
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::vector<int> emptyVector;
+	try
+	{
+		value = easyfind(emptyVector, 5);
 		std::cout << "Found: " << value << std::endl;
 	}
 	catch ( const std::exception & e )
