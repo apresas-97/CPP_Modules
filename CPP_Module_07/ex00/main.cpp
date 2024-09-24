@@ -53,13 +53,25 @@ int	main( void )
 	char	charA = 'A';
 	char	charB = 'B';
 
-	std::cout <<"Comparing chars " << charA << " and " << charB << std::endl;
-	std::cout << "Max: " << max<char>(charA, charB) << std::endl;
-	std::cout << "Min: " << min<char>(charA, charB) << std::endl;
+	std::cout <<"Comparing chars '" << charA << "' and '" << charB << "'" << std::endl;
+	std::cout << "Max: '" << max<char>(charA, charB) << "'" << std::endl;
+	std::cout << "Min: '" << min<char>(charA, charB) << "'" << std::endl;
 	std::cout << "Performing swap" << std::endl;
-	std::cout << "Old values: " << charA << ", " << charB << std::endl;
+	std::cout << "Old values: '" << charA << "', '" << charB << "'" << std::endl;
 	swap<char>(charA, charB);
-	std::cout << "New values: " << charA << ", " << charB << std::endl;
+	std::cout << "New values: '" << charA << "', '" << charB << "'" << std::endl;
+	std::cout << std::endl;
+
+	std::string stringA = "chaine1";
+	std::string stringB = "chaine2";
+
+	std::cout <<"Comparing std::strings \"" << stringA << "\" and \"" << stringB << "\"" << std::endl;
+	std::cout << "Max: \"" << ::max(stringA, stringB) << "\"" << std::endl;
+	std::cout << "Min: \"" << ::min(stringA, stringB) << "\"" << std::endl;
+	std::cout << "Performing swap" << std::endl;
+	std::cout << "Old values: \"" << stringA << "\", \"" << stringB << "\"" << std::endl;
+	swap(stringA, stringB);
+	std::cout << "New values: \"" << stringA << "\", \"" << stringB << "\"" << std::endl;
 
 	return 0;
 }
