@@ -42,12 +42,29 @@ void	identify( Base* p )
 
 void	identify( Base& p )
 {
-	if (dynamic_cast<A*>(&p) != NULL)
+	try
+	{
+		A& a = dynamic_cast<A&>(p);
 		std::cout << "Identified type A" << std::endl;
-	else if (dynamic_cast<B*>(&p) != NULL)
+		(void)a;
+		return ;
+	}
+	catch ( const std::exception & e ) {}
+	try
+	{
+		B& b = dynamic_cast<B&>(p);
 		std::cout << "Identified type B" << std::endl;
-	else if (dynamic_cast<C*>(&p) != NULL)
+		(void)b;
+		return ;
+	}
+	catch ( const std::exception & e ) {}
+	try
+	{
+		C& c = dynamic_cast<C&>(p);
 		std::cout << "Identified type C" << std::endl;
-	else
-		std::cout << "Failed to identify the type" << std::endl;
+		(void)c;
+		return ;
+	}
+	catch ( const std::exception & e ) {}
+	std::cout << "Failed to identify the type" << std::endl;
 }
