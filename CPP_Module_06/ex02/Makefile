@@ -1,11 +1,11 @@
-NAME = serialize
+NAME = identify
 
 # Files
 SRC_DIR = .
 OBJ_DIR = obj
 DEPS_DIR = deps
 
-SRC = main.cpp Serializer.cpp Base.cpp A.cpp B.cpp C.cpp
+SRC = main.cpp Base.cpp A.cpp B.cpp C.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
 

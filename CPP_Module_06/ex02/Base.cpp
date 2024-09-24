@@ -5,40 +5,49 @@ Base::~Base()
 
 }
 
-Base*	Base::generate( void )
+Base*	generate( void )
 {
 	std::srand(std::clock());
-	int rand_result = rand() % 3;
-	if (rand_result == 0)
-		return new A;
-	else if (rand_result == 1)
-		return new B;
-	return new C;
+	switch (rand() % 3)
+	{
+		case 0:
+		{
+			std::cout << "Type created is A" << std::endl; // For clarity
+			return new A;
+		}
+		case 1:
+		{
+			std::cout << "Type created is B" << std::endl; // For clarity
+			return new B;
+		}
+		default:
+		{
+			std::cout << "Type created is C" << std::endl; // For clarity
+			return new C;
+		}
+	}
 }
 
-void	Base::identify( Base* p )
+void	identify( Base* p )
 {
-	A*	a = dynamic_cast<A*>(p);
-	B*	b = dynamic_cast<B*>(p);
-	C*	c = dynamic_cast<C*>(p);
-	if (a != NULL)
+	if (dynamic_cast<A*>(p) != NULL)
 		std::cout << "Identified type A" << std::endl;
-	else if (b != NULL)
+	else if (dynamic_cast<B*>(p) != NULL)
 		std::cout << "Identified type B" << std::endl;
-	else if (c != NULL)
+	else if (dynamic_cast<C*>(p) != NULL)
 		std::cout << "Identified type C" << std::endl;
 	else
 		std::cout << "Failed to identify the type" << std::endl;
 }
 
-void	Base::identify( Base& p )
+void	identify( Base& p )
 {
-	try
-	{
-		A& a = dynamic_cast<A&>(p);
-	}
-	catch ( const std::exception & e )
-	{
-		std::cout << "caught exception: " << e.what() << std::endl;
-	}
+	if (dynamic_cast<A*>(&p) != NULL)
+		std::cout << "Identified type A" << std::endl;
+	else if (dynamic_cast<B*>(&p) != NULL)
+		std::cout << "Identified type B" << std::endl;
+	else if (dynamic_cast<C*>(&p) != NULL)
+		std::cout << "Identified type C" << std::endl;
+	else
+		std::cout << "Failed to identify the type" << std::endl;
 }
