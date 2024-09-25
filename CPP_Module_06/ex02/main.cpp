@@ -13,8 +13,8 @@ int	main( void )
 	// We identify the class using a reference
 	identify(*base);
 	delete base;
-	std::cout << std::endl;
-
+	std::cout << "----------------------------------------" << std::endl;
+	
 	// We can also do it with objects in the stack
 	A a;
 	B b;
@@ -28,14 +28,14 @@ int	main( void )
 	std::cout << "Identifying C:" << std::endl;
 	identify(&c);
 	identify(c);
-	std::cout << std::endl;
+	std::cout << "----------------------------------------" << std::endl;
 
 	// If we try to identify a Base object, it will fail
 	std::cout << "Identifying Base:" << std::endl;
 	Base base2;
 	identify(&base2);
 	identify(base2);
-	std::cout << std::endl;
+	std::cout << "----------------------------------------" << std::endl;
 
 	// Even if we pass it as a Base*, it will identify it as the correct type
 	std::cout << "Identifying as Base*:" << std::endl;

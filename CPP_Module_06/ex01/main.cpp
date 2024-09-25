@@ -25,7 +25,7 @@ int	main( void )
 	set_data(&data, "Hello", "World", 42, 3.14f);
 
 	std::cout << "Serializing data..." << std::endl;
-	raw = Serializer::serialize(&data);	
+	raw = Serializer::serialize(&data);
 
 	print_ptr(&data, raw);
 
