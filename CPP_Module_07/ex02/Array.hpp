@@ -72,6 +72,11 @@ Array<T> & Array<T>::operator=( Array const & rhs )
 		this->_n = rhs._n;
 		if (this->_array)
 			delete [] this->_array;
+		if (this->_n == 0)
+		{
+			this->_array = NULL;
+			return *this;
+		}
 		this->_array = new T[this->_n];
 		for (unsigned int i = 0; i < this->_n; i++)
 			this->_array[i] = rhs._array[i];
