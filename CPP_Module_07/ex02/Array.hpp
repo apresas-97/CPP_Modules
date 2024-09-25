@@ -13,7 +13,6 @@ class Array
 		Array( unsigned int n );
 		Array( Array const & src );
 		~Array();
-		Array( char const * str );
 		Array &		operator=( Array const & rhs );
 		T &			operator[]( unsigned int i );
 		const T &	operator[]( unsigned int i ) const;
@@ -41,6 +40,11 @@ template<typename T>
 Array<T>::Array( unsigned int n ) : _n(n)
 {
 	// std::cout << "Array parameterized constructor called" << std::endl;
+	if (this->_n == 0)
+	{
+		this->_array = NULL;
+		return ;
+	}
 	this->_array = new T[n];
 	for (unsigned int i = 0; i < n; i++)
 		this->_array[i] = T();
@@ -51,16 +55,6 @@ Array<T>::Array( Array const & src ) : _n(0), _array(NULL)
 {
 	// std::cout << "Array copy constructor called" << std::endl;
 	*this = src;
-}
-
-template<>
-Array<char>::Array( char const * str )
-{
-	// std::cout << "Array string constructor called" << std::endl;
-	this->_n = strlen(str);
-	this->_array = new char[this->_n];
-	for (unsigned int i = 0; i < this->_n; i++)
-		this->_array[i] = str[i];
 }
 
 template<typename T>

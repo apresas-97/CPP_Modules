@@ -5,33 +5,39 @@ int	main( void )
 	Array<int> intArray(4);
 	Array<bool> boolArray(4);
 	Array<char> charArray(4);
+	Array<std::string> stringArray(4);
 
+	std::cout << "Creating Arrays:" << std::endl;
 	intArray[0] = 21;
 	intArray[1] = 42;
 	intArray[2] = 84;
 	intArray[3] = 168;
-	std::cout << intArray << std::endl;
+	std::cout << "int Array: " << intArray << std::endl;
 
 	boolArray[0] = true;
 	boolArray[1] = false;
 	boolArray[2] = true;
 	boolArray[3] = false;
-	std::cout << boolArray << std::endl;
+	std::cout << "bool Array: " << boolArray << std::endl;
 
 	charArray[0] = 'H';
 	charArray[1] = 'o';
 	charArray[2] = 'l';
 	charArray[3] = 'a';
-	std::cout << charArray << std::endl;
+	std::cout << "char Array: " << charArray << std::endl;
 
-	Array<char> string("Hello, World!");
-	std::cout << string << std::endl;
+	stringArray[0] = "Hola";
+	stringArray[1] = "que";
+	stringArray[2] = "tal";
+	stringArray[3] = "?";
+	std::cout << "std::string Array: " << stringArray << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "Testing the size function:" << std::endl;
 	std::cout << "intArray size: " << intArray.size() << std::endl;
 	std::cout << "boolArray size: " << boolArray.size() << std::endl;
 	std::cout << "charArray size: " << charArray.size() << std::endl;
-	std::cout << "string size: " << string.size() << std::endl;
+	std::cout << "stringArray size: " << stringArray.size() << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "Testing the copy constructor:" << std::endl;
@@ -48,36 +54,43 @@ int	main( void )
 	std::cout << std::endl;
 
 	std::cout << "Testing the assignment operator:" << std::endl;
-	Array<char> emptyString;
-	std::cout << "emptyString: \"" << emptyString << "\"" << std::endl;
-	emptyString = string;
+	Array<char> auxArray;
+	std::cout << "auxArray: \"" << auxArray << "\"" << std::endl;
+	auxArray = charArray;
 	std::cout << "After assignment:" << std::endl;
-	std::cout << "string: " << string << std::endl;
-	std::cout << "emptyString: " << emptyString << std::endl;
-	emptyString[0] = ' ';
-	emptyString[1] = 'H';
-	emptyString[2] = 'o';
-	emptyString[3] = 'l';
-	emptyString[4] = 'a';
+	std::cout << "charArray: " << charArray << std::endl;
+	std::cout << "auxArray: " << auxArray << std::endl;
+	auxArray[0] = 'C';
+	auxArray[1] = 'h';
+	auxArray[2] = 'a';
+	auxArray[3] = 'o';
 	std::cout << "We change the copy's values, and check both again:" << std::endl;
-	std::cout << "string: " << string << std::endl;
-	std::cout << "emptyString: " << emptyString << std::endl;
+	std::cout << "charArray: " << charArray << std::endl;
+	std::cout << "auxArray: " << auxArray << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "\nTrying to access an out of bounds index:" << std::endl;
+	std::cout << "Trying to access an out of bounds index:" << std::endl;
 	try
 	{
 		std::cout << intArray[4] << std::endl;
 	}
 	catch( const Array<int>::IndexOutOfRangeException & e )
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << "Exception caught: " << e.what() << std::endl;
 	}
 	std::cout << std::endl;
 
-	std::cout << "Accessing elements of a default Array:" << std::endl;
+	std::cout << "Testing default Array:" << std::endl;
 	Array<> defaultArray;
 	std::cout << defaultArray << std::endl;
+	std::cout << std::endl;
+	std::cout << "Testing Array with 0 size:" << std::endl;
+	Array<int> zeroArray(0);
+	std::cout << zeroArray << std::endl;
+	std::cout << std::endl;
+	std::cout << "Testing Array with \"uninitialised\" contents:" << std::endl;
+	Array<int> uninitialisedArray(10);
+	std::cout << uninitialisedArray << std::endl;
 
 	return 0;
 }
