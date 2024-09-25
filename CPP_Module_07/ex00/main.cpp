@@ -1,4 +1,5 @@
 #include "whatever.hpp"
+#include <iostream>
 
 int	main( void )
 {
@@ -72,6 +73,22 @@ int	main( void )
 	std::cout << "Old values: \"" << stringA << "\", \"" << stringB << "\"" << std::endl;
 	::swap(stringA, stringB);
 	std::cout << "New values: \"" << stringA << "\", \"" << stringB << "\"" << std::endl;
+
+	std::cout << std::endl;
+
+	std::cout << "Checking that min and max, when equal, return the second variable:" << std::endl;
+	int	first = 0;
+	int	second = 0;
+	std::cout << "first = " << first << std::endl;
+	std::cout << "second = " << second << std::endl;
+	const int & returned = max(first, second);
+	std::cout << "returned = " << returned << std::endl;
+	first = 1;
+	second = 2;
+	std::cout << "first = " << first << std::endl;
+	std::cout << "second = " << second << std::endl;
+	std::cout << "returned = " << returned << std::endl;
+
 
 	return 0;
 }
