@@ -89,6 +89,5 @@ int	main( void )
 	std::cout << "second = " << second << std::endl;
 	std::cout << "returned = " << returned << std::endl;
 
-
 	return 0;
 }
