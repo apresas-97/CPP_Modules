@@ -70,7 +70,7 @@ int	main( void )
 	std::cout << "Min: \"" << ::min(stringA, stringB) << "\"" << std::endl;
 	std::cout << "Performing swap" << std::endl;
 	std::cout << "Old values: \"" << stringA << "\", \"" << stringB << "\"" << std::endl;
-	swap(stringA, stringB);
+	::swap(stringA, stringB);
 	std::cout << "New values: \"" << stringA << "\", \"" << stringB << "\"" << std::endl;
 
 	return 0;
