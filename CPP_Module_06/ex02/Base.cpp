@@ -7,7 +7,7 @@ Base::~Base()
 
 Base*	generate( void )
 {
-	std::srand(std::clock());
+	std::srand(std::time(NULL));
 	switch (rand() % 3)
 	{
 		case 0:

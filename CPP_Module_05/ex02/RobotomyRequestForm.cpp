@@ -13,7 +13,7 @@ RobotomyRequestForm::RobotomyRequestForm( RobotomyRequestForm const &other ) : A
 
 RobotomyRequestForm::RobotomyRequestForm( std::string target ) : AForm("RobotomyRequestForm", target, 72, 45)
 {
-	std::srand(std::clock());
+	std::srand(std::time(NULL));
 	// RobotomyRequestForm constructed
 }
 
