@@ -19,11 +19,11 @@ class EmptyContainerException : public std::exception
 };
 
 template<typename T>
-int	easyfind( T const & container, int const find )
+int	easyfind( T const & container, int const to_find )
 {
 	if (container.empty())
 		throw EmptyContainerException();
-	typename T::const_iterator it = std::find( container.begin(), container.end(), find );
+	typename T::const_iterator it = std::find( container.begin(), container.end(), to_find );
 	if (it == container.end())
 		throw NotFoundException();
 	return *it;
