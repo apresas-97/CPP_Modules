@@ -2,32 +2,26 @@
 
 Span::Span( void ) : _size(0), _index(0), _integers(NULL)
 {
-	std::srand(std::time(NULL));
+	std::cout << "Span default constructor called" << std::endl;
 }
 
 Span::Span( const unsigned int size ) : _size(size), _index(0)
 {
-	std::srand(std::time(NULL));
+	std::cout << "Span constructor called" << std::endl;
 	this->_integers = new int[size];
 	for (unsigned int i = 0; i < size; i++)
 		this->_integers[i] = int();
 }
 
-Span::Span( int * array, unsigned int size ) : _size(size), _index(0)
-{
-	std::srand(std::time(NULL));
-	this->_integers = new int[size];
-	for (unsigned int i = 0; i < size; i++)
-		this->addMember(array[i]);
-}
-
 Span::Span( Span const & src ) : _size(0), _index(0), _integers(NULL)
 {
+	std::cout << "Span copy constructor called" << std::endl;
 	*this = src;
 }
 
 Span::~Span()
 {
+	std::cout << "Span destructor called" << std::endl;
 	if (this->_integers != NULL)
 		delete [] this->_integers;
 }
@@ -47,52 +41,38 @@ Span &	Span::operator=( Span const & rhs )
 	return *this;
 }
 
-void	Span::addMember( const int add )
+void	Span::addNumber( const int add )
 {
-	if (this->_index == this->_size)
+	if (this->_size == 0)
 		throw Span::EmptySpanException();
+	if (this->_index == this->_size)
+		throw Span::AddOutOfBoundsException();
 	this->_integers[this->_index] = add;
 	this->_index++;
 }
 
-void	Span::assign( int * begin, int * end )
+unsigned int	Span::shortestSpan( void ) const
 {
-	while (begin != end)
-	{
-		if (this->_index == this->_size)
-			return ;
-		this->addMember(*begin);
-		begin++;
-	}
-}
-
-void	Span::randomFill( void )
-{
-	for (unsigned int i = 0; i < this->_size; i++)
-	{
-		if (std::rand() % 2)
-			this->addMember(std::rand());
-		else
-			this->addMember(-std::rand());
-	}
-}
-
-unsigned int	Span::shortestSpan( void )
-{
-	if (this->_size < 2 || this->_index < 2 )
-		throw Span::OnlyOneMemberException();
 	if (this->_size == 0 || this->_index == 0)
 		throw Span::EmptySpanException();
+	if (this->_size < 2 || this->_index < 2 )
+		throw Span::OnlyOneMemberException();
 	std::sort(this->begin(), this->end());
-	std::for_each(this->begin(), this->end(), [](int i) { std::cout << i << std::endl; });
+	unsigned int	shortest_span = UINT_MAX;
+	for (int * it = this->begin(); it != this->end(); it++)
+	{
+		if (it + 1 != this->end() && static_cast<unsigned int>(*(it + 1) - *it) < shortest_span)
+			shortest_span = *(it + 1) - *it;
+	}
+	return shortest_span;
 }
 
-unsigned int	Span::longestSpan( void )
+unsigned int	Span::longestSpan( void ) const
 {
-	if (this->_size < 2 || this->_index < 2 )
-		throw Span::OnlyOneMemberException();
 	if (this->_size == 0 || this->_index == 0)
 		throw Span::EmptySpanException();
+	if (this->_size < 2 || this->_index < 2 )
+		throw Span::OnlyOneMemberException();
 	std::sort(this->begin(), this->end());
 	int	largest_value = *(this->end() - 1);
 	int	smallest_value = *(this->begin());
@@ -101,9 +81,10 @@ unsigned int	Span::longestSpan( void )
 
 void	Span::print( void ) const
 {
-	std::sort(this->begin(), this->end());
+	std::cout << "Span contents:" << std::endl;
 	for (int * it = this->begin(); it != this->end(); it++)
 		std::cout << *it << std::endl;
+	std::cout << std::endl;
 }
 
 int *	Span::begin( void ) const
@@ -130,4 +111,9 @@ const char*	Span::EmptySpanException::what() const throw()
 const char*	Span::OnlyOneMemberException::what() const throw()
 {
 	return "Span object has only one member";
+}
+
+const char*	Span::AddOutOfBoundsException::what() const throw()
+{
+	return "Attempted to add more members than the Span size allows";
 }
