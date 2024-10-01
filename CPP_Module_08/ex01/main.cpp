@@ -46,6 +46,7 @@ int	main( void )
 
 std::vector<int>	create_vector_with_random_values( int size )
 {
+	std::srand(std::time(0));
 	std::cout << "Creating a vector" << std::endl;
 	std::vector<int> vec(size);
 
