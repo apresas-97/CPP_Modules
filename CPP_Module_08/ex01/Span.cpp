@@ -43,8 +43,6 @@ Span &	Span::operator=( Span const & rhs )
 
 void	Span::addNumber( const int add )
 {
-	if (this->_size == 0)
-		throw Span::EmptySpanException();
 	if (this->_index == this->_size)
 		throw Span::AddOutOfBoundsException();
 	this->_integers[this->_index] = add;
@@ -57,14 +55,13 @@ unsigned int	Span::shortestSpan( void ) const
 		throw Span::EmptySpanException();
 	if (this->_size < 2 || this->_index < 2 )
 		throw Span::OnlyOneMemberException();
-	std::sort(this->begin(), this->end());
-	unsigned int	shortest_span = UINT_MAX;
-	for (int * it = this->begin(); it != this->end(); it++)
-	{
-		if (it + 1 != this->end() && static_cast<unsigned int>(*(it + 1) - *it) < shortest_span)
-			shortest_span = *(it + 1) - *it;
-	}
-	return shortest_span;
+	
+	std::vector<int>	sorted_vec(this->begin(), this->end());
+	std::sort(sorted_vec.begin(), sorted_vec.end());
+	std::vector<int>	diff(sorted_vec.size());
+	std::adjacent_difference(sorted_vec.begin(), sorted_vec.end(), diff.begin());
+
+	return *std::min_element(diff.begin() + 1, diff.end());
 }
 
 unsigned int	Span::longestSpan( void ) const
@@ -73,9 +70,11 @@ unsigned int	Span::longestSpan( void ) const
 		throw Span::EmptySpanException();
 	if (this->_size < 2 || this->_index < 2 )
 		throw Span::OnlyOneMemberException();
-	std::sort(this->begin(), this->end());
-	int	largest_value = *(this->end() - 1);
-	int	smallest_value = *(this->begin());
+
+	std::vector<int>	sorted_vec(this->begin(), this->end());
+	std::sort(sorted_vec.begin(), sorted_vec.end());
+	int	largest_value = *(sorted_vec.end() - 1);
+	int	smallest_value = *(sorted_vec.begin());
 	return largest_value - smallest_value;
 }
 

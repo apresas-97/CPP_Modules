@@ -5,6 +5,8 @@
 #include <exception>
 #include <climits>
 #include <iostream>
+#include <vector>
+#include <numeric>
 
 class Span
 {

@@ -126,19 +126,9 @@ void	test_exceptions( void )
 	std::cout << "> Trying to add more numbers than the Span size:" << std::endl;
 	try
 	{
-		Span sp = Span(1);
-		sp.addNumber(6);
-		sp.addNumber(3);
-	}
-	catch ( const std::exception & e )
-	{
-		std::cout << "Caught exception: " << e.what() << "\n" << std::endl;
-	}
-	std::cout << "> Trying to add numbers to a Span with size 0:" << std::endl;
-	try
-	{
-		Span sp2;
-		sp2.addNumber(42);
+		Span sp = Span(10);
+		for (int i = 0; i <= 10; i++)
+			sp.addNumber(i);
 	}
 	catch ( const std::exception & e )
 	{
