@@ -22,10 +22,15 @@ int	main( void )
 	int value;
 	try
 	{
+		std::cout << "Attempting to find 5 in the vector:" << std::endl;
 		value = easyfind(vec, 5);
 		std::cout << "Found: " << value << std::endl;
+		std::cout << std::endl;
+		std::cout << "Attempting to find 50 in the list:" << std::endl;
 		value = easyfind(lst, 50);
 		std::cout << "Found: " << value << std::endl;
+		std::cout << std::endl;
+		std::cout << "Attempting to find 6 in the vector (there is no 6):" << std::endl;
 		value = easyfind(vec, 6);
 		std::cout << "Found: " << value << std::endl;
 	}
@@ -33,7 +38,9 @@ int	main( void )
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
+	std::cout << "Attempting to find in an empty vector:" << std::endl;
 	std::vector<int> emptyVector;
 	try
 	{
