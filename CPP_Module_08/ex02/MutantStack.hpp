@@ -1,22 +1,21 @@
 #ifndef MUTANTSTACK_HPP
 #define MUTANTSTACK_HPP
 
-#include <algorithm>
 #include <stack>
 #include <deque>
 
 template<typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container>
 {
-	public:
-		MutantStack( void );
-		MutantStack( MutantStack const & src );
-		~MutantStack();
-		MutantStack &	operator=( MutantStack const & rhs );
+public:
+	MutantStack( void );
+	MutantStack( MutantStack const & src );
+	~MutantStack();
+	MutantStack &	operator=( MutantStack const & rhs );
 
-	typedef typename std::stack<T, Container>::container_type::iterator				iterator;
+	typedef typename std::stack<T, Container>::container_type::iterator					iterator;
 	typedef typename std::stack<T, Container>::container_type::const_iterator			const_iterator;
-	typedef typename std::stack<T, Container>::container_type::reverse_iterator		reverse_iterator;
+	typedef typename std::stack<T, Container>::container_type::reverse_iterator			reverse_iterator;
 	typedef typename std::stack<T, Container>::container_type::const_reverse_iterator	const_reverse_iterator;
 
 	iterator				begin( void )
@@ -60,19 +59,20 @@ class MutantStack : public std::stack<T, Container>
 template<typename T, typename Container>
 MutantStack<T, Container>::MutantStack( void ) : std::stack<T, Container>()
 {
-
+	// std::cout << "MutantStack constructor called" << std::endl;
 }
 
 template<typename T, typename Container>
 MutantStack<T, Container>::MutantStack( MutantStack const & src ) : std::stack<T, Container>(src)
 {
+	// std::cout << "MutantStack copy constructor called" << std::endl;
 	*this = src;
 }
 
 template<typename T, typename Container>
 MutantStack<T, Container>::~MutantStack()
 {
-
+	// std::cout << "MutantStack destructor called" << std::endl;
 }
 
 template<typename T, typename Container>
