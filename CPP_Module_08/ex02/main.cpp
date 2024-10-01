@@ -29,8 +29,8 @@ int	main( void )
 	std::cout << BLUE "Checking if the mstack iterators work as expected:" RESET << std::endl;
 	test_mstack_iterators<int>();
 	test_mstack_iterators<int, std::vector<int> >();
-	test_mstack_iterators<float, std::deque<float> >();
 	test_mstack_iterators<char, std::list<char> >();
+	test_mstack_iterators<float, std::deque<float> >();
 	std::cout << std::endl;
 
 	std::cout << BLUE "Checking if the main from the subject works:" RESET << std::endl;
