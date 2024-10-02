@@ -45,6 +45,24 @@ void	BitcoinExchange::initDataMap( void )
 	}
 }
 
+std::map<std::string, float>	BitcoinExchange::initInputMap( std::string & filename )
+{
+	std::ifstream file(filename);
+
+	if (!file.is_open())
+		throw OpenFileException();
+
+	// Here goes all the logic to parse the input
+	// DO NOT BE TOO NITPICKY ABOUT VALID INPUTS!
+
+	return input;
+}
+
+void	BitcoinExchange::CompareData( std::string & filename )
+{
+	std::map<std::string, float>	input = initInputMap(filename);
+}
+
 // Exceptions
 const char *BitcoinExchange::OpenFileException::what() const throw()
 {

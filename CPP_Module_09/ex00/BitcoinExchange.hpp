@@ -17,6 +17,8 @@ class BitcoinExchange
 		~BitcoinExchange();
 		BitcoinExchange &operator=( BitcoinExchange const &other );
 
+		void	CompareData( std::string & filename );
+
 	private:
 		void	initDataMap( void );
 
