@@ -15,6 +15,7 @@
 #define MUL '*'
 #define DIV '/'
 #define NUMBER 0
+#define OPERATOR 1
 
 typedef struct s_token
 {
@@ -24,21 +25,19 @@ typedef struct s_token
 
 class RPN
 {
-	public:
-		RPN( void );
-		RPN( RPN const &other );
-		~RPN();
-		RPN &operator=( RPN const &other );
+public:
+	RPN( void );
+	RPN( RPN const &other );
+	~RPN();
+	RPN &operator=( RPN const &other );
 
-		void				calculate( std::string const & expression );
-		void				easyRPN( std::string const & expression );
+	void				calculate( std::string const & expression );
+	void				easyRPN( std::string const & expression );
 	
-	private:
-		bool				verifyExpression( std::string const & expression );
-		std::deque<t_token>	tokenize( std::string const & expression );
-		std::deque<t_token>	getSubExpression( std::deque<t_token> & tokenized_expression );
-		int					operateSubExpression( std::deque<t_token> & sub_expression );
-		void				printDeque( std::deque<t_token> const & deque );
+private:
+	bool				verifyExpression( std::string const & expression );
+	std::deque<t_token>	tokenize( std::string const & expression );
+	void				printDeque( std::deque<t_token> const & deque );
 
 };
 
