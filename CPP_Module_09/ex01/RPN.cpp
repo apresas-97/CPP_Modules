@@ -32,7 +32,7 @@ void	RPN::calculate( std::string const & expression )
 		std::cout << "Error" << std::endl;
 		return ;
 	}
-	std::deque<int> stack;
+	std::deque<int>	stack;
 	std::deque<t_token>	tokenized_expression = tokenize(expression);
 
 	std::deque<t_token>::const_iterator it = tokenized_expression.begin();
