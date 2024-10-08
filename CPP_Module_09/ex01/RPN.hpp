@@ -3,10 +3,8 @@
 
 #include <iostream>
 #include <string>
-#include <exception>
 #include <algorithm>
 #include <sstream>
-#include <cstring>
 #include <cctype>
 #include <deque>
 
@@ -32,12 +30,10 @@ public:
 	RPN &operator=( RPN const &other );
 
 	void				calculate( std::string const & expression );
-	void				easyRPN( std::string const & expression );
 	
 private:
-	bool				verifyExpression( std::string const & expression );
+	bool				verifyExpressionSyntax( std::string const & expression );
 	std::deque<t_token>	tokenize( std::string const & expression );
-	void				printDeque( std::deque<t_token> const & deque );
 
 };
 

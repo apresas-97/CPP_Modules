@@ -20,15 +20,20 @@ RPN &RPN::operator=( RPN const &other )
 {
 	if ( this != &other )
 	{
-
+		// Nothing to do here
 	}
 	return *this;
 }
 
-void	RPN::easyRPN( std::string const & expression )
+void	RPN::calculate( std::string const & expression )
 {
-	std::deque<t_token>	tokenized_expression = tokenize(expression);
+	if (verifyExpressionSyntax(expression) == false)
+	{
+		std::cout << "Error" << std::endl;
+		return ;
+	}
 	std::deque<int> stack;
+	std::deque<t_token>	tokenized_expression = tokenize(expression);
 
 	std::deque<t_token>::const_iterator it = tokenized_expression.begin();
 	while (it != tokenized_expression.end())
@@ -53,24 +58,26 @@ void	RPN::easyRPN( std::string const & expression )
 			else if (it->flag == MUL)
 				stack.push_back(operand1 * operand2);
 			else if (it->flag == DIV)
+			{
+				if (operand2 == 0)
+				{
+					std::cout << "Error (division by zero found)" << std::endl;
+					return ;
+				}
 				stack.push_back(operand1 / operand2);
+			}
 		}
 		it++;
 	}
-	std::cout << stack.back() << std::endl;
-}
-
-void	RPN::calculate( std::string const & expression )
-{
-	if (verifyExpression(expression) == false)
+	if (stack.size() != 1)
 	{
 		std::cout << "Error" << std::endl;
 		return ;
 	}
-	easyRPN(expression);
+	std::cout << stack.back() << std::endl;
 }
 
-bool	RPN::verifyExpression( std::string const & expression )
+bool	RPN::verifyExpressionSyntax( std::string const & expression )
 {
 	if (expression.empty())
 		return false;
@@ -106,23 +113,9 @@ std::deque<t_token> RPN::tokenize( std::string const & expression )
 		else if (std::isdigit(aux_char))
 		{
 			token.value = aux_char - '0';
-			token.flag = 0;
+			token.flag = NUMBER;
 		}
 		tokenized_expression.push_back(token);
 	}
 	return tokenized_expression;
-}
-
-void	RPN::printDeque( std::deque<t_token> const & deque )
-{
-	std::deque<t_token>::const_iterator it = deque.begin();
-	while (it != deque.end())
-	{
-		if (it->flag == NUMBER)
-			std::cout << it->value << " ";
-		else
-			std::cout << static_cast<char>(it->value) << " ";
-		it++;
-	}
-	std::cout << std::endl;
 }
