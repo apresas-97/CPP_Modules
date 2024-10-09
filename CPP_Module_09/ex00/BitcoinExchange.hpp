@@ -2,19 +2,14 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <algorithm>
-#include <vector>
 #include <iostream>
 #include <fstream>
 #include <exception>
 #include <string>
 #include <sstream>
 #include <cctype>
-
-typedef struct s_element
-{
-	std::string	date;
-	float		value;
-}				t_element;
+#include <map>
+#include <iomanip>
 
 class BitcoinExchange
 {
@@ -25,15 +20,18 @@ class BitcoinExchange
 		BitcoinExchange &operator=( BitcoinExchange const &other );
 
 		void	calculateValues( std::string & filename );
-		void	printDataVector( void );
+
+		void	printDataMap( void );
+		void	printMap( std::multimap<std::string, float> & map );
 
 	private:
 
-		void					initDataMap( void );
-		std::vector<t_element>	initInputMap( std::string & filename );
-		bool					verifyDateFormat( std::string & date );
+		void								initDataMap( void );
+		int									countInputLines( std::string const & filename );
+		std::multimap<std::string, float>	initInputMap( std::string & filename );
+		bool								verifyDateFormat( std::string & date );
 
-		std::vector<t_element>	_data;
+		std::multimap<std::string, float>	_data;
 
 	public:
 		class OpenFileException : public std::exception
