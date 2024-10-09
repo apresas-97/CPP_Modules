@@ -29,8 +29,7 @@ int	main( int argc, char **argv )
 
 	std::vector<int> vec(numbers, numbers + size);
 	
-	// mergeInsertionSort(numbers, size);
-
+	mergeInsertionSort<std::vector<int>>(vec.begin(), vec.end());
 
 	printArray(AFTER, numbers, size);
 	// printTime(0);
