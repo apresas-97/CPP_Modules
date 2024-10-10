@@ -1,0 +1,13 @@
+What do we need?
+
+mergeInsertionSort is recursive
+
+We create pairs, size/2 many
+
+We fill the pairs
+
+We sort each pair
+
+We store each pair in an array, and we call mergeInsertionSort recursively to sort that
+array of pairs based on the first value
+
