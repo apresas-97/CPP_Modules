@@ -126,6 +126,15 @@ void	insertElement( Iterator begin, Iterator end, Iterator element, size_t eleme
 }
 
 template<typename Iterator>
+std::vector<Iterator>	getPendVector( Iterator begin, Iterator end, size_t elementSize )
+{
+	std::vector<Iterator>	pend;
+	for (Iterator it = begin + 1; it != end; it += elementSize) // Will this fail because it might skip the end??
+		pend.push_back(it);
+	return pend;
+}
+
+template<typename Iterator>
 void	mergeInsertionSort( Iterator begin, Iterator end, size_t elementSize )
 {
 	size_t	size = std::distance(begin, end) / elementSize;
@@ -149,27 +158,26 @@ void	mergeInsertionSort( Iterator begin, Iterator end, size_t elementSize )
 	// Sort the "pairs" by their first element, recursively
 	mergeInsertionSort(begin, begin + (nbPairs * pairSize), pairSize);
 
-	// "Merge" the elements of the "pairs" into their right place
-	// A pair is (a, b)
-	// There are k pairs
-	// The elements will be referred to as a1, b1, a2, b2, ..., ak, bk
-	// a1, b1 will be the elements of the first pair
-	// ak, bk will be the elements of the k-th pair
-	// We will pretend that a1, a2... ak is the main chain
-	// And b1, b2... bk is the pending chain. Which includes, if it exists, the last value that was unpaired
-
 	// Insert b1, which will always be smaller than a1, so it must go first
 
+	std::vector<int> mainChain;
+	std::vector<std::vector<int>::iterator> pend = getPendVector(begin, end, elementSize);
+	// MAYBE???
+
 	size_t	i = 0;
+	size_t	k = 0;
 	size_t	pendSize = size - static_cast<int>(oddSize); // ?? -1 if odd? -0 if even?
 	while (true) // for now
 	{
-		if (i + jacobsthalNumber(i) >= pendSize)
+		if (i + jacobsthalNumber(k) > pendSize) // > or >= ??
 			break ;
 
 
 	}
 
+	// Insert remaning pend elements
+
+	// Insert last value if odd
 
 	return ;
 }

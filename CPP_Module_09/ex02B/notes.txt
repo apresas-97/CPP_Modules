@@ -1,0 +1,147 @@
+IT00
+Input:
+5 2 3 1 4 7 6
+Pair:
+5--3--4
+|  |  |
+2  1  7 ~6
+Sort pairs:
+2--1--4
+|  |  |
+5  3  7 ~6
+Sort new list recursively:
+
+IT01
+Input:
+2 1 4
+Pair:
+2
+|  
+1 ~4  
+Sort pairs:
+1
+|
+2 ~4
+Sort new list recursively:
+
+IT02
+Input:
+1
+OUT
+
+IT01
+1
+|
+2 ~4
+main_chain:
+1
+pend:
+2
+remainder:
+4
+Insert b1
+2--1
+pend was inserted
+
+insert leftovers
+4--2--1
+OUT
+
+IT00
+4--2--1
+|  |  |
+7  5  3 ~6
+main_chain:
+4 2 1
+pend:
+7 5 3
+remainder:
+6
+Insert b1
+7 4 2 1
+    5 3 ~6
+
+Insert b3
+7 4 3 2 1
+      5   ~6
+
+Insert b2
+7 5 4 3 2 1
+            ~6
+
+Pend inserted
+
+Insert leftovers
+
+7 6 5 4 3 2 1
+
+
+-----------------------------------
+
+4--2--1
+|  |  |
+7  5  3 ~6
+
+Insert b1:
+
+// J(N) means Nth Jacobsthal number
+
+k=0
+i=0
+
+nextB = i+J(k) = 0+J(0) = 0+0 = 0
+pendSize = 3
+
+if nextB > pendSize
+	break;
+0 >= 3 ? no
+
+pendToInsert = X
+
+// In this case, it's only b1, so it will be pendToInsert = 1
+
+while pendToInsert > 0
+
+insert(pend[nextB], rangeMainChain)
+pendToInsert--
+
+i--
+
+pendToInsert = 0, loop done
+
+Find next values
+
+nextB = i + J(k) = 1 + 1 = 2
+pendSize = 2
+
+nextB > pendSize ? no
+
+// Now I know we should insert b3, but let's see how that's calculated
+
+   b1, b2, b3, b4, b5  ...
+i= 0,  1,  2,  3,  4,  ...
+
+   b1, b2, b3, b4, b5  ...
+i= 0,  1,  2,  3,  4,  ...
+
+while pendToInsert > 0
+
+insert(pend[nextB], mainChain)
+pendToInsert--
+i--
+
+pendIndex = Index at which pend is currently being inserted
+pendNextEnd = Index at which pend finished its cycle of insertions
+pend
+
+
+Insert b3 must be calculated:
+
+bN must be calculated.
+
+To calculate N:
+
+The order is
+
+b1,b3,b2,b5,b4,b11,b10,b9,b8,b7,b6,b22,b21...b12,b44?
+
