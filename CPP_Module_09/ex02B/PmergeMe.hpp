@@ -54,16 +54,16 @@ int &	PmergeMe<Container>::operator[]( int index ) const
 //// pair utils
 // Sorts a pair of values from within a container
 template<typename Iterator, typename Comparator>
-void	sortPair( Iterator pairA, Iterator pairB, Comparator comp )
+void	sortPair( Iterator pairA, Iterator pairB, Comparator comp, size_t elementSize )
 {
 	if (comp(*pairA, *pairB)) // If the given comparator returns true
 		std::swap(*pairA, *pairB);
 }
 
 // Inserts an element using binary search, within the range from begin to end
-template<typename Iterator>
-void	insertElement( Iterator element, Iterator begin, Iterator end, size_t elementSize, size_t offset )
-{
+// template<typename Iterator>
+// void	insertElement( Iterator element, Iterator begin, Iterator end, size_t elementSize, size_t offset )
+// {
 	// size_t	i = offset;
 	// while (i < elementSize)
 	// {
@@ -74,7 +74,7 @@ void	insertElement( Iterator element, Iterator begin, Iterator end, size_t eleme
 	// 	}
 	// 	i++;
 	// }
-}
+// }
 
 // void	binaryInsert( Iterator begin, Iterator end, size_t elementSize, size_t offset, int value )
 // {
@@ -113,25 +113,121 @@ void	swapElements( Iterator elementA, Iterator elementB, size_t elementSize )
 // }
 
 template<typename Iterator>
-void	insertElement( Iterator begin, Iterator end, Iterator element, size_t elementSize )
+Iterator	binarySearch( Iterator begin, Iterator end, Iterator element, size_t elementSize )
 {
-	for (Iterator it = begin; it != end; it += elementSize)
+	Iterator	start = begin;
+	while (start < end)
 	{
-		if (*element < *it)
-		{
-			swapElements(element, it, elementSize);
-			element = it;
-		}
+		Iterator	mid = start + std::distance(start, end) / 2;
+
+		if (*mid == *element)
+			return mid;
+		else if (*mid < *element)
+			start = mid + elementSize;
+		else
+			end = mid - elementSize;
 	}
+	return end;
+}
+
+// template<typename Iterator>
+// void	insertElement( Iterator begin, Iterator end, Iterator element, size_t elementSize )
+// {
+// 	Iterator	insertPos = binarySearch(begin, end, element, elementSize);
+
+// 	for (size_t i = 0; i < elementSize; i++)
+// 	{
+// 		insertPos.insert(insertPos, *element);
+// 		insertPos++;
+// 		element++;
+// 	}
+// }
+
+void	insertElement( std::vector<int> & vec, std::vector<int>::iterator begin, std::vector<int>::iterator end, std::vector<int>::iterator element, size_t elementSize )
+{
+	std::vector<int>::iterator	insertPos = binarySearch(begin, end, element, elementSize);
+
+	for (size_t i = 0; i < elementSize; i++)
+		vec.insert(insertPos + i, *(element + i));
+}
+
+// template<typename Iterator>
+// std::vector<Iterator>	getPendVector( Iterator begin, Iterator end, size_t elementSize )
+// {
+// 	std::vector<Iterator>	pend;
+// 	for (Iterator it = begin + 1; it != end; it += elementSize) // Will this fail because it might skip the end??
+// 		pend.push_back(it);
+// 	return pend;
+// }
+
+template<typename Iterator>
+std::vector<int>	getMainChain( Iterator begin, Iterator end, size_t elementSize )
+{
+	std::vector<int>	mainChain;
+	Iterator			it = begin;
+
+	while (it < end)
+	{
+		if (it + elementSize >= end)
+			break ;
+		for (size_t i = 0; i < elementSize; i++)
+		{
+			mainChain.push_back(*(it + i));
+		}
+		it += 2 * elementSize;
+	}
+	return mainChain;
 }
 
 template<typename Iterator>
-std::vector<Iterator>	getPendVector( Iterator begin, Iterator end, size_t elementSize )
+std::vector<int>	getPend( Iterator begin, Iterator end, size_t elementSize )
 {
-	std::vector<Iterator>	pend;
-	for (Iterator it = begin + 1; it != end; it += elementSize) // Will this fail because it might skip the end??
-		pend.push_back(it);
+	std::vector<int>	pend;
+	Iterator			it = begin;
+
+	it += elementSize;
+	while (it < end)
+	{
+		if (it + elementSize >= end)
+			break ;
+		for (size_t i = 0; i < elementSize; i++)
+		{
+			pend.push_back(*(it + i));
+		}
+		it += 2 * elementSize;
+	}
 	return pend;
+}
+
+size_t	jacobsthalNumber( size_t k )
+{
+	if (k == 0)
+		return 0;
+	if (k == 1)
+		return 1;
+
+	size_t	a = 0;
+	size_t	b = 1;
+	size_t	c;
+	for (size_t i = 2; i <= k; i++)
+	{
+		c = 2 * b + a;
+		a = b;
+		b = c;
+	}
+	return b;
+}
+
+size_t	getPendEnd( size_t prevStart )
+{
+	size_t	pendEnd = prevStart + 1;
+	return pendEnd;
+}
+
+size_t	getPendStart( size_t k )
+{
+	size_t	pendStart = jacobsthalNumber(k) - 1;
+	return pendStart;
 }
 
 template<typename Iterator>
@@ -145,7 +241,10 @@ void	mergeInsertionSort( Iterator begin, Iterator end, size_t elementSize )
 	bool	oddSize = size % 2 != 0;
 	int		lastValue = 0;
 	if (oddSize)
+	{
 		lastValue = *(end - 1);
+		end -= elementSize;
+	}
 	//
 
 	// Create "pairs"
@@ -158,29 +257,42 @@ void	mergeInsertionSort( Iterator begin, Iterator end, size_t elementSize )
 	// Sort the "pairs" by their first element, recursively
 	mergeInsertionSort(begin, begin + (nbPairs * pairSize), pairSize);
 
-	// Insert b1, which will always be smaller than a1, so it must go first
+	std::vector<int>	mainChain = getMainChain(begin, end, elementSize);
+	std::vector<int>	pend = getPend(begin, end, elementSize);
 
-	std::vector<int> mainChain;
-	std::vector<std::vector<int>::iterator> pend = getPendVector(begin, end, elementSize);
-	// MAYBE???
-
-	size_t	i = 0;
-	size_t	k = 0;
-	size_t	pendSize = size - static_cast<int>(oddSize); // ?? -1 if odd? -0 if even?
-	while (true) // for now
+	size_t	k = 2; // jacobsthal index
+	size_t	i = 0; // pend index
+	size_t	pendEnd = 0;
+	mainChain.insert(mainChain.begin(), pend[i]); // insert b1
+	size_t	insertedElements = 1;
+	while (true)
 	{
-		if (i + jacobsthalNumber(k) > pendSize) // > or >= ??
+		pendEnd = jacobsthalNumber(k - 1) - 1;
+		i = jacobsthalNumber(k) - 1;
+		if (i >= pend.size()) // start is out of bounds
 			break ;
-
-
+		while (i >= pendEnd)
+		{
+			insertElement(mainChain.begin(), mainChain.begin() + i + insertedElements, pend[i], elementSize);
+			// I should find the correct range to insert the element
+			i--;
+		}
+		k++;
 	}
 
-	// Insert remaning pend elements
-
-	// Insert last value if odd
+	// The target index was out of bounds
+	// We insert the remaining pend elements, but first we must insert the odd element if there was one
+	if (oddSize)
+		insertElement(mainChain.begin(), mainChain.end(), lastValue, elementSize);
+	for (size_t i = pend.size() - 1; i >= pendEnd; i--)
+	{
+		insertElement(mainChain.begin(), mainChain.begin() + i + insertedElements, pend[i], elementSize);
+		insertedElements++;
+	}
 
 	return ;
 }
+
 
 
 
