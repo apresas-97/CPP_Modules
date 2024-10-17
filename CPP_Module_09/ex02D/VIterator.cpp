@@ -1,80 +1,74 @@
 #include "VIterator.hpp"
 
-VIterator::VIterator( void )
-{
-	throw std::exception();// for now
-	// _it = NULL;
-	// _size = 0;
-}
+VIterator::VIterator( void ) {}
 
-VIterator::VIterator( iterator_type it, size_t size ) : _it(it), _size(size)
-{
-	
-}
+VIterator::VIterator( iterator_type it, size_t size ) : _it(it), _size(size) {}
 
-VIterator::VIterator( VIterator it, size_t size ) : _it(it.base()), _size(size)
-{
-	
-}
+VIterator::VIterator( iterator_type it ) : _it(it), _size(1) {}
 
-VIterator::VIterator( VIterator const & other )
-{
-	*this = other;
-}
+VIterator::VIterator( VIterator it, size_t size ) : _it(it.base()), _size(size) {}
 
-VIterator::~VIterator()
-{
-	
-}
+VIterator::VIterator( VIterator const & other ) : _it(other.base()), _size(other.size()) {}
 
-VIterator &	VIterator::operator=( VIterator const & other )
-{
-	if (this != &other)
-	{
-		_it = other.base();
-		_size = other.size();
-	}
-	return *this;
-}
+VIterator::~VIterator() {}
 
-// Member functions
+//// Member functions
+// returns the underlying iterator
 VIterator::iterator_type	VIterator::base( void ) const
 {
 	return _it;
 }
 
-VIterator::difference_type	VIterator::size( void ) const
+// returns the size of the VIterator
+// VIterator::difference_type	VIterator::size( void ) const
+size_t	VIterator::size( void ) const
 {
 	return _size;
 }
 
-// Operators
-VIterator::reference	VIterator::operator*( void ) const
+////// Operators
+// Assigns the underlying iterator of another VIterator to this VIterator of equal size
+VIterator &	VIterator::operator=( VIterator const & other )
 {
-	return *(_it + _size - 1);
+	if (this != &other && _size == other.size())
+		_it = other.base();
+	return *this;
 }
 
+//// Dereference operators
+// Returns the meaningful value that the VIterator is pointing to
+VIterator::reference	VIterator::operator*( void ) const
+{
+	return _it[_size - 1];
+}
+
+// Returns the address of the meaningful value that the VIterator is pointing to
 VIterator::pointer		VIterator::operator->( void ) const
 {
 	return &(operator*());
 }
 
+// Accesses the meaningful value from the VIterator by index
 VIterator::value_type	VIterator::operator[]( size_t index )
 {
 	return _it[index * _size + _size - 1];
 }
 
+// Accesses the meaningful value from the VIterator by index, const version
 VIterator::value_type	VIterator::operator[]( size_t index ) const
 {
 	return _it[index * _size + _size - 1];
 }
-//
+
+//// Increment and Decrement operators
+// Advances the VIterator by _size
 VIterator &	VIterator::operator++( void )
 {
 	_it += _size;
 	return *this;
 }
 
+// Advances the VIterator by _size, post increment
 VIterator	VIterator::operator++( int )
 {
 	VIterator tmp(*this);
@@ -82,12 +76,14 @@ VIterator	VIterator::operator++( int )
 	return tmp;
 }
 
+// Decrements the VIterator by _size
 VIterator &	VIterator::operator--( void )
 {
 	_it -= _size;
 	return *this;
 }
 
+// Decrements the VIterator by _size, post decrement
 VIterator	VIterator::operator--( int )
 {
 	VIterator tmp(*this);
@@ -95,18 +91,22 @@ VIterator	VIterator::operator--( int )
 	return tmp;
 }
 
+// Advances the VIterator by _size * increment
 VIterator &	VIterator::operator+=( difference_type increment )
 {
 	_it += increment * _size;
 	return *this;
 }
 
+// Decrements the VIterator by _size * decrement
 VIterator &	VIterator::operator-=( difference_type decrement )
 {
 	_it -= decrement * _size;
 	return *this;
 }
-//
+
+//// Comparison operators
+// Compares the underlying iterator of two VIterators
 bool	VIterator::operator==( VIterator const & rhs ) const
 {
 	return _it == rhs.base();
@@ -137,6 +137,8 @@ bool	VIterator::operator>=( VIterator const & rhs ) const
 	return _it >= rhs.base();
 }
 
+//// Arithmetic operators
+// Advances the VIterator by increment * _size
 VIterator	VIterator::operator+( difference_type increment )
 {
 	VIterator it(_it, _size);
@@ -144,6 +146,13 @@ VIterator	VIterator::operator+( difference_type increment )
 	return it;
 }
 
+// // Returns the sum of the underlying iterators of two VIterators
+// VIterator::difference_type	VIterator::operator+( VIterator const & rhs ) const
+// {
+// 	return (_it + rhs.base()) / _size;
+// }
+
+// Decrements the VIterator by decrement * _size
 VIterator	VIterator::operator-( difference_type decrement )
 {
 	VIterator it(_it, _size);
@@ -151,36 +160,35 @@ VIterator	VIterator::operator-( difference_type decrement )
 	return it;
 }
 
-// VIterator::difference_type	VIterator::operator-( VIterator const & rhs ) const
-// {
-// 	return (_it.base() - rhs.base()) / _size;
-// }
-
-// VIterator::difference_type	VIterator::operator+( VIterator const & rhs ) const
-// {
-// 	return (_it.base() + rhs.base()) / _size;
-// }
-
-VIterator::iterator_type	VIterator::base( void ) const
+// Returns the difference between the underlying iterators of two VIterators
+VIterator::difference_type	VIterator::operator-( VIterator const & rhs ) const
 {
-	return _it;
+	return (_it - rhs.base()) / _size;
 }
 
-VIterator::difference_type	VIterator::size( void ) const
-{
-	return _size;
-}
-
+// For VIteratorUtils.cpp ??
+// Swaps the contents of two VIterators
 void	swapVIterator( VIterator lhs, VIterator rhs )
 {
 	std::swap_ranges(lhs.base(), lhs.base() + lhs.size(), rhs.base());
 }
 
+// Sorts the pairs of elements in the range [start, end)
 void	makePairs( VIterator & start, VIterator & end )
 {
-	for (VIterator it = start; it != end; it++)
+	for (VIterator it = start; it != end; it += 2)
 	{
-		if (it[0] > it[1]) // Make sure this is really correct
+		if (it[0] < it[1]) // Make sure this is really correct
 			swapVIterator(it, it + 1);
 	}
+}
+
+void	printVIterator( VIterator & start, VIterator & end )
+{
+	// std::cout << "Printing VIterator: " << std::endl;
+	for (VIterator it = start; it != end; it++)
+	{
+		std::cout << it[0] << " ";
+	}
+	std::cout << std::endl;
 }
