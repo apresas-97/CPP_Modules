@@ -6,24 +6,28 @@
 #include <iterator>
 #include <utility>
 #include <vector>
+#include <sstream>
+
+#define BLOCKS 3
+#define VISUALIZER 2
+#define TRUE_VECTOR 1
+#define DEFAULT 0
 
 class VIterator
 {
 public:
 
-	typedef typename std::iterator_traits<std::vector<int>::iterator>::iterator_category		iterator_category;
-	typedef typename std::iterator_traits<std::vector<int>::iterator>::value_type				value_type;
-	typedef typename std::iterator_traits<std::vector<int>::iterator>::difference_type			difference_type;
-	typedef typename std::iterator_traits<std::vector<int>::iterator>::pointer					pointer;
-	typedef typename std::iterator_traits<std::vector<int>::iterator>::reference				reference;
-	typedef std::vector<int>::iterator															iterator_type;
-
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::iterator_category		iterator_category;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::value_type				value_type;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::difference_type			difference_type;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::pointer					pointer;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::reference				reference;
+	typedef std::vector<unsigned int>::iterator															iterator_type;
 
 private:
 
 	iterator_type	_it;
 	size_t			_size;
-	
 	
 	VIterator( void );
 
@@ -70,10 +74,9 @@ public:
 };
 
 void	swapVIterator( VIterator lhs, VIterator rhs );
-void	makePairs( VIterator & lhs, VIterator & rhs );
+void	makePairs( VIterator & lhs, VIterator & rhs, int & comparisons );
 void	printVIterator( VIterator & start, VIterator & end );
-
-
+void	printVIterator( VIterator & start, VIterator & end, int flag );
 
 
 
@@ -260,14 +263,14 @@ void	printVIterator( VIterator & start, VIterator & end );
 // // }
 
 // template<>
-// PmergeIt<PmergeIt<std::vector<int>::iterator> >::PmergeIt( PmergeIt<std::vector<int>::iterator> it, size_t size )
+// PmergeIt<PmergeIt<std::vector<unsigned int>::iterator> >::PmergeIt( PmergeIt<std::vector<unsigned int>::iterator> it, size_t size )
 // {
 // 	_it = it;
 // 	_size = size * it.size();
 // }
 
 // template<>
-// PmergeIt<std::vector<int>::iterator>::PmergeIt( std::vector<int>::iterator it, size_t size ) : _it(it), _size(size)
+// PmergeIt<std::vector<unsigned int>::iterator>::PmergeIt( std::vector<unsigned int>::iterator it, size_t size ) : _it(it), _size(size)
 // {
 
 // }
