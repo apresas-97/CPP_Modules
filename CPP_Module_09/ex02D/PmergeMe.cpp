@@ -90,7 +90,7 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 {
 	timeElapsed = 0.0;
 	std::clock_t	timeStart = std::clock();
-	// static std::string indent = "";
+
 	// static int	lvl = 0;
 	// lvl++;
 	// std::cout << prefix(lvl) << "IN >>" << std::endl;
@@ -109,7 +109,6 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	makePairs(start, end);
 	// printVIterator(start, end, BLOCKS);
 
-	// indent += "  ";
 	mergeInsertionSort(VIterator(first, first.size() * 2), VIterator(end, end.size() * 2));
 
 	// lvl--;
@@ -166,11 +165,9 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 
 	// Now we will do the binary insertion part
 	// std::cout << prefix(lvl) << "Insertion" << std::endl;
-	// std::cout << prefix(lvl) << "Insertion" << std::endl;
 
 	VIterator	current = start + 2;
 	std::vector<std::list<VIterator>::iterator>::iterator	current_pend = pend.begin();
-	std::vector<std::list<VIterator>::iterator>::iterator	pe = current_pend;
 	size_t	k = 3;
 	while (true)
 	{
@@ -179,13 +176,14 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 			break ;
 		
 		VIterator	it = current + dist * 2;
-		pe = current_pend + dist;
+		std::vector<std::list<VIterator>::iterator>::iterator	pe = current_pend + dist;
 
 		while (current_pend != pe)
 		{
 			--pe;
 			it -= 2;
 			// std::list<VIterator>::iterator insertionPoint = binarySearch(mainChain.begin(), *pe, *it);
+			// mainChain.insert(insertionPoint, it);
 			mainChain.insert(binarySearch(mainChain.begin(), *pe, *it), it);
 		}
 
@@ -205,18 +203,22 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	}
 
 	// After the binary insertion part, we must insert the remaining elements
-	// std::cout << prefix(lvl) << "Insert" << std::endl;
+	// std::cout << prefix(lvl) << "Insertga" << std::endl;
 	while (current_pend != pend.end())
 	{
 		// std::list<VIterator>::iterator insertionPoint = binarySearch(mainChain.begin(), *current_pend, *current);
+		// mainChain.insert(insertionPoint, current);
 		mainChain.insert(binarySearch(mainChain.begin(), *current_pend, *current), current);
-		std::advance(current, 2);
-		std::advance(current_pend, 1);
+		// std::advance(current, 2);
+		// std::advance(current_pend, 1);
+		current += 2;
+		current_pend++;
 	}
 
 	std::vector<unsigned int>	cache;
 	cache.reserve(size);
 
+	// std::cout << prefix(lvl) << "making cache" << std::endl;
 	for (std::list<VIterator>::iterator it = mainChain.begin(); it != mainChain.end(); it++)
 	{
 		std::vector<unsigned int>::iterator begin = it->base();
@@ -230,6 +232,7 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	std::swap_ranges(cache.begin(), cache.end(), start.base());
 
 	timeElapsed = (double)(std::clock() - timeStart) / CLOCKS_PER_SEC;
+	// std::cout << "OUT!" << std::endl;
 }
 
 void	pprintVector( std::vector<unsigned int> & vec )
@@ -250,7 +253,10 @@ void	mergeVIteratorToVector( VIterator start, VIterator end, std::vector<unsigne
 		std::vector<unsigned int>::iterator begin = it.base();
 		std::vector<unsigned int>::iterator end = begin + it.size();
 		while (begin != end)
-			cache.push_back(*begin++);
+		{
+			cache.push_back(*begin);
+			begin++;
+		}
 	}
 	std::swap_ranges(cache.begin(), cache.end(), vec.begin());
 }
@@ -264,7 +270,10 @@ void	mergeVIteratorToVector( VIterator start, VIterator end, std::vector<unsigne
 		std::vector<unsigned int>::iterator begin = it.base();
 		std::vector<unsigned int>::iterator end = begin + it.size();
 		while (begin != end)
-			cache.push_back(*begin++);
+		{
+			cache.push_back(*begin);
+			begin++;
+		}
 	}
 	std::swap_ranges(cache.begin(), cache.end(), vstart);
 }

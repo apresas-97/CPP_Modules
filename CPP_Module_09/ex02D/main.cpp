@@ -38,6 +38,7 @@ int	main( int argc, char **argv )
 	printVector(vec, "Before: ");
 
 	PmergeMe pm;
+	// pm.mergeInsertionSort(vec);
 	pm.mergeInsertionSort(vec.begin(), vec.end());
 
 	printVector(vec, "After: ");
