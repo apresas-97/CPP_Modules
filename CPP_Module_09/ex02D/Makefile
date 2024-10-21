@@ -52,10 +52,10 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME) `shuf -i 1-1000 -n 1000 | tr "\n" " "`
+	./$(NAME) `shuf -i 1-1000 -n1000 | tr "\n" " "`
 
 valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) `shuf -i 1-30 -n 30 | tr "\n" " "`
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) `shuf -i 1-1000 -n 1000 | tr "\n" " "`
 
 .PHONY: all clean fclean re run valgrind
 -include $(DEPS)

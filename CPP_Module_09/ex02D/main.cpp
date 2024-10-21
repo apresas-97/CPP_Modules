@@ -31,14 +31,24 @@ int	main( int argc, char **argv )
 			return 1;
 		}
 	}
-	std::cout << "Sorting as a vector:" << std::endl;
 	std::vector<unsigned int> vec(numbers, numbers + size);
+	std::vector<unsigned int> copy(vec.begin(), vec.end());
+
+	std::cout << "Sorting as a vector:" << std::endl;
 	printVector(vec, "Before: ");
 
 	PmergeMe pm;
-	pm.mergeInsertionSort(vec);
+	pm.mergeInsertionSort(vec.begin(), vec.end());
 
 	printVector(vec, "After: ");
+	pm.printTimeElapsed();
+
+	std::sort(copy.begin(), copy.end(), std::less<unsigned int>());
+
+	if (vec == copy)
+		std::cout << "Vectors are equal" << std::endl;
+	else
+		std::cout << "Vectors are not equal" << std::endl;
 
 	delete [] numbers;
 	return 0;

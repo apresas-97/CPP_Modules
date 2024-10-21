@@ -171,12 +171,11 @@ void	swapVIterator( VIterator lhs, VIterator rhs )
 }
 
 // Sorts the pairs of elements in the range [start, end)
-void	makePairs( VIterator & start, VIterator & end, int & comparisons )
+void	makePairs( VIterator start, VIterator end )
 {
 	for (VIterator it = start; it != end; it += 2)
 	{
-		comparisons++;
-		if (it[0] < it[1]) // Make sure this is really correct
+		if (it[0] > it[1]) // Make sure this is really correct
 			swapVIterator(it, it + 1);
 	}
 }

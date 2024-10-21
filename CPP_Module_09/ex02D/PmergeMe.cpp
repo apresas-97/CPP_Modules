@@ -2,8 +2,9 @@
 
 PmergeMe::PmergeMe( void )
 {
+	timeElapsed = 0.0;
 	initJacobsthalNumbers();
-	initJacobsthalDiff();
+	// initJacobsthalDiff();
 }
 
 PmergeMe::PmergeMe( PmergeMe const &other ) { *this = other; }
@@ -27,45 +28,39 @@ void	PmergeMe::initJacobsthalNumbers( void )
 		jacobsthalNumbers[i] = jacobsthalNumbers[i - 1] + 2 * jacobsthalNumbers[i - 2];
 }
 
-void	PmergeMe::initJacobsthalDiff( void )
-{
-	jacobsthalDiff[0] = 2;
-	jacobsthalDiff[1] = 2;
-	for (size_t i = 2; i < 63; i++)
-		jacobsthalDiff[i] = jacobsthalDiff[i - 1] + 2 * jacobsthalDiff[i - 2];
-}
+// void	PmergeMe::initJacobsthalDiff( void )
+// {
+// 	jacobsthalDiff[0] = 2;
+// 	jacobsthalDiff[1] = 2;
+// 	for (size_t i = 2; i < 63; i++)
+// 		jacobsthalDiff[i] = jacobsthalDiff[i - 1] + 2 * jacobsthalDiff[i - 2];
+// }
 
-/////
-bool	compare( const unsigned int & lhs, const VIterator & rhs )
+VIteratorList::iterator	PmergeMe::binarySearch(VIteratorList::iterator left, VIteratorList::iterator right, unsigned int val )
 {
-	return lhs > *rhs;
-}
-#include <iterator>
-#include <utility>
+	VIteratorList::iterator											mid;
+	std::iterator_traits<VIteratorList::iterator>::difference_type	search_range;
+	std::iterator_traits<VIteratorList::iterator>::difference_type	half_range;
 
-std::list<VIterator>::iterator	PmergeMe::my_upper_bound(std::list<VIterator>::iterator first, std::list<VIterator>::iterator last, unsigned int val )
-{
-	std::list<VIterator>::iterator											it;
-	std::iterator_traits<std::list<VIterator>::iterator>::difference_type	count;
-	std::iterator_traits<std::list<VIterator>::iterator>::difference_type	step;
-
-	count = std::distance(first,last);
-	while (count > 0)
+	search_range = std::distance(left, right);
+	while (search_range > 0)
 	{
-		it = first; step=count/2; std::advance (it,step);
-		if (!compare(val, *it))
+		mid = left;
+		half_range = search_range / 2;
+		std::advance (mid, half_range);
+		if (!(val < **mid))
 		{
-			this->comparisons++;
-			first = ++it;
-			count -= step + 1;
+			mid++;
+			left = mid;
+			search_range -= half_range + 1;
 		}
 		else
-			count = step;
+			search_range = half_range;
 	}
-	return first;
+	return left;
 }
-//////////
 
+// DEBUG
 std::string	prefix( int n )
 {
 	std::string prefix = ""; 
@@ -82,19 +77,27 @@ std::string	prefix( int n )
 	return prefix + oss.str();
 }
 
-// Merge Insertion Sort functions:
+void	initJacobsthalNumberss( size_t *jacobsthalNumbers )
+{
+	jacobsthalNumbers[0] = 0;
+	jacobsthalNumbers[1] = 1;
+	for (size_t i = 2; i < 63; i++)
+		jacobsthalNumbers[i] = jacobsthalNumbers[i - 1] + 2 * jacobsthalNumbers[i - 2];
+}
 
+// Merge Insertion Sort functions:
 void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 {
-	comparisons = 0;
-	static std::string indent = "";
-	static int	lvl = 0;
-	lvl++;
-	std::cout << prefix(lvl) << "IN >>" << std::endl;
+	timeElapsed = 0.0;
+	std::clock_t	timeStart = std::clock();
+	// static std::string indent = "";
+	// static int	lvl = 0;
+	// lvl++;
+	// std::cout << prefix(lvl) << "IN >>" << std::endl;
 
-	printVIterator(first, last, BLOCKS);
+	// printVIterator(first, last, BLOCKS);
 	size_t	size = last - first;
-	std::cout << prefix(lvl) << "size = " << size << std::endl;
+	// std::cout << prefix(lvl) << "size = " << size << std::endl;
 	if (size < 2)
 		return ;
 
@@ -102,17 +105,17 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	VIterator	end = oddSize ? last - 1 : last;
 	VIterator	start = first;
 
-	std::cout << prefix(lvl) << "-Pairing" << std::endl;
-	makePairs(start, end, comparisons);
-	printVIterator(start, end, BLOCKS);
+	// std::cout << prefix(lvl) << "-Pairing" << std::endl;
+	makePairs(start, end);
+	// printVIterator(start, end, BLOCKS);
 
-	indent += "  ";
+	// indent += "  ";
 	mergeInsertionSort(VIterator(first, first.size() * 2), VIterator(end, end.size() * 2));
 
-	lvl--;
-	std::cout << prefix(lvl) << "<< OUT" << std::endl;
+	// lvl--;
+	// std::cout << prefix(lvl) << "<< OUT" << std::endl;
 
-	printVIterator(start, end, BLOCKS);
+	// printVIterator(start, end, BLOCKS);
 
 	// Now the current vector will be divided into two vectors
 	// a1, a2, a3, ..., aN will be the highest values from every pair
@@ -124,11 +127,8 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	// using an std::list<VIterator> mainChain
 
 	std::list<VIterator>	mainChain;
-	// mainChain.push_front(start);
-	// mainChain.push_front(start + 1);
-	mainChain.push_back(start);
-	mainChain.push_back(start + 1);
-	// n[log2(3n/4)] - [2^[log2(6n)]/3] + [log2(6n)/2]
+	mainChain.push_back(start); // a1
+	mainChain.push_back(start + 1); // b1
 
 	// And we want to keep track of the positions at which we must insert the bN elements
 	// So we can use an std::vector<std::list<VIterator>::iterator> pend
@@ -145,18 +145,19 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	{
 		// std::cout << "INSERTING " << *(it + 1) << std::endl;
 		// std::list<VIterator>::iterator tmp = mainChain.insert(mainChain.end(), it);
-		std::list<VIterator>::iterator tmp = mainChain.insert(mainChain.end(), it + 1);
-		pend.push_back(tmp);
+		// std::list<VIterator>::iterator tmp = mainChain.insert(mainChain.end(), it + 1);
+		// pend.push_back(tmp);
+		pend.push_back(mainChain.insert(mainChain.end(), it + 1));
 	}
 
-	if (oddSize)
-	{
-		pend.push_back(mainChain.end());
-	}
-	std::cout << prefix(lvl) << "Initial mainChain: " << std::endl;
-	for (std::list<VIterator>::iterator it = mainChain.begin(); it != mainChain.end(); it++)
-		std::cout << **it << " ";
-	std::cout << std::endl;
+	// if (oddSize)
+	// {
+	// 	pend.push_back(mainChain.end());
+	// }
+	// std::cout << prefix(lvl) << "Initial mainChain: " << std::endl;
+	// for (std::list<VIterator>::iterator it = mainChain.begin(); it != mainChain.end(); it++)
+		// std::cout << **it << " ";
+	// std::cout << std::endl;
 
 	// std::cout << prefix(lvl) << "mainChain: ";
 	// for (std::list<VIterator>::iterator it = mainChain.begin(); it != mainChain.end(); it++)
@@ -164,31 +165,33 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	// std::cout << std::endl;
 
 	// Now we will do the binary insertion part
-	std::cout << prefix(lvl) << "Insertion" << std::endl;
+	// std::cout << prefix(lvl) << "Insertion" << std::endl;
+	// std::cout << prefix(lvl) << "Insertion" << std::endl;
 
-	VIterator	current = start + 2; // Becuase we already inserted the first two elements
+	VIterator	current = start + 2;
 	std::vector<std::list<VIterator>::iterator>::iterator	current_pend = pend.begin();
-	for (size_t k = 0; ; ++k)
+	std::vector<std::list<VIterator>::iterator>::iterator	pe = current_pend;
+	size_t	k = 3;
+	while (true)
 	{
-		long	dist = jacobsthalDiff[k];
+		long	dist = jacobsthalNumbers[k] - jacobsthalNumbers[k - 1];
 		if (dist > std::distance(current_pend, pend.end()))
 			break ;
-
+		
 		VIterator	it = current + dist * 2;
-		typename std::vector<typename std::list<VIterator>::iterator>::iterator	pe = current_pend + dist;
+		pe = current_pend + dist;
 
 		while (current_pend != pe)
 		{
 			--pe;
 			it -= 2;
-			std::list<VIterator>::iterator insertion_point = my_upper_bound(
-				mainChain.begin(), *pe, *it);
-			std::cout << "Inserting " << *it << " at " << **insertion_point << std::endl;
-			mainChain.insert(insertion_point, it);
+			// std::list<VIterator>::iterator insertionPoint = binarySearch(mainChain.begin(), *pe, *it);
+			mainChain.insert(binarySearch(mainChain.begin(), *pe, *it), it);
 		}
 
 		std::advance(current, dist * 2);
 		std::advance(current_pend, dist);
+		k++;
 	}
 
 	// std::cout << prefix(lvl) << "mainChain: ";
@@ -196,47 +199,37 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 	// 	std::cout << **it << " ";
 	// std::cout << std::endl;
 
+	if (oddSize)
+	{
+		pend.push_back(mainChain.end());
+	}
+
 	// After the binary insertion part, we must insert the remaining elements
 	// std::cout << prefix(lvl) << "Insert" << std::endl;
 	while (current_pend != pend.end())
 	{
-		std::list<VIterator>::iterator insertionPoint = my_upper_bound(
-			mainChain.begin(), *current_pend, *current);
-		std::cout << "INSERTING " << *current << std::endl;
-		mainChain.insert(insertionPoint, current);
-		current += 2;
-		current_pend++;
+		// std::list<VIterator>::iterator insertionPoint = binarySearch(mainChain.begin(), *current_pend, *current);
+		mainChain.insert(binarySearch(mainChain.begin(), *current_pend, *current), current);
+		std::advance(current, 2);
+		std::advance(current_pend, 1);
 	}
-
-	std::cout << prefix(lvl) << "mainChain: ";
-	for (std::list<VIterator>::iterator it = mainChain.begin(); it != mainChain.end(); it++)
-		std::cout << **it << " ";
-	std::cout << std::endl;
-
-	// std::cout << prefix(lvl) << "Passing the mainChain to the original vector" << std::endl;
 
 	std::vector<unsigned int>	cache;
 	cache.reserve(size);
 
-	// std::cout << prefix(lvl) << "Storing cache" << std::endl;
 	for (std::list<VIterator>::iterator it = mainChain.begin(); it != mainChain.end(); it++)
 	{
 		std::vector<unsigned int>::iterator begin = it->base();
 		std::vector<unsigned int>::iterator end = begin + it->size();
 		while (begin != end)
-			cache.push_back(*begin++);
+		{
+			cache.push_back(*begin);
+			begin++;
+		}
 	}
-
-	// std::cout << prefix(lvl) << "Vector before swap_ranges for cache:" << std::endl;
-	// printVIterator(start, last, BLOCKS);
 	std::swap_ranges(cache.begin(), cache.end(), start.base());
 
-	// std::cout << prefix(lvl) << "Full resulting vector: ";
-	// for (std::vector<unsigned int>::iterator it = cache.begin(); it != cache.end(); it++)
-	// 	std::cout << *it << " ";
-	// std::cout << std::endl;
-
-	printVIterator(start, last, BLOCKS);
+	timeElapsed = (double)(std::clock() - timeStart) / CLOCKS_PER_SEC;
 }
 
 void	pprintVector( std::vector<unsigned int> & vec )
@@ -265,7 +258,7 @@ void	mergeVIteratorToVector( VIterator start, VIterator end, std::vector<unsigne
 void	mergeVIteratorToVector( VIterator start, VIterator end, std::vector<unsigned int>::iterator vstart )
 {
 	std::vector<unsigned int>	cache;
-	cache.reserve(start - end);
+	cache.reserve(end - start);
 	for (VIterator it = start; it != end; it++)
 	{
 		std::vector<unsigned int>::iterator begin = it.base();
@@ -283,11 +276,9 @@ void	PmergeMe::mergeInsertionSort( std::vector<unsigned int> & vec )
 	VIterator end(vec.end());
 	mergeInsertionSort(start, end);
 	mergeVIteratorToVector(start, end, vec);
-	std::cout << "Comparisons: " << comparisons << std::endl;
-	comparisons = 0;
 }
 
-void	PmergeMe::mergeInsertionSort( std::vector<unsigned int>::iterator & first, std::vector<unsigned int>::iterator & last )
+void	PmergeMe::mergeInsertionSort( std::vector<unsigned int>::iterator first, std::vector<unsigned int>::iterator last )
 {
 	VIterator start(first);
 	VIterator end(last);
@@ -331,3 +322,13 @@ void	PmergeMe::mergeInsertionSort( std::vector<unsigned int>::iterator & first, 
 // 	LIterator end(lst.end());
 // 	mergeInsertionSort(start, end);
 // }
+
+void	PmergeMe::printTimeElapsed( void )
+{
+	if (timeElapsed * 1000 < 1)
+		std::cout << "Time elapsed: " << timeElapsed * 1000000.0 << "us" << std::endl;
+	else if (timeElapsed < 1)
+		std::cout << "Time elapsed: " << timeElapsed * 1000.0 << "ms" << std::endl;
+	else
+		std::cout << "Time elapsed: " << timeElapsed << "s" << std::endl;
+}

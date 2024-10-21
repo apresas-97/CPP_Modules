@@ -7,11 +7,15 @@
 #include <vector>
 #include <list>
 #include <typeinfo>
+#include <iterator>
+#include <utility>
+#include <ctime>
 
 #include "VIterator.hpp"
 
 typedef std::vector<unsigned int> vector;
 typedef std::list<unsigned int> list;
+typedef std::list<VIterator> VIteratorList;
 
 class PmergeMe
 {
@@ -21,19 +25,21 @@ class PmergeMe
 		~PmergeMe();
 		PmergeMe &operator=( PmergeMe const &other );
 
-		size_t	jacobsthalNumbers[63];
-		size_t	jacobsthalDiff[63];
 
 		void	mergeInsertionSort( vector & vec );
-		void	mergeInsertionSort( vector::iterator & first, vector::iterator & last );
+		void	mergeInsertionSort( vector::iterator first, vector::iterator last );
 		void	mergeInsertionSort( list & lst );
-		void	mergeInsertionSort( list::iterator & first, list::iterator & last );
+		void	mergeInsertionSort( list::iterator first, list::iterator last );
+
+		void	printTimeElapsed( void );
 
 	private:
 
-		int	comparisons;
+		double	timeElapsed;
+		size_t	jacobsthalNumbers[63];
+		size_t	jacobsthalDiff[63];
 
-		std::list<VIterator>::iterator	my_upper_bound(std::list<VIterator>::iterator first, std::list<VIterator>::iterator last, unsigned int val );
+		VIteratorList::iterator	binarySearch(VIteratorList::iterator left, VIteratorList::iterator right, unsigned int val );
 
 		void	initJacobsthalNumbers( void );
 		void	initJacobsthalDiff( void );
