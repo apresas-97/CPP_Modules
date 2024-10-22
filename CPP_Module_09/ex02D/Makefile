@@ -5,7 +5,7 @@ SRC_DIR = .
 OBJ_DIR = obj
 DEPS_DIR = deps
 
-SRC = main.cpp PmergeMe.cpp VIterator.cpp
+SRC = main.cpp PmergeMe.cpp VIterator.cpp LIterator.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
 
@@ -15,7 +15,7 @@ HDRS =
 
 # Compiler + flags
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -std=c++98
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -O2
 DFLAGS = -MD -MF
 INCLUDE =
 
@@ -52,7 +52,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME) `shuf -i 1-20000 -n 20000 | tr "\n" " "`
+	./$(NAME) `shuf -i 1-3000 -n 3000 | tr "\n" " "`
 
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) `shuf -i 1-10000 -n 10000 | tr "\n" " "`

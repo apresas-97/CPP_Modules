@@ -12,10 +12,15 @@
 #include <ctime>
 
 #include "VIterator.hpp"
+#include "LIterator.hpp"
 
 typedef std::vector<unsigned int> vector;
 typedef std::list<unsigned int> list;
 typedef std::list<VIterator> VIteratorList;
+typedef std::list<LIterator> LIteratorList;
+
+#define VECTOR 0
+#define LIST 1
 
 class PmergeMe
 {
@@ -35,18 +40,41 @@ class PmergeMe
 
 	private:
 
-		double	timeElapsed;
-		size_t	jacobsthalNumbers[63];
-		size_t	jacobsthalDiff[63];
-
-		VIteratorList::iterator	binarySearch(VIteratorList::iterator left, VIteratorList::iterator right, unsigned int val );
+		long			_elementsCount[2];
+		double			_timeElapsed[2];
+		size_t			_jacobsthalNumbers[63];
 
 		void	initJacobsthalNumbers( void );
-		void	initJacobsthalDiff( void );
-		void	makePairs( VIterator start, VIterator end );
+		void	sortAdjacentPairs( VIterator start, VIterator end );
+		void	sortAdjacentPairs( LIterator start, LIterator end );
 
 		void	mergeInsertionSort( VIterator first, VIterator last );
+		void	mergeInsertionSort( LIterator first, LIterator last );
+
+		template	<typename Container>
+		Container	passToCache( std::list<LIterator> chain );
+
+		VIteratorList::iterator	binarySearch(VIteratorList::iterator left, VIteratorList::iterator right, unsigned int val );
+		LIteratorList::iterator	binarySearch(LIteratorList::iterator left, LIteratorList::iterator right, unsigned int val );
 
 };
+
+template<typename Container>
+Container	PmergeMe::passToCache( std::list<LIterator> chain )
+{
+	Container	cache;
+	for (std::list<LIterator>::iterator it = chain.begin(); it != chain.end(); it++)
+	{
+		std::list<unsigned int>::iterator begin = it->base();
+		std::list<unsigned int>::iterator end = begin;
+		std::advance(end, it->size());
+		while (begin != end)
+		{
+			cache.push_back(*begin);
+			begin++;
+		}
+	}
+	return cache;
+}
 
 #endif // PMERGEME_HPP

@@ -17,12 +17,12 @@ class VIterator
 {
 public:
 
-	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::iterator_category		iterator_category;
-	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::value_type				value_type;
-	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::difference_type			difference_type;
-	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::pointer					pointer;
-	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::reference				reference;
-	typedef std::vector<unsigned int>::iterator															iterator_type;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::iterator_category	iterator_category;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::value_type			value_type;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::difference_type		difference_type;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::pointer				pointer;
+	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::reference			reference;
+	typedef std::vector<unsigned int>::iterator														iterator_type;
 
 private:
 
