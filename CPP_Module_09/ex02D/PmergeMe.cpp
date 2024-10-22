@@ -85,6 +85,16 @@ void	initJacobsthalNumberss( size_t *jacobsthalNumbers )
 		jacobsthalNumbers[i] = jacobsthalNumbers[i - 1] + 2 * jacobsthalNumbers[i - 2];
 }
 
+// Sorts the pairs of elements in the range [start, end)
+void	PmergeMe::makePairs( VIterator start, VIterator end )
+{
+	for (VIterator it = start; it != end; it += 2)
+	{
+		if (it[0] > it[1]) // Make sure this is really correct
+			swapVIterator(it, it + 1);
+	}
+}
+
 // Merge Insertion Sort functions:
 void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 {

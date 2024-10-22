@@ -43,6 +43,7 @@ class PmergeMe
 
 		void	initJacobsthalNumbers( void );
 		void	initJacobsthalDiff( void );
+		void	makePairs( VIterator start, VIterator end );
 
 		void	mergeInsertionSort( VIterator first, VIterator last );
 

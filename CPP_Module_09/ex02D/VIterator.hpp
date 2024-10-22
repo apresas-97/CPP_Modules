@@ -74,7 +74,6 @@ public:
 };
 
 void	swapVIterator( VIterator lhs, VIterator rhs );
-void	makePairs( VIterator lhs, VIterator rhs );
 void	printVIterator( VIterator & start, VIterator & end );
 void	printVIterator( VIterator & start, VIterator & end, int flag );
 

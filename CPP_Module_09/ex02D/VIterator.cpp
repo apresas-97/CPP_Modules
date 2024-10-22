@@ -170,16 +170,6 @@ void	swapVIterator( VIterator lhs, VIterator rhs )
 	std::swap_ranges(lhs.base(), lhs.base() + lhs.size(), rhs.base());
 }
 
-// Sorts the pairs of elements in the range [start, end)
-void	makePairs( VIterator start, VIterator end )
-{
-	for (VIterator it = start; it != end; it += 2)
-	{
-		if (it[0] > it[1]) // Make sure this is really correct
-			swapVIterator(it, it + 1);
-	}
-}
-
 void	printVIterator( VIterator & start, VIterator & end )
 {
 	// std::cout << "Printing VIterator: " << std::endl;
