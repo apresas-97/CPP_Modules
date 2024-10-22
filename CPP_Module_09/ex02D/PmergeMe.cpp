@@ -113,7 +113,7 @@ void	PmergeMe::mergeInsertionSort( VIterator first, VIterator last )
 
 	bool		oddSize = size % 2 != 0;
 	VIterator	end = oddSize ? last - 1 : last;
-	VIterator	start = first;
+	VIterator&	start = first;
 
 	// std::cout << prefix(lvl) << "-Pairing" << std::endl;
 	makePairs(start, end);
