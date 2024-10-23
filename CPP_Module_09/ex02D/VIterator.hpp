@@ -23,6 +23,7 @@ public:
 	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::pointer				pointer;
 	typedef typename std::iterator_traits<std::vector<unsigned int>::iterator>::reference			reference;
 	typedef std::vector<unsigned int>::iterator														iterator_type;
+	typedef std::vector<unsigned int>																container_type;
 
 private:
 

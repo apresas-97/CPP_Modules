@@ -45,36 +45,25 @@ class PmergeMe
 		size_t			_jacobsthalNumbers[63];
 
 		void	initJacobsthalNumbers( void );
+
+		bool	isSorted( VIterator first, VIterator last );
+		bool	isSorted( LIterator first, LIterator last );
+
 		void	sortAdjacentPairs( VIterator start, VIterator end );
 		void	sortAdjacentPairs( LIterator start, LIterator end );
 
 		void	mergeInsertionSort( VIterator first, VIterator last );
 		void	mergeInsertionSort( LIterator first, LIterator last );
 
-		template	<typename Container>
-		Container	passToCache( std::list<LIterator> chain );
+		void	mergeIteratorToContainer( VIterator first, VIterator last, vector::iterator vstart );
+		void	mergeIteratorToContainer( LIterator first, LIterator last, list::iterator lstart );
+
+		void	passChainToIterator( std::list<VIterator> chain, VIterator start, VIterator last );
+		void	passChainToIterator( std::list<LIterator> chain, LIterator start, LIterator last );
 
 		VIteratorList::iterator	binarySearch(VIteratorList::iterator left, VIteratorList::iterator right, unsigned int val );
 		LIteratorList::iterator	binarySearch(LIteratorList::iterator left, LIteratorList::iterator right, unsigned int val );
 
 };
-
-template<typename Container>
-Container	PmergeMe::passToCache( std::list<LIterator> chain )
-{
-	Container	cache;
-	for (std::list<LIterator>::iterator it = chain.begin(); it != chain.end(); it++)
-	{
-		std::list<unsigned int>::iterator begin = it->base();
-		std::list<unsigned int>::iterator end = begin;
-		std::advance(end, it->size());
-		while (begin != end)
-		{
-			cache.push_back(*begin);
-			begin++;
-		}
-	}
-	return cache;
-}
 
 #endif // PMERGEME_HPP

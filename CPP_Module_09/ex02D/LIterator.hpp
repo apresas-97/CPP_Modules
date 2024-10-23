@@ -46,6 +46,12 @@ public:
 	iterator_type	base( void ) const;
 	// difference_type	size( void ) const;
 	size_t			size( void ) const;
+	value_type		value( void );
+	value_type		value( size_t index );
+	value_type		value( size_t index ) const;
+	iterator_type	next( iterator_type it, size_t n ) const;
+	iterator_type	next( iterator_type it, size_t n );
+	void			swap( LIterator lhs, LIterator rhs );
 
 	// Operators
 	reference		operator*( void ) const;
@@ -68,7 +74,7 @@ public:
 	bool			operator>=( LIterator const & rhs ) const;
 
 	LIterator		operator+( difference_type increment );
-	// difference_type	operator+( LIterator const & rhs ) const;
+	difference_type	operator+( LIterator const & rhs ) const;
 	LIterator		operator-( difference_type decrement );
 	difference_type	operator-( LIterator const & rhs ) const;
 

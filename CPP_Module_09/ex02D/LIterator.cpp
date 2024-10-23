@@ -19,8 +19,39 @@ LIterator::iterator_type	LIterator::base( void ) const
 	return _it;
 }
 
+// returns the value of the meaningul iterator in the LIterator
+LIterator::value_type	LIterator::value( void )
+{
+	return *LIterator::next(_it, _size - 1);
+}
+
+// returns the value of the meaningul iterator in the LIterator past the given index
+LIterator::value_type	LIterator::value( size_t index )
+{
+	return *LIterator::next(_it, index * _size + _size - 1);
+}
+
+// returns the value of the meaningul iterator in the LIterator past the given index
+LIterator::value_type	LIterator::value( size_t index ) const
+{
+	return *LIterator::next(_it, index * _size + _size - 1);
+}
+
+// similar to std::next, but for LIterator, const version
+LIterator::iterator_type	LIterator::next( LIterator::iterator_type it, size_t n ) const
+{
+	std::advance(it, n);
+	return it;
+}
+
+// similar to std::next, but for LIterator
+LIterator::iterator_type	LIterator::next( LIterator::iterator_type it, size_t n )
+{
+	std::advance(it, n);
+	return it;
+}
+
 // returns the size of the LIterator
-// LIterator::difference_type	LIterator::size( void ) const
 size_t	LIterator::size( void ) const
 {
 	return _size;
@@ -39,9 +70,7 @@ LIterator &	LIterator::operator=( LIterator const & other )
 // Returns the meaningful value that the LIterator is pointing to
 LIterator::reference	LIterator::operator*( void ) const
 {
-	LIterator	tmp(_it, 1);
-	tmp += _size - 1;
-	return *tmp.base();
+	return *next(_it, _size - 1);
 }
 
 // Returns the address of the meaningful value that the LIterator is pointing to
@@ -53,17 +82,19 @@ LIterator::pointer		LIterator::operator->( void ) const
 // Accesses the meaningful value from the LIterator by index
 LIterator::value_type	LIterator::operator[]( size_t index )
 {
-	LIterator	tmp(_it, 1);
-	tmp += (index * _size + _size - 1);
-	return *tmp.base();
+	// LIterator	tmp(_it, 1);
+	// tmp += (index * _size + _size - 1);
+	// return *tmp.base();
+	return value(index);
 }
 
 // Accesses the meaningful value from the LIterator by index, const version
 LIterator::value_type	LIterator::operator[]( size_t index ) const
 {
-	LIterator	tmp(_it, 1);
-	tmp += (index * _size + _size - 1);
-	return *tmp.base();
+	// LIterator	tmp(_it, 1);
+	// tmp += (index * _size + _size - 1);
+	// return *tmp.base();
+	return value(index);
 }
 
 //// Increment and Decrement operators
@@ -158,7 +189,7 @@ bool	LIterator::operator!=( LIterator const & rhs ) const
 // }
 
 //// Arithmetic operators
-// Advances the LIterator by increment * _size
+// Returns an LIterator resulting from advancing the LIterator by increment
 LIterator	LIterator::operator+( difference_type increment )
 {
 	LIterator it(_it, _size);
@@ -166,7 +197,15 @@ LIterator	LIterator::operator+( difference_type increment )
 	return it;
 }
 
-// Decrements the LIterator by decrement * _size
+// Returns the sum of the underlying iterators of two LIterators
+LIterator::difference_type	LIterator::operator+( LIterator const & rhs ) const
+{
+	// return (_it - rhs.base()) / _size;
+	LIterator::difference_type dist = std::distance(rhs.base(), _it);
+	return dist / _size;
+}
+
+// Returns an LIterator resulting from receding the LIterator by decrement
 LIterator	LIterator::operator-( difference_type decrement )
 {
 	LIterator it(_it, _size);
@@ -174,15 +213,32 @@ LIterator	LIterator::operator-( difference_type decrement )
 	return it;
 }
 
-// // Returns the difference between the underlying iterators of two LIterators
-// LIterator::difference_type	LIterator::operator-( LIterator const & rhs ) const
-// {
-// 	return (_it - rhs.base()) / _size;
-// }
+// Returns the difference between the underlying iterators of two LIterators
+LIterator::difference_type	LIterator::operator-( LIterator const & rhs ) const
+{
+	// return (_it - rhs.base()) / _size;
+	LIterator::difference_type dist = std::distance(rhs.base(), _it);
+	return dist / _size;
+}
 
 // For LIteratorUtils.cpp ??
 // Swaps the contents of two LIterators
 void	swapLIterator( LIterator lhs, LIterator rhs )
+{
+	size_t	size = lhs.size();
+	std::list<unsigned int>::iterator lhsIt = lhs.base();
+	std::list<unsigned int>::iterator rhsIt = rhs.base();
+	for (size_t i = 0; i < size; i++)
+	{
+		std::iter_swap(lhsIt, rhsIt);
+		lhsIt++;
+		rhsIt++;
+	}
+}
+
+// For LIteratorUtils.cpp ??
+// Removes lhs and inserts lhs at the position of rhs
+void	moveLIterator( LIterator lhs, LIterator rhs )
 {
 	size_t	size = lhs.size();
 	std::list<unsigned int>::iterator lhsIt = lhs.base();
@@ -215,6 +271,8 @@ void	printLIterator( LIterator start, LIterator end )
 		ss1 << "[";
 		for (size_t k = 0; k < it.size(); k++)
 		{
+			for (unsigned int value = *tmp; value / 10 > 0; value /= 10)
+				ss0 << " ";
 			if (*tmp == *it)
 				ss0 << "v";
 			else
@@ -223,7 +281,7 @@ void	printLIterator( LIterator start, LIterator end )
 			if (k + 1 < it.size())
 			{
 				ss0 << "  ";
-				ss1 << ", ";	
+				ss1 << ", ";
 			}
 			tmp++;
 		}

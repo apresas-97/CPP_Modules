@@ -5,7 +5,14 @@ SRC_DIR = .
 OBJ_DIR = obj
 DEPS_DIR = deps
 
-SRC = main.cpp PmergeMe.cpp VIterator.cpp LIterator.cpp
+SRC =	main.cpp \
+		PmergeMe.cpp \
+		VIterator.cpp \
+		LIterator.cpp \
+		binarySearch.cpp \
+		mergeInsertionSort.cpp \
+		mergeIteratorToContainer.cpp \
+		printTimeElapsed.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
 
@@ -52,7 +59,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME) `shuf -i 1-3000 -n 3000 | tr "\n" " "`
+	./$(NAME) `shuf -i 1-10000 -n 10000 | tr "\n" " "`
 
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) `shuf -i 1-10000 -n 10000 | tr "\n" " "`

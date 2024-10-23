@@ -28,31 +28,106 @@
 // 	std::cout << std::endl;
 // }
 
-class Object
-{
-	public:
-	Object()
-	{
-		// std::cout << "Object created" << std::endl;
-	}
-	~Object()
-	{
-		// std::cout << "Object destroyed" << std::endl;
-	}
-
-	int	value;
-};
+#include <vector>
+#include <list>
+#include <iterator>
+#include "LIterator.hpp"
 
 int	main( void )
 {
 	// test_jacobsthalNumbers();
-	// int a = 0;
-	size_t i = 0;
-	Object obj;
-	while (i < 1000000000)
+
+	std::cout << "Testing vector iterators" << std::endl;
+	std::vector<unsigned int> vec;
+	vec.push_back(1);
+	vec.push_back(2);
+	vec.push_back(3);
+	vec.push_back(4);
+	vec.push_back(5);
+
+	std::cout << "Initial run" << std::endl;
+	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it++)
+		std::cout << "it = " << *it << " | " << &(*it) << std::endl;
+
+	std::iter_swap(vec.begin(), vec.begin() + 4);
+	vec.erase(vec.begin() + 2);
+	vec.insert(vec.begin() + 2, 10);
+
+	std::cout << "Second run" << std::endl;
+	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it++)
+		std::cout << "it = " << *it << " | " << &(*it) << std::endl;
+
+	std::cout << "Testing list iterators" << std::endl;
+	std::list<unsigned int> lst;
+	lst.push_back(1);
+	lst.push_back(2);
+	lst.push_back(3);
+	lst.push_back(4);
+	lst.push_back(5);
+	lst.push_back(6);
+	lst.push_back(7);
+	lst.push_back(8);
+	lst.push_back(9);
+	lst.push_back(10);
+
+	LIterator	start(lst.begin());
+	LIterator	end(lst.end());
+
+	std::cout << "Initial run" << std::endl;
+	for (LIterator it = start; it != end; it++)
+		std::cout << "it = " << *it << " | " << &(*it) << std::endl;
+	// std::cout << "As list iterator" << std::endl;
+	// for (std::list<unsigned int>::iterator it = lst.begin(); it != lst.end(); it++)
+	// 	std::cout << "it = " << *it << " | " << &(*it) << std::endl;
+
+	// std::list<unsigned int>::iterator itA = lst.begin();
+	// std::list<unsigned int>::iterator itB = itA;
+	// std::advance(itB, 4);
+	swapLIterator(start, start + 2);
+	// std::iter_swap(itA, itB);
+
+	std::cout << "Second run" << std::endl;
+	for (LIterator it = start; it != end; it++)
+		std::cout << "it = " << *it << " | " << &(*it) << std::endl;
+
+	////////////////////////////
+	// std::list<LIterator>	chain;
+	// chain.push_back(start); // a1
+	// chain.push_back(start + 1); // b1
+
+	// std::vector<std::list<LIterator>::iterator>	chainPos;
+	std::vector<unsigned int*>	chainPos;
+	chainPos.reserve((lst.size() + 1) / 2 - 1);
+
+	// for (LIterator it = start + 2; it != end; it += 2)
+	// {
+	// 	std::list<LIterator>::iterator position = chain.insert(chain.end(), it + 1);
+	// 	chainPos.push_back(position);
+	// }
+
+	for (LIterator it = start + 2; it != end; it += 2)
 	{
-		obj.value = i;
-		i++;
+		// std::vector<unsigned int*>::iterator position = &(*it);
+		chainPos.push_back(&(*it));
 	}
+
+	std::cout << "Checking adresses of elements" << std::endl;
+	// std::cout << "> chain:" << std::endl;
+	// for (std::list<LIterator>::iterator it = chain.begin(); it != chain.end(); it++)
+	// 	std::cout << "it = " << **it << " | " << &(**it) << std::endl;
+
+	std::cout << "> chainPos:" << std::endl;
+	for (std::vector<unsigned int*>::iterator it = chainPos.begin(); it != chainPos.end(); it++)
+		std::cout << "it = " << **it << " | " << *it << std::endl;
+	
+
+	std::cout << "What if I now swap the LIterator elements?" << std::endl;
+	swapLIterator(start, start + 2);
+
+	std::cout << "Checking adresses of elements" << std::endl;
+	std::cout << "> chainPos:" << std::endl;
+	for (std::vector<unsigned int*>::iterator it = chainPos.begin(); it != chainPos.end(); it++)
+		std::cout << "it = " << **it << " | " << *it << std::endl;
+
 	return 0;
 }
