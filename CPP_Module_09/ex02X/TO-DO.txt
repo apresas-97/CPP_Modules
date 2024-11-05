@@ -9,3 +9,17 @@ THINGS TO DO:
 the odd element.
 Meaning, sometimes, the odd element will be included in the main insertion loop, instead of being left to the
 final loop for the remaining pend elements.
+- getJacobsthalNumber returns long, check if that's necessary or its better to use size_t or whatever unsigned type
+
+- Apparently, two binary searches on two ranges of values of size (2^N)-1 and 2^(N-1) will yield the same WORST cases
+Which are approximatedly:
+
+floor(log2(N)) - 1
+
+Which means, that in the worst case, two binary searches on ranges 64 and 127 will require the same amount of comparisons.
+
+HOWEVER, despite their WORST case being the same, their averages will NOT be the same.
+
+On average, a range 64 will require less comparisons than a range 127.
+
+This breaks my assumptions with which I wrote my merge-insertion sort for std::vector.

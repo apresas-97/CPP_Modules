@@ -75,7 +75,7 @@ public:
 	difference_type	operator-( LIterator const & rhs ) const;
 };
 
-// void	swapLIterator( LIterator lhs, LIterator rhs );
+void	swapLIterator( LIterator lhs, LIterator rhs );
 void	printLIterator( LIterator start, LIterator end );
 
 #endif // LITERATOR_HPP

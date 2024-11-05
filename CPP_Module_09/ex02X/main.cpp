@@ -14,7 +14,7 @@ void	parseArguments( int size, char **argv, unsigned int *numbers )
 	{
 		std::istringstream iss(argv[i]);
 		iss >> numbers[i];
-		if (iss.fail() || !iss.eof() || argv[i][0] == '-')
+		if (iss.fail() || !iss.eof() || argv[i][0] == '-' || numbers[i] == 0)
 			throw std::exception();
 	}
 }
@@ -114,8 +114,8 @@ int	main( int argc, char **argv )
 		pm.mergeInsertionSort(vec);
 		pm.mergeInsertionSort(lst);
 
-		// printVector(vec, "After: ");
-		printList(lst, "After: ");
+		printVector(vec, "After: ");
+		// printList(lst, "After: ");
 
 		pm.printTimeElapsed();
 

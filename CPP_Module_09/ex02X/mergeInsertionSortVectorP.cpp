@@ -8,8 +8,8 @@ void	PmergeMe::mergeInsertionSort( vector & vec )
 		return ;
 	this->timeStart(VECTOR);
 
-	VIterator	start(vec.begin());
-	VIterator	end(vec.end());
+	VIteratorP	start(vec.begin());
+	VIteratorP	end(vec.end());
 	mergeInsertionSort(start, end);
 	this->timeEnd(VECTOR);
 }

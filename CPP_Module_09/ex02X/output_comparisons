@@ -1,0 +1,26 @@
+Before: 6 1 4 2 3 5 
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+After: 1 2 3 4 5 6 
+Time to sort 6 elements with std::vector: 30us
+Time to sort 6 elements with std::list:   29us
+[32m[1mVector is sorted![0m
+[32m[1mList is sorted![0m

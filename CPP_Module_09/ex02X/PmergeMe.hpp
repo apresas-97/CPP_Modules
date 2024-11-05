@@ -13,6 +13,7 @@
 
 #include "VIterator.hpp"
 #include "LIterator.hpp"
+#include "ansi.hpp"
 
 typedef std::vector<unsigned int> vector;
 typedef std::list<unsigned int> list;
@@ -78,6 +79,8 @@ class PmergeMe
 		// void	mergeIteratorToContainer( LIterator<uint_t> first, LIterator<uint_t> last, list::iterator lstart );
 
 };
+
+long	getJacobsthalNumber( unsigned int k );
 
 // #include "mergeInsertionSort.tpp"
 

@@ -194,39 +194,9 @@ LIterator::difference_type	LIterator::operator-( LIterator const & rhs ) const
 	return dist / _size;
 }
 
-// // For LIteratorUtils.cpp ??
-// // Swaps the contents of two LIterators
-// void	swapLIterator( LIterator lhs, LIterator rhs )
-// {
-// 	// size_t	size = lhs.size();
-// 	// std::list<unsigned int>::iterator lhsIt = lhs.base();
-// 	// std::list<unsigned int>::iterator rhsIt = rhs.base();
-// 	// for (size_t i = 0; i < size; i++)
-// 	// {
-// 	// 	std::iter_swap(lhsIt, rhsIt);
-// 	// 	lhsIt++;
-// 	// 	rhsIt++;
-// 	// }
-
-// 	// We'll see if this works
-// 	LIterator::iterator_type lhsEnd = lhs.base();
-// 	advance(lhsEnd, lhs.size());
-// 	std::swap_ranges(lhs.base(), lhsEnd, rhs.base());
-// }
-
-// For LIteratorUtils.cpp ??
-// Removes lhs and inserts lhs at the position of rhs
-void	moveLIterator( LIterator lhs, LIterator rhs )
+void	swapLIterator( LIterator lhs, LIterator rhs )
 {
-	size_t	size = lhs.size();
-	std::list<unsigned int>::iterator lhsIt = lhs.base();
-	std::list<unsigned int>::iterator rhsIt = rhs.base();
-	for (size_t i = 0; i < size; i++)
-	{
-		std::iter_swap(lhsIt, rhsIt);
-		++lhsIt;
-		++rhsIt;
-	}
+	std::swap_ranges(lhs.base(), lhs.end(), rhs.base());
 }
 
 void	printLIterator( LIterator start, LIterator end )

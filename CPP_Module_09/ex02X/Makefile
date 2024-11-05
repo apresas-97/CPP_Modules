@@ -11,6 +11,7 @@ SRC =	main.cpp \
 		LIterator.cpp \
 		mergeInsertionSortVector.cpp \
 		mergeInsertionSortList.cpp \
+		utils.cpp \
 		time_utils.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
