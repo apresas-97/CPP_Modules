@@ -1,0 +1,56 @@
+./PmergeMe 5 2 3 1 4 7 6
+Before: 5 2 3 1 4 7 6 
+Recurssion IN -----------------
+On entry
+5 2 3 1 4 7 6 
+After sortAdjacentPairs
+2 5 1 3 4 7 
+Recurssion IN -----------------
+On entry
+    v     v     v 
+[2, 5][1, 3][4, 7]
+
+After sortAdjacentPairs
+    v     v 
+[1, 3][2, 5]
+
+Vector:
+    v     v 
+[1, 3][2, 5]
+
+a:
+    v 
+[3, 5]
+Should be:
+    v     v 
+[1, 3][2, 5]
+
+b:
+
+should be:
+    v 
+[4, 7]
+
+
+
+
+Recurssion OUT ++++++++++++++
+Vector:
+1 3 2 5 4 7 
+a:
+size default:
+1 3 5 7 
+right size:
+1 3 5 7 
+
+b:
+size default:
+2 4 
+right size:
+2 4 
+
+Recurssion OUT ++++++++++++++
+After: 1 3 2 5 4 7 6 
+Time to sort 7 elements with std::vector: 151us
+Time to sort 0 elements with std::list:   0us
+[31m[1mVector is not sorted![0m

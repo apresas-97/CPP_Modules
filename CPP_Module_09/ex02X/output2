@@ -1,0 +1,180 @@
+c++ -Wall -Wextra -Werror -g -std=c++98 -O2 -MD -MF deps/mergeInsertionSort.d -c mergeInsertionSort.cpp -o obj/mergeInsertionSort.o
+c++ -Wall -Wextra -Werror -g -std=c++98 -O2 obj/main.o obj/PmergeMe.o obj/VIterator.o obj/mergeInsertionSort.o obj/time_utils.o -o PmergeMe
+./PmergeMe 5 2 3 1 4 7 6
+Before: 5 2 3 1 4 7 6 
+Recurssion IN -----------------
+On entry
+5 2 3 1 4 7 6 
+After sortAdjacentPairs
+2 5 1 3 4 7 
+Recurssion IN -----------------
+On entry
+    v     v     v 
+[2, 5][1, 3][4, 7]
+
+After sortAdjacentPairs
+    v     v 
+[1, 3][2, 5]
+
+Before insertElements:
+    v     v 
+[1, 3][2, 5]
+
+a:
+    v     v 
+[1, 3][2, 5]
+
+b:
+    v 
+[4, 7]
+
+
+insertElements called
+Received a:
+1 3 2 5 
+As VIterator of size 2
+    v     v 
+[1, 3][2, 5]
+
+
+Received b:
+4 7 
+As VIterator of size 2
+    v 
+[4, 7]
+
+
+Current search_range = 3
+Current Jacobsthal Number = 3
+bStart = 1
+b.size() / itSize = 1
+(bStart >= (b.size() / itSize)) = 1
+Checka
+bEnd = 0
+bundle size = 1
+Search range expected = 2
+Search range 2 = 2
+Binary Search called
+Search range = 2
+Left = 3
+Comparing !(7 < 5) ? 1
+Updating mid from 5 to 0
+Position seems to be 0
+Binary Search returns
+The position to insert 7 is 0
+insertVIterator called
+pos = 0
+it = 4
+end = 0
+end2 = 0
+sub-inserting 4
+sub-inserting 7
+insertVIterator returns
+LOOP
+insertElements returns
+After insertElements:
+    v     v     v 
+[1, 3][2, 5][4, 7]
+
+Recurssion OUT ++++++++++++++
+Before insertElements:
+1 3 2 5 4 7 
+a:
+1 3 5 7 
+b:
+2 4 6 
+
+insertElements called
+Received a:
+1 3 5 7 
+As VIterator of size 1
+1 3 5 7 
+
+Received b:
+2 4 6 
+As VIterator of size 1
+2 4 6 
+
+Current search_range = 3
+Current Jacobsthal Number = 3
+bStart = 1
+b.size() / itSize = 3
+(bStart >= (b.size() / itSize)) = 0
+bEnd = 0
+i = 1
+Searching for 4
+Binary Search called
+Search range = 3
+Left = 1
+Comparing !(4 < 3) ? 1
+Updating mid from 3 to 5
+Comparing !(4 < 5) ? 0
+Position seems to be 5
+Binary Search returns
+insertVIterator called
+pos = 5
+it = 4
+end = 6
+end2 = 6
+sub-inserting 4
+insertVIterator returns
+After Insertion, a:
+1 3 4 5 7 
+bEnd = 0
+i = 0
+Searching for 2
+Binary Search called
+Search range = 3
+Left = 1
+Comparing !(2 < 3) ? 0
+Comparing !(2 < 1) ? 1
+Updating mid from 1 to 3
+Position seems to be 3
+Binary Search returns
+insertVIterator called
+pos = 3
+it = 2
+end = 4
+end2 = 4
+sub-inserting 2
+insertVIterator returns
+After Insertion, a:
+1 2 3 4 5 7 
+Updating bEnd from 0 to 1 + 1
+Current search_range = 7
+Current Jacobsthal Number = 5
+bStart = 3
+b.size() / itSize = 3
+(bStart >= (b.size() / itSize)) = 1
+Checka
+bEnd = 2
+bundle size = 3
+Search range expected = 6
+Search range 2 = 6
+Binary Search called
+Search range = 6
+Left = 1
+Comparing !(6 < 4) ? 1
+Updating mid from 4 to 5
+Comparing !(6 < 7) ? 0
+Comparing !(6 < 5) ? 1
+Updating mid from 5 to 7
+Position seems to be 7
+Binary Search returns
+The position to insert 6 is 7
+insertVIterator called
+pos = 7
+it = 6
+end = 0
+end2 = 0
+sub-inserting 6
+insertVIterator returns
+LOOP
+insertElements returns
+After insertElements:
+1 2 3 4 5 6 7 
+Recurssion OUT ++++++++++++++
+After: 1 2 3 4 5 6 7 
+Time to sort 7 elements with std::vector: 699us
+Time to sort 0 elements with std::list:   0us
+[32m[1mVector is sorted![0m
