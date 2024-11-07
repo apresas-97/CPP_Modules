@@ -7,27 +7,27 @@
 #include <utility>
 #include <vector>
 #include <sstream>
-#include "ansi.hpp"
 
-typedef std::pair<unsigned int, unsigned int>	pair_t;
+#include "PmergeMe_types.hpp"
+#include "ansi.hpp"
 
 class VIteratorP
 {
 public:
 
-	typedef typename std::iterator_traits<std::vector<pair_t>::iterator>::iterator_category	iterator_category;
-	typedef typename std::iterator_traits<std::vector<pair_t>::iterator>::value_type		value_type;
-	typedef typename std::iterator_traits<std::vector<pair_t>::iterator>::difference_type	difference_type;
-	typedef typename std::iterator_traits<std::vector<pair_t>::iterator>::pointer			pointer;
-	typedef typename std::iterator_traits<std::vector<pair_t>::iterator>::reference			reference;
-	typedef std::vector<pair_t>::iterator													iterator_type;
-	typedef std::vector<pair_t>																container_type;
+	typedef typename std::iterator_traits<pair_vector::iterator>::iterator_category	iterator_category;
+	typedef typename std::iterator_traits<pair_vector::iterator>::value_type		value_type;
+	typedef typename std::iterator_traits<pair_vector::iterator>::difference_type	difference_type;
+	typedef typename std::iterator_traits<pair_vector::iterator>::pointer			pointer;
+	typedef typename std::iterator_traits<pair_vector::iterator>::reference			reference;
+	typedef pair_vector::iterator													iterator_type;
+	typedef pair_vector																container_type;
 
 private:
 
 	iterator_type	_it;
 	size_t			_size;
-	
+
 	VIteratorP( void );
 
 public:
@@ -38,22 +38,21 @@ public:
 	VIteratorP( VIteratorP const & other );
 	~VIteratorP();
 
-
 	// Member functions
 	iterator_type		base( void ) const;
 	iterator_type		end( void ) const;
 	size_t				size( void ) const;
-	unsigned int		value( void ); // first
-	unsigned int		index( void ); // second
+	integer				value( void ); // first
+	integer				index( void ); // second
 	void				resize( size_t size );
 
 	static void			swap( VIteratorP lhs, VIteratorP rhs );
 	static bool			less( VIteratorP lhs, VIteratorP rhs );
 	static bool			greater( VIteratorP lhs, VIteratorP rhs );
-	static VIteratorP	find( VIteratorP begin, VIteratorP end, unsigned int index );
+	static VIteratorP	find( VIteratorP begin, VIteratorP end, integer index );
 	static void			insert( container_type & v, VIteratorP position, VIteratorP val );
-	static void			push( container_type & v, VIteratorP x, unsigned int index );
-	static VIteratorP	upperBound( VIteratorP first, VIteratorP last, unsigned int val );
+	static void			push( container_type & v, VIteratorP x, integer index );
+	static VIteratorP	upperBound( VIteratorP first, VIteratorP last, integer val );
 
 	// Operators
 	VIteratorP &		operator=( VIteratorP const & other );
@@ -79,16 +78,15 @@ public:
 	bool				operator>=( VIteratorP const & rhs ) const;
 
 	VIteratorP			operator+( difference_type increment );
-	// difference_type	operator+( VIteratorP const & rhs ) const;
 	VIteratorP			operator-( difference_type decrement );
 	difference_type		operator-( VIteratorP const & rhs ) const;
 
 };
 
-void	swapVIteratorP( VIteratorP lhs, VIteratorP rhs );
-
-// void	swapVIterator( VIteratorP lhs, VIteratorP rhs );
-// void	printVIteratorP( VIteratorP start, VIteratorP end );
-// void	printVIteratorP( VIteratorP & start, VIteratorP & end, int flag );
+void	printVIteratorP( VIteratorP p );
+void	printVIteratorP( std::ostringstream & oss0, std::ostringstream & oss1, VIteratorP p );
+void	printChain( VIteratorP start, VIteratorP end, std::string prefix );
+void	printChain( pair_vector & chain, std::string prefix );
+void	printInsertion( pair_vector & v, VIteratorP position, VIteratorP element );
 
 #endif // VITERATORP_HPP

@@ -8,24 +8,26 @@
 #include <list>
 #include <sstream>
 
+#include "PmergeMe_types.hpp"
+#include "ansi.hpp"
 
-class	LIterator
+class LIterator
 {
 public:
 
-	typedef typename std::iterator_traits<std::list<unsigned int>::iterator>::iterator_category	iterator_category;
-	typedef typename std::iterator_traits<std::list<unsigned int>::iterator>::value_type			value_type;
-	typedef typename std::iterator_traits<std::list<unsigned int>::iterator>::difference_type		difference_type;
-	typedef typename std::iterator_traits<std::list<unsigned int>::iterator>::pointer				pointer;
-	typedef typename std::iterator_traits<std::list<unsigned int>::iterator>::reference			reference;
-	typedef std::list<unsigned int>::iterator														iterator_type;
-	typedef std::list<unsigned int>																container_type;
+	typedef typename std::iterator_traits<list::iterator>::iterator_category	iterator_category;
+	typedef typename std::iterator_traits<list::iterator>::value_type			value_type;
+	typedef typename std::iterator_traits<list::iterator>::difference_type		difference_type;
+	typedef typename std::iterator_traits<list::iterator>::pointer				pointer;
+	typedef typename std::iterator_traits<list::iterator>::reference			reference;
+	typedef list::iterator														iterator_type;
+	typedef list																container_type;
 
 private:
 
 	iterator_type	_it;
 	size_t			_size;
-	
+
 	LIterator( void );
 
 public:
@@ -40,7 +42,6 @@ public:
 
 	// Member functions
 	iterator_type	base( void ) const;
-	// difference_type	size( void ) const;
 	iterator_type	end( void ) const;
 	size_t			size( void ) const;
 	value_type		value( void );
@@ -48,7 +49,8 @@ public:
 	value_type		value( size_t index ) const;
 	iterator_type	next( iterator_type it, size_t n ) const;
 	iterator_type	next( iterator_type it, size_t n );
-	void			swap( LIterator lhs, LIterator rhs );
+
+	static void		swap( LIterator lhs, LIterator rhs );
 
 	reference		operator*( void ) const;
 	pointer			operator->( void ) const;
@@ -75,7 +77,9 @@ public:
 	difference_type	operator-( LIterator const & rhs ) const;
 };
 
-void	swapLIterator( LIterator lhs, LIterator rhs );
+typedef std::list<LIterator>				LIterator_list;
+typedef std::list<LIterator_list::iterator>	LIterator_position_list;
+
 void	printLIterator( LIterator start, LIterator end );
 
 #endif // LITERATOR_HPP

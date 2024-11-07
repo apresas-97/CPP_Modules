@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
 // returns the kth Jacobsthal number
-long	jacobsthalNumber( unsigned int k )
+long	PmergeMe::jacobsthalNumber( size_t k )
 {
 	if (k == 0)
 		return 0;
@@ -11,7 +11,7 @@ long	jacobsthalNumber( unsigned int k )
 	long	a = 0;
 	long	b = 1;
 	long	c;
-	for (unsigned int i = 2; i <= k; ++i)
+	for (size_t i = 2; i <= k; ++i)
 	{
 		c = b + 2 * a;
 		a = b;

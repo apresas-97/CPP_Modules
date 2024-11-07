@@ -16,42 +16,42 @@ LIterator::~LIterator() {}
 // returns the underlying iterator
 LIterator::iterator_type	LIterator::base( void ) const
 {
-	return _it;
+	return this->_it;
 }
 
 // returns the last iterator of this LIterator
 LIterator::iterator_type	LIterator::end( void ) const
 {
-	return next(_it, _size);
+	return next(this->_it, this->_size);
 }
 
 // returns the value of the meaningul iterator in the LIterator
 LIterator::value_type	LIterator::value( void )
 {
-	return *LIterator::next(_it, _size - 1);
+	return *LIterator::next(this->_it, this->_size - 1);
 }
 
 // returns the value of the meaningul iterator in the LIterator past the given index
 LIterator::value_type	LIterator::value( size_t index )
 {
-	return *LIterator::next(_it, index * _size + _size - 1);
+	return *LIterator::next(this->_it, index * this->_size + this->_size - 1);
 }
 
 // returns the value of the meaningul iterator in the LIterator past the given index
 LIterator::value_type	LIterator::value( size_t index ) const
 {
-	return *LIterator::next(_it, index * _size + _size - 1);
+	return *LIterator::next(this->_it, index * this->_size + this->_size - 1);
 }
 
 // similar to std::next, but for LIterator, const version
-LIterator::iterator_type	LIterator::next( LIterator::iterator_type it, size_t n ) const
+LIterator::iterator_type	LIterator::next( iterator_type it, size_t n ) const
 {
 	std::advance(it, n);
 	return it;
 }
 
 // similar to std::next, but for LIterator
-LIterator::iterator_type	LIterator::next( LIterator::iterator_type it, size_t n )
+LIterator::iterator_type	LIterator::next( iterator_type it, size_t n )
 {
 	std::advance(it, n);
 	return it;
@@ -60,15 +60,21 @@ LIterator::iterator_type	LIterator::next( LIterator::iterator_type it, size_t n 
 // returns the size of the LIterator
 size_t	LIterator::size( void ) const
 {
-	return _size;
+	return this->_size;
+}
+
+// swaps the contents of two LIterators
+void	LIterator::swap( LIterator lhs, LIterator rhs )
+{
+	std::swap_ranges(lhs.base(), lhs.end(), rhs.base());
 }
 
 ////// Operators
 // Assigns the underlying iterator of another LIterator to this LIterator of equal size
 LIterator &	LIterator::operator=( LIterator const & other )
 {
-	if (this != &other && _size == other.size())
-		_it = other.base();
+	if (this != &other && this->_size == other.size())
+		this->_it = other.base();
 	return *this;
 }
 
@@ -76,8 +82,8 @@ LIterator &	LIterator::operator=( LIterator const & other )
 // Returns the meaningful value that the LIterator is pointing to
 LIterator::reference	LIterator::operator*( void ) const
 {
-	return *next(_it, _size - 1);
-	// return *_it;
+	return *next(this->_it, this->_size - 1);
+	// return *this->_it;
 }
 
 // Returns the address of the meaningful value that the LIterator is pointing to
@@ -89,63 +95,57 @@ LIterator::pointer		LIterator::operator->( void ) const
 // Accesses the meaningful value from the LIterator by index
 LIterator::value_type	LIterator::operator[]( size_t index )
 {
-	// LIterator	tmp(_it, 1);
-	// tmp += (index * _size + _size - 1);
-	// return *tmp.base();
 	return value(index);
 }
 
 // Accesses the meaningful value from the LIterator by index, const version
 LIterator::value_type	LIterator::operator[]( size_t index ) const
 {
-	// LIterator	tmp(_it, 1);
-	// tmp += (index * _size + _size - 1);
-	// return *tmp.base();
 	return value(index);
 }
 
 //// Increment and Decrement operators
-// Advances the LIterator by _size
+// Advances the LIterator by this->_size
 LIterator &	LIterator::operator++( void )
 {
-	std::advance(_it, _size);
+	std::advance(this->_it, this->_size);
 	return *this;
 }
 
-// Advances the LIterator by _size, post increment
+// Advances the LIterator by this->_size, post increment
 LIterator	LIterator::operator++( int )
 {
 	LIterator tmp(*this);
-	std::advance(_it, _size);
+	std::advance(this->_it, this->_size);
 	return tmp;
 }
 
-// Decrements the LIterator by _size
+// Decrements the LIterator by this->_size
 LIterator &	LIterator::operator--( void )
 {
-	std::advance(_it, -_size);
+	std::advance(this->_it, -this->_size);
 	return *this;
 }
 
-// Decrements the LIterator by _size, post decrement
+// Decrements the LIterator by this->_size, post decrement
 LIterator	LIterator::operator--( int )
 {
 	LIterator tmp(*this);
-	std::advance(_it, -_size);
+	std::advance(this->_it, -this->_size);
 	return tmp;
 }
 
-// Advances the LIterator by _size * increment
+// Advances the LIterator by this->_size * increment
 LIterator &	LIterator::operator+=( difference_type increment )
 {
-	std::advance(_it, _size * increment);
+	std::advance(this->_it, this->_size * increment);
 	return *this;
 }
 
-// Decrements the LIterator by _size * decrement
+// Decrements the LIterator by this->_size * decrement
 LIterator &	LIterator::operator-=( difference_type decrement )
 {
-	std::advance(_it, -_size * decrement);
+	std::advance(this->_it, -this->_size * decrement);
 	return *this;
 }
 
@@ -153,19 +153,19 @@ LIterator &	LIterator::operator-=( difference_type decrement )
 // Compares the underlying iterator of two LIterators
 bool	LIterator::operator==( LIterator const & rhs ) const
 {
-	return _it == rhs.base();
+	return this->_it == rhs.base();
 }
 
 bool	LIterator::operator!=( LIterator const & rhs ) const
 {
-	return _it != rhs.base();
+	return this->_it != rhs.base();
 }
 
 //// Arithmetic operators
 // Returns an LIterator resulting from advancing the LIterator by increment
 LIterator	LIterator::operator+( difference_type increment )
 {
-	LIterator it(_it, _size);
+	LIterator it(this->_it, this->_size);
 	it += increment;
 	return it;
 }
@@ -173,15 +173,15 @@ LIterator	LIterator::operator+( difference_type increment )
 // Returns the sum of the underlying iterators of two LIterators
 LIterator::difference_type	LIterator::operator+( LIterator const & rhs ) const
 {
-	// return (_it - rhs.base()) / _size;
-	LIterator::difference_type dist = std::distance(rhs.base(), _it);
-	return dist / _size;
+	// return (this->_it - rhs.base()) / this->_size;
+	LIterator::difference_type dist = std::distance(rhs.base(), this->_it);
+	return dist / this->_size;
 }
 
 // Returns an LIterator resulting from receding the LIterator by decrement
 LIterator	LIterator::operator-( difference_type decrement )
 {
-	LIterator it(_it, _size);
+	LIterator it(this->_it, this->_size);
 	it -= decrement;
 	return it;
 }
@@ -189,14 +189,9 @@ LIterator	LIterator::operator-( difference_type decrement )
 // Returns the difference between the underlying iterators of two LIterators
 LIterator::difference_type	LIterator::operator-( LIterator const & rhs ) const
 {
-	// return (_it - rhs.base()) / _size;
-	LIterator::difference_type dist = std::distance(rhs.base(), _it);
-	return dist / _size;
-}
-
-void	swapLIterator( LIterator lhs, LIterator rhs )
-{
-	std::swap_ranges(lhs.base(), lhs.end(), rhs.base());
+	// return (this->_it - rhs.base()) / this->_size;
+	LIterator::difference_type dist = std::distance(rhs.base(), this->_it);
+	return dist / this->_size;
 }
 
 void	printLIterator( LIterator start, LIterator end )
@@ -219,7 +214,7 @@ void	printLIterator( LIterator start, LIterator end )
 		oss1 << "[";
 		for (size_t k = 0; k < it.size(); k++)
 		{
-			for (unsigned int value = *tmp; value / 10 > 0; value /= 10)
+			for (integer value = *tmp; value / 10 > 0; value /= 10)
 				oss0 << " ";
 			if (*tmp == *it)
 				oss0 << "v";

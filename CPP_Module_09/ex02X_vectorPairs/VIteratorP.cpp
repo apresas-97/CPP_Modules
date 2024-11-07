@@ -16,34 +16,34 @@ VIteratorP::~VIteratorP() {}
 // returns the underlying iterator
 VIteratorP::iterator_type	VIteratorP::base( void ) const
 {
-	return _it;
+	return this->_it;
 }
 
 VIteratorP::iterator_type	VIteratorP::end( void ) const
 {
-	return _it + _size;
+	return this->_it + this->_size;
 }
 
 // returns the size of the VIteratorP
 // VIteratorP::difference_type	VIteratorP::size( void ) const
 size_t	VIteratorP::size( void ) const
 {
-	return _size;
+	return this->_size;
 }
 
-unsigned int	VIteratorP::value( void )
+integer	VIteratorP::value( void )
 {
-	return _it[_size - 1].first;
+	return this->_it[this->_size - 1].first;
 }
 
-unsigned int	VIteratorP::index( void )
+integer	VIteratorP::index( void )
 {
-	return _it[_size - 1].second;
+	return this->_it[this->_size - 1].second;
 }
 
 void	VIteratorP::resize( size_t size )
 {
-	_size = size;
+	this->_size = size;
 }
 
 void	VIteratorP::swap( VIteratorP lhs, VIteratorP rhs )
@@ -72,7 +72,7 @@ void	VIteratorP::insert( container_type & v, VIteratorP position, VIteratorP val
 }
 
 // pushes the given VIteratorP x into the given vector v, and assigns index to its ->second
-void	VIteratorP::push( container_type & v, VIteratorP x, unsigned int index )
+void	VIteratorP::push( container_type & v, VIteratorP x, integer index )
 {
 	iterator_type	it = x.base();
 	while (it != x.end() - 1)
@@ -80,13 +80,12 @@ void	VIteratorP::push( container_type & v, VIteratorP x, unsigned int index )
 	v.push_back(std::make_pair(it->first, index));
 }
 
-// Performs a binary search on the given range of VIteratorP and returns the first VIteratorP
-// that has a ->first greater than the given value
-VIteratorP	VIteratorP::upperBound( VIteratorP first, VIteratorP last, unsigned int val )
+// Performs a binary search on the given range of VIteratorP and returns the first VIteratorP that has a ->first greater than the given value
+VIteratorP	VIteratorP::upperBound( VIteratorP first, VIteratorP last, integer val )
 {
-	VIteratorP	it = first;
-	size_t		step;
-	size_t		count = std::distance(first, last);
+	VIteratorP		it = first;
+	difference_type	step;
+	difference_type	count = std::distance(first, last);
 	while (count > 0)
 	{
 		it = first;
@@ -105,7 +104,7 @@ VIteratorP	VIteratorP::upperBound( VIteratorP first, VIteratorP last, unsigned i
 }
 
 // Finds and returns the VIteratorP within the given range begin to end, that has as its ->second the given index
-VIteratorP	VIteratorP::find( VIteratorP begin, VIteratorP end, unsigned int index )
+VIteratorP	VIteratorP::find( VIteratorP begin, VIteratorP end, integer index )
 {
 	for (VIteratorP it = begin; it != end; ++it)
 	{
@@ -120,8 +119,8 @@ VIteratorP	VIteratorP::find( VIteratorP begin, VIteratorP end, unsigned int inde
 // Assigns the underlying iterator of another VIteratorP to this VIteratorP of equal size
 VIteratorP &	VIteratorP::operator=( VIteratorP const & other )
 {
-	if (this != &other && _size == other.size())
-		_it = other.base();
+	if (this != &other && this->_size == other.size())
+		this->_it = other.base();
 	return *this;
 }
 
@@ -129,7 +128,7 @@ VIteratorP &	VIteratorP::operator=( VIteratorP const & other )
 // Returns the meaningful value that the VIteratorP is pointing to
 VIteratorP::reference	VIteratorP::operator*( void ) const
 {
-	return _it[_size - 1];
+	return this->_it[this->_size - 1];
 }
 
 // Returns the address of the meaningful value that the VIteratorP is pointing to
@@ -141,63 +140,63 @@ VIteratorP::pointer		VIteratorP::operator->( void ) const
 // Accesses the meaningful value from the VIteratorP by index
 VIteratorP::value_type	VIteratorP::operator[]( size_t index )
 {
-	return _it[index * _size + _size - 1];
+	return this->_it[index * this->_size + this->_size - 1];
 }
 
 // Accesses the meaningful value from the VIteratorP by index, const version
 VIteratorP::value_type	VIteratorP::operator[]( size_t index ) const
 {
-	return _it[index * _size + _size - 1];
+	return this->_it[index * this->_size + this->_size - 1];
 }
 
 VIteratorP &	VIteratorP::operator=( iterator_type it )
 {
-	_it = it;
+	this->_it = it;
 	return *this;
 }
 
 //// Increment and Decrement operators
-// Advances the VIteratorP by _size
+// Advances the VIteratorP by this->_size
 VIteratorP &	VIteratorP::operator++( void )
 {
-	_it += _size;
+	this->_it += this->_size;
 	return *this;
 }
 
-// Advances the VIteratorP by _size, post increment
+// Advances the VIteratorP by this->_size, post increment
 VIteratorP	VIteratorP::operator++( int )
 {
 	VIteratorP tmp(*this);
-	_it += _size;
+	this->_it += this->_size;
 	return tmp;
 }
 
-// Decrements the VIteratorP by _size
+// Decrements the VIteratorP by this->_size
 VIteratorP &	VIteratorP::operator--( void )
 {
-	_it -= _size;
+	this->_it -= this->_size;
 	return *this;
 }
 
-// Decrements the VIteratorP by _size, post decrement
+// Decrements the VIteratorP by this->_size, post decrement
 VIteratorP	VIteratorP::operator--( int )
 {
 	VIteratorP tmp(*this);
-	_it -= _size;
+	this->_it -= this->_size;
 	return tmp;
 }
 
-// Advances the VIteratorP by _size * increment
+// Advances the VIteratorP by this->_size * increment
 VIteratorP &	VIteratorP::operator+=( difference_type increment )
 {
-	_it += increment * _size;
+	this->_it += increment * this->_size;
 	return *this;
 }
 
-// Decrements the VIteratorP by _size * decrement
+// Decrements the VIteratorP by this->_size * decrement
 VIteratorP &	VIteratorP::operator-=( difference_type decrement )
 {
-	_it -= decrement * _size;
+	this->_it -= decrement * this->_size;
 	return *this;
 }
 
@@ -205,47 +204,47 @@ VIteratorP &	VIteratorP::operator-=( difference_type decrement )
 // Compares the underlying iterator of two VIteratorPs
 bool	VIteratorP::operator==( VIteratorP const & rhs ) const
 {
-	return _it == rhs.base();
+	return this->_it == rhs.base();
 }
 
 bool	VIteratorP::operator!=( VIteratorP const & rhs ) const
 {
-	return _it != rhs.base();
+	return this->_it != rhs.base();
 }
 
 bool	VIteratorP::operator<( VIteratorP const & rhs ) const
 {
-	return _it < rhs.base();
+	return this->_it < rhs.base();
 }
 
 bool	VIteratorP::operator<=( VIteratorP const & rhs ) const
 {
-	return _it <= rhs.base();
+	return this->_it <= rhs.base();
 }
 
 bool	VIteratorP::operator>( VIteratorP const & rhs ) const
 {
-	return _it > rhs.base();
+	return this->_it > rhs.base();
 }
 
 bool	VIteratorP::operator>=( VIteratorP const & rhs ) const
 {
-	return _it >= rhs.base();
+	return this->_it >= rhs.base();
 }
 
 //// Arithmetic operators
-// Advances the VIteratorP by increment * _size
+// Advances the VIteratorP by increment * this->_size
 VIteratorP	VIteratorP::operator+( difference_type increment )
 {
-	VIteratorP it(_it, _size);
+	VIteratorP it(this->_it, this->_size);
 	it += increment;
 	return it;
 }
 
-// Decrements the VIteratorP by decrement * _size
+// Decrements the VIteratorP by decrement * this->_size
 VIteratorP	VIteratorP::operator-( difference_type decrement )
 {
-	VIteratorP it(_it, _size);
+	VIteratorP it(this->_it, this->_size);
 	it -= decrement;
 	return it;
 }
@@ -253,65 +252,8 @@ VIteratorP	VIteratorP::operator-( difference_type decrement )
 // Returns the difference between the underlying iterators of two VIteratorPs
 VIteratorP::difference_type	VIteratorP::operator-( VIteratorP const & rhs ) const
 {
-	return (_it - rhs.base()) / _size;
+	return (this->_it - rhs.base()) / this->_size;
 }
-
-// // For VIteratorPUtils.cpp ??
-// // Swaps the contents of two VIteratorPs
-// void	swapVIteratorP( VIteratorP lhs, VIteratorP rhs )
-// {
-// 	std::swap_ranges(lhs.base(), lhs.base() + lhs.size(), rhs.base());
-// }
-
-// void	printVIteratorP( VIteratorP start, VIteratorP end )
-// {
-// 	if (start.size() == 1)
-// 	{
-// 		for (VIteratorP it = start; it != end; it++)
-// 		{
-// 			std::cout << it[0] << " ";
-// 		}
-// 		std::cout << std::endl;
-// 		return ;
-// 	}
-// 	std::ostringstream oss0;
-// 	std::ostringstream oss1;
-// 	for (VIteratorP it = start; it != end; it++)
-// 	{
-// 		typename VIteratorP::iterator_type tmp = it.base();
-// 		oss0 << " ";
-// 		oss1 << "[";
-// 		for (size_t k = 0; k < it.size(); k++)
-// 		{
-// 			for (unsigned int value = *tmp; value / 10 > 0; value /= 10)
-// 				oss0 << " ";
-// 			if (*tmp == *it)
-// 				oss0 << "v";
-// 			else
-// 				oss0 << " ";
-// 			oss1 << *tmp;
-// 			if (k + 1 < it.size())
-// 			{
-// 				oss0 << "  ";
-// 				oss1 << ", ";
-// 			}
-// 			tmp++;
-// 		}
-// 		oss0 << " ";
-// 		oss1 << "]";
-// 	}
-// 	std::cout << oss0.str() << std::endl;
-// 	std::cout << oss1.str() << std::endl;
-// 	std::cout << std::endl;
-// }
-
-void	swapVIteratorP( VIteratorP lhs, VIteratorP rhs )
-{
-	std::swap_ranges(lhs.base(), lhs.end(), rhs.base());
-}
-
-
-///
 
 void	printVIteratorP( VIteratorP p )
 {
@@ -338,13 +280,13 @@ void	printChain( VIteratorP start, VIteratorP end, std::string prefix )
 	std::cout << oss1.str() << std::endl;
 }
 
-void	printChain( std::vector<std::pair<unsigned int, unsigned int> > & chain, std::string prefix )
+void	printChain( pair_vector & chain, std::string prefix )
 {
 	std::ostringstream oss0;
 	std::ostringstream oss1;
 	oss0 << prefix << ": ";
 	oss1 << "i: ";
-	for (std::vector<std::pair<unsigned int, unsigned int> >::iterator it = chain.begin(); it != chain.end(); it++)
+	for (pair_vector::iterator it = chain.begin(); it != chain.end(); it++)
 	{
 		oss0 << BOLD << it->first << RESET " ";
 		oss1 << DIM << it->second << RESET " ";
@@ -353,7 +295,7 @@ void	printChain( std::vector<std::pair<unsigned int, unsigned int> > & chain, st
 	std::cout << oss1.str() << std::endl;
 }
 
-void	printInsertion( std::vector<std::pair<unsigned int, unsigned int> > & v, VIteratorP position, VIteratorP element )
+void	printInsertion( pair_vector & v, VIteratorP position, VIteratorP element )
 {
 	std::cout << "Inserting: " BOLD << element->first << RESET " at position:" << std::endl;
 	if (position == v.end())

@@ -6,12 +6,15 @@ OBJ_DIR = obj
 DEPS_DIR = deps
 
 SRC =	main.cpp \
+		parse_arguments.cpp \
+		print_container.cpp \
+		verify_sort.cpp \
 		PmergeMe.cpp \
 		VIteratorP.cpp \
 		LIterator.cpp \
-		mergeInsertionSortVectorP.cpp \
-		mergeInsertionSortList.cpp \
-		utils.cpp \
+		merge_insertion_sort_vector.cpp \
+		merge_insertion_sort_list.cpp \
+		jacobsthal_sequence.cpp \
 		time_utils.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
@@ -22,8 +25,7 @@ HDRS =
 
 # Compiler + flags
 CC = c++
-#CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -O2
-CFLAGS = -Wall -Wextra -g -std=c++98 -O2
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -O2
 DFLAGS = -MD -MF
 INCLUDE =
 
