@@ -1,56 +1,42 @@
 #include "PmergeMe.hpp"
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <cstdlib>
-
-void	printArray( bool prefix, int *array, int size );
 
 int	main( int argc, char **argv )
 {
 	if (argc < 2)
 	{
-		std::cout << "Usage: ./PmergeMe \"expression\"" << std::endl;
+		std::cout << "Usage: ./PmergeMe <elements>" << std::endl;
 		return 1;
 	}
-	int	size = argc - 1;
-	int	*numbers = new int[size];
-	for (int i = 0; i < size; i++)
+
+	try
 	{
-		std::stringstream ss(argv[i + 1]);
-		ss >> numbers[i];
-		if (ss.fail() || !ss.eof())
-		{
-			std::cout << "Invalid input" << std::endl;
-			return 1;
-		}
+		int				size = argc - 1;
+		integer			numbers[size];
+		parseArguments(size, argv, numbers);
+
+		PmergeMe	pm;
+
+		vector	vec(numbers, numbers + size);
+		list	lst(numbers, numbers + size);
+
+		printVector(vec, "Before:\t");
+
+		pm.mergeInsertionSort(vec);
+		pm.mergeInsertionSort(lst);
+
+		printVector(vec, "After:\t");
+
+		pm.printTimeElapsed();
+
+		// Remember to comment this out before submitting
+		verifySort(vec);
+		verifySort(lst);
 	}
-	printArray(BEFORE, numbers, size);
+	catch ( const std::exception & e )
+	{
+		std::cout << "Error: " << e.what() << std::endl;
+		return 1;
+	}
 
-	std::vector<int> vec(numbers, numbers + size);
-	
-	mergeInsertionSort<std::vector<int>>(vec.begin(), vec.end());
-
-	printArray(AFTER, numbers, size);
-	// printTime(0);
-	// printTime(1);
-
-	delete [] numbers;
 	return 0;
-}
-
-void	printArray( bool prefix, int *array, int size )
-{
-	std::stringstream ss;
-	if (prefix == BEFORE)
-		ss << "Before:\t";
-	else if (prefix == AFTER)
-		ss << "After:\t";
-	for (int i = 0; i < size; i++)
-	{
-		ss << array[i];
-		if (i < size - 1)
-			ss << " ";
-	}
-	std::cout << ss.str() << std::endl;
 }

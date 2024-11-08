@@ -5,7 +5,17 @@ SRC_DIR = .
 OBJ_DIR = obj
 DEPS_DIR = deps
 
-SRC = main.cpp PmergeMe.cpp
+SRC =	main.cpp \
+		parse_arguments.cpp \
+		print_container.cpp \
+		verify_sort.cpp \
+		PmergeMe.cpp \
+		VIteratorP.cpp \
+		LIterator.cpp \
+		merge_insertion_sort_vector.cpp \
+		merge_insertion_sort_list.cpp \
+		jacobsthal_sequence.cpp \
+		time_utils.cpp
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:%.cpp=%.o))
 DEPS = $(addprefix $(DEPS_DIR)/,$(SRC:%.cpp=%.d))
 
@@ -15,7 +25,7 @@ HDRS =
 
 # Compiler + flags
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -std=c++98
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -O2
 DFLAGS = -MD -MF
 INCLUDE =
 
@@ -25,6 +35,9 @@ MKDIR = mkdir -p
 AR = ar rcs
 MUTE = &> /dev/null
 MK = Makefile
+
+SIZE ?= 3000
+LOOPS ?= 10
 
 all: $(NAME)
 
@@ -52,10 +65,21 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME) `shuf -i 1-100 -n 10 | tr "\n" " "`
+	./$(NAME) `shuf -i 1-$(SIZE) -n $(SIZE) | tr "\n" " "`
+
+run_loop: all
+	i=0; \
+	while [ $$i -lt $(LOOPS) ]; do \
+		echo "Running iteration $$i"; \
+		./$(NAME) `shuf -i 1-$(SIZE) -n $(SIZE) | tr "\n" " "`; \
+		i=$$((i + 1)); \
+	done
+
+case: all
+	./$(NAME) 5 2 3 1 4 7 6
 
 valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) `shuf -i 1-100 -n 10 | tr "\n" " "`
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) `shuf -i 1-$(SIZE) -n $(SIZE) | tr "\n" " "`
 
-.PHONY: all clean fclean re run valgrind
+.PHONY: all clean fclean re run run_loop case valgrind
 -include $(DEPS)
