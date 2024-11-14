@@ -28,7 +28,6 @@ int	main( int argc, char **argv )
 
 		pm.printTimeElapsed();
 
-		// Remember to comment this out before submitting
 		verifySort(vec);
 		verifySort(lst);
 	}
