@@ -15,13 +15,13 @@ class LIterator
 {
 public:
 
-	typedef typename std::iterator_traits<list::iterator>::iterator_category	iterator_category;
-	typedef typename std::iterator_traits<list::iterator>::value_type			value_type;
-	typedef typename std::iterator_traits<list::iterator>::difference_type		difference_type;
-	typedef typename std::iterator_traits<list::iterator>::pointer				pointer;
-	typedef typename std::iterator_traits<list::iterator>::reference			reference;
-	typedef list::iterator														iterator_type;
-	typedef list																container_type;
+	typedef std::iterator_traits<list::iterator>::iterator_category	iterator_category;
+	typedef std::iterator_traits<list::iterator>::value_type		value_type;
+	typedef std::iterator_traits<list::iterator>::difference_type	difference_type;
+	typedef std::iterator_traits<list::iterator>::pointer			pointer;
+	typedef std::iterator_traits<list::iterator>::reference			reference;
+	typedef list::iterator											iterator_type;
+	typedef list													container_type;
 
 private:
 

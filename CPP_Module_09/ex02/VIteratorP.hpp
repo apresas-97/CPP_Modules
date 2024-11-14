@@ -15,13 +15,13 @@ class VIteratorP
 {
 public:
 
-	typedef typename std::iterator_traits<pair_vector::iterator>::iterator_category	iterator_category;
-	typedef typename std::iterator_traits<pair_vector::iterator>::value_type		value_type;
-	typedef typename std::iterator_traits<pair_vector::iterator>::difference_type	difference_type;
-	typedef typename std::iterator_traits<pair_vector::iterator>::pointer			pointer;
-	typedef typename std::iterator_traits<pair_vector::iterator>::reference			reference;
-	typedef pair_vector::iterator													iterator_type;
-	typedef pair_vector																container_type;
+	typedef std::iterator_traits<pair_vector::iterator>::iterator_category	iterator_category;
+	typedef std::iterator_traits<pair_vector::iterator>::value_type			value_type;
+	typedef std::iterator_traits<pair_vector::iterator>::difference_type	difference_type;
+	typedef std::iterator_traits<pair_vector::iterator>::pointer			pointer;
+	typedef std::iterator_traits<pair_vector::iterator>::reference			reference;
+	typedef pair_vector														container_type;
+	typedef pair_vector::iterator											iterator_type;
 
 private:
 
