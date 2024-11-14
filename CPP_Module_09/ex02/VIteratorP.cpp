@@ -111,7 +111,6 @@ VIteratorP	VIteratorP::find( VIteratorP begin, VIteratorP end, integer index )
 		if (it->second == index)
 			return it;
 	}
-	throw std::exception();
 	return end;
 }
 

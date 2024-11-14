@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <list>
-#include <typeinfo>
 #include <iterator>
 #include <utility>
 #include <ctime>
