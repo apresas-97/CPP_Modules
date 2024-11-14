@@ -149,7 +149,7 @@ std::multimap<std::string, float>	BitcoinExchange::initInputMap( std::string & f
 	std::ifstream						file;
 	std::multimap<std::string, float>	input;
 	int									input_size = countInputLines(filename);
-	int									width = input_size / 10 + 1;
+	int									width = input_size / 10 + 2;
 
 	file.open(filename.c_str());
 	if (!file.is_open())
@@ -159,7 +159,10 @@ std::multimap<std::string, float>	BitcoinExchange::initInputMap( std::string & f
 	std::string	line;
 	getline(file, line);
 	if (line != "date | value")
-		throw InvalidInputHeaderException(); // Maybe?
+	{
+		file.clear();
+		file.seekg(0, std::ios::beg);
+	}
 	std::string	divisor = " | ";
 	while (getline(file, line))
 	{

@@ -51,11 +51,5 @@ fclean: clean
 
 re: fclean all
 
-run: all
-	./$(NAME) "input.txt"
-
-valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) "input.txt"
-
-.PHONY: all clean fclean re run valgrind
+.PHONY: all clean fclean re
 -include $(DEPS)
